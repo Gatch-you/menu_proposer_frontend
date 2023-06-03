@@ -14,10 +14,10 @@ function FoodStrage() {
       const response = await fetch('http://localhost:8080/backend/foods');
       const jsonData = await response.json();
 
-      const formattedData = jsonData.map((food: Food) => ({
-        ...food,
-        expiration_date: new Date(food.expiration_date),
-      }));
+      // const formattedData = jsonData.map((food: Food) => ({
+      //   ...food,
+      //   expiration_date: new Date(food.expiration_date),
+      // }));
 
       setFoods(jsonData);
     } catch (error) {
