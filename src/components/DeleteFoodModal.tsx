@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 // import { Food } from './Models'
 
@@ -15,67 +15,71 @@ const customStyles = {
 
 type ModalProps = {
   showDeleteModal: boolean;
-  onCloseDeleteModal: () => void;
+  closeDeleteModal: () => void;
+  FoodId: number | null,
+  FoodName: string | null;
+  
 };
 
-const DeleteFoodModal: React.FC<ModalProps> = ({ showDeleteModal, onCloseDeleteModal }) => {
+const DeleteFoodModal: React.FC<ModalProps> = ({ 
+  showDeleteModal, 
+  closeDeleteModal,
+  FoodId,
+  FoodName,
+  }) => {
 
-    const [neme, setName] = useState("");
-    const [quqntity, setQuantity] = useState(0.0);
-    const [unit, setUnit] = useState("");
-    const [expiration_date, setExpirationDate] = useState("")
-    const [type, setType] = useState("")
+    // const [neme, setName] = useState("");
+    // const [quqntity, setQuantity] = useState(0.0);
+    // const [unit, setUnit] = useState("");
+    // const [expiration_date, setExpirationDate] = useState("")
+    // const [type, setType] = useState("")
 
     //またあとでAPIの実装を書く
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-        onCloseDeleteModal();
 
-        setName("")
-        setQuantity(0.0)
-        setUnit("")
-        setExpirationDate("")
-        setType("")
+    const deleteFoodData = {
+      id: FoodId,
+    };
+    fetch('http://localhost:8080/backend/delete_food', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Acsess-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(deleteFoodData)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Delete food sucsessfull:', data);
+        closeDeleteModal();
+      })
+      .catch((error) => {
+        console.error('Delete food failed:', error)
+      });
+      console.log(deleteFoodData)
   };
-  
-//Delete処理時にはいらない？
-//   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setName(e.target.value)
-//   }
 
-//   const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const value = parseFloat(e.target.value);
-//     setQuantity(value);
-//   }
-
-//   const handleUnit = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setUnit(e.target.value)
-//   }
-
-//   const handleExpirationData = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setExpirationDate(e.target.value)
-//   }
-
-//   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setType(e.target.value)
-//   }
-
+  const handleCancell = (e: any) => {
+    closeDeleteModal();
+  }
 
   return (
     <Modal
       contentLabel="Example Modal"
       isOpen={showDeleteModal}
       style={customStyles}
-      onRequestClose={onCloseDeleteModal}
+      onRequestClose={closeDeleteModal}
     >
       <h2>食材の削除</h2>
       <div>削除した場合は新しく登録し直さなければいけませんがよろしいですか？</div>
       <h3>本当に削除しますか？</h3>
+      <p>削除項目: {FoodName}</p>
 
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={handleSubmit}>
         <ul>
-          <button onClick={onCloseDeleteModal}>キャンセル</button>
-          <button onClick={onCloseDeleteModal}>削除する</button>
+          <button type="button"onClick={handleCancell}>キャンセル</button>
+          <button type="submit">削除する</button>
         </ul>
       </form>
     </Modal>

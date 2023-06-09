@@ -4,14 +4,17 @@ import ResistFoodModal from './ResistFoodModal';
 import UpdateFoodModal from './UpdateFoodModal';
 import DeleteFoodModal from './DeleteFoodModal';
 
-
 const FoodStorage: React.FC = () => {
-
   const [foods, setFoods] = useState<Food[] | null>(null);
   const [showResistModal, setShowResistModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+  const [FoodId, setFoodId] = useState<number | null>(null);
+  const [FoodName, setFoodName] = useState<string | null>(null);
+  const [FoodQuantity, setFoodQuantity] = useState<number | null>(null);
+  const [FoodUnit, setFoodUnit] = useState<string | null>(null);
+  const [FoodType, setFoodType] = useState<string | null>(null);
+  
   function openResistModal() {
     setShowResistModal(true);
   }
@@ -19,14 +22,20 @@ const FoodStorage: React.FC = () => {
     setShowResistModal(false);
   }
 
-  function openUpdateModal() {
-    setShowUpdateModal(true);
+  function openUpdateModal(foodId: number, foodName: string, fooodQuantity: number,foodUnit: string, foodType: string) {
+      setFoodId(foodId);
+      setFoodName(foodName);
+      setFoodQuantity(fooodQuantity)
+      setFoodUnit(foodUnit);
+      setFoodType(foodType);
+      setShowUpdateModal(true);
   }
-  function closeUpdatetModal() {
+  function closeUpdateModal() {
     setShowUpdateModal(false);
   }
 
-  function openDeleteModal() {
+  function openDeleteModal(foodId: number) {
+    setFoodId(foodId);
     setShowDeleteModal(true);
   }
   function closeDeleteModal() {
@@ -37,7 +46,6 @@ const FoodStorage: React.FC = () => {
     fetchFoods();
   }, []);
 
-  //食品一覧取得部位
   async function fetchFoods() {
     try {
       const response = await fetch('http://localhost:8080/backend/foods');
@@ -59,25 +67,37 @@ const FoodStorage: React.FC = () => {
         <p>Loading...</p>
       ) : (
         <ul>
-          <button onClick={openResistModal}>Resist New Food</button>
-          <ResistFoodModal showResistModal={showResistModal} onCloseResistModal={closeResistModal}/>
-          {/* 食材のリスト表示 */}
+          <button onClick={openResistModal}>新しい食材の追加</button>
+          <ResistFoodModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
           {foods.map((food) => (
             <li key={food.id}>
+              <p>{food.id}</p>
               <p>Name: {food.name}</p>
               <p>Quantity: {food.quantity} {food.unit}</p>
               <p>Type: {food.type}</p>
-              <button onClick={openDeleteModal}>削除</button>
-              <DeleteFoodModal showDeleteModal={showDeleteModal} onCloseDeleteModal={closeDeleteModal}/>
+              <button onClick={() => openDeleteModal(food.id)}>削除</button>
+              <DeleteFoodModal
+                showDeleteModal={showDeleteModal} 
+                closeDeleteModal={closeDeleteModal}
+                FoodId={FoodId}
+                FoodName={FoodName} />
 
-              <button onClick={openUpdateModal}>変更</button>
-              <UpdateFoodModal showUpdateModal={showUpdateModal} onCloseUpdateModal={closeUpdatetModal}/>
+              <button onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.type)}>変更 {food.id}</button>
+              <UpdateFoodModal 
+                showUpdateModal={showUpdateModal} 
+                closeUpdateModal={closeUpdateModal} 
+                FoodId={FoodId} 
+                FoodName={FoodName} 
+                FoodQuantity={FoodQuantity}
+                FoodUnit={FoodUnit}
+                FoodType={FoodType}
+                />
             </li>
           ))}
         </ul>
       )}
     </div>
   );
-}
+};
 
 export default FoodStorage;
