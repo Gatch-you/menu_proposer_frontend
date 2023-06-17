@@ -65,6 +65,38 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
       })
     console.log(recipeData)
   };
+// 使用食材の登録を行う際のsubmit処理後ほど
+  // const handleSubmitWithFood = (e: React.FormEvent<HTMLFormElement>) => {
+  //   const recipeData = {
+  //       name: name,
+  //       description: description,
+  //       image: image,
+  //       making_method: making_method,
+  //   };
+
+  //   fetch('http://localhost:8080/backend/insert_recipe', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Access-Control-Allow-Origin': '*',
+  //       },
+  //       body: JSON.stringify(recipeData)
+  //   })
+  //     .then((response) => response.json)
+  //     .then((data) => {
+  //       console.log('Recipe resistrarion sucsessfull:', data);
+  //       closeResistModal();
+
+  //       setName("");
+  //       setDescription("");
+  //       setImage("")
+  //       setMethod("")
+  //     })
+  //     .catch((error) => {
+  //       console.error('Reccipe resistration failed:', error);
+  //     })
+  //   console.log(recipeData)
+  // };
 
   const handleCancell = (e: any) => {
     closeResistModal();
@@ -115,6 +147,10 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
           <button type="submit">登録</button>
         </ul>
       </form>
+      {/* 使用食材の登録を行うフォームの作成 */}
+      {/* <form onSubmit={handleSubmitWithFood} onKeyDown={handleKeyDown}>
+
+      </form> */}
     </Modal>
 
   )

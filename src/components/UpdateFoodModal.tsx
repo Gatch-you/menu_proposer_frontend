@@ -41,7 +41,6 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
   const [expirationDate, setExpirationDate] = useState<Date | null>(null)
   const [type, setType] = useState<string | null>(null)
 
-    //またあとでAPIの実装を書く
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

@@ -9,11 +9,11 @@ const FoodStorage: React.FC = () => {
   const [showResistModal, setShowResistModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [FoodId, setFoodId] = useState<number | null>(null);
-  const [FoodName, setFoodName] = useState<string | null>(null);
-  const [FoodQuantity, setFoodQuantity] = useState<number | null>(null);
-  const [FoodUnit, setFoodUnit] = useState<string | null>(null);
-  const [FoodType, setFoodType] = useState<string | null>(null);
+  const [FoodId, setFoodId] = useState<Food["id"] | null>(null);
+  const [FoodName, setFoodName] = useState<Food["name"] | null>(null);
+  const [FoodQuantity, setFoodQuantity] = useState<Food["quantity"] | null>(null);
+  const [FoodUnit, setFoodUnit] = useState<Food["unit"] | null>(null);
+  const [FoodType, setFoodType] = useState<Food["type"] | null>(null);
   
   function openResistModal() {
     setShowResistModal(true);

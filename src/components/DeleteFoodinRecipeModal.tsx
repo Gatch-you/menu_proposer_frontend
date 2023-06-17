@@ -2,6 +2,9 @@ import React from 'react';
 import Modal from 'react-modal';
 // import { Food } from './Models'
 
+// curl -X DELETE -d '{"recipe_id": 1, "food_id": 14}' http://localhost:8080/backend/delete_using_food
+//　一応完成！
+
 const customStyles = {
     content: {
       top: '50%',
@@ -16,14 +19,15 @@ const customStyles = {
 type ModalProps = {
   showDeleteModal: boolean;
   closeDeleteModal: () => void;
-  FoodId: number | null,
+  RecipeId: number | null;
+  FoodId: number | null;
   FoodName: string | null;
-  
 };
 
-const DeleteFoodModal: React.FC<ModalProps> = ({ 
+const DeleteFoodinRecipeModal: React.FC<ModalProps> = ({ 
   showDeleteModal, 
   closeDeleteModal,
+  RecipeId,
   FoodId,
   FoodName,
   }) => {
@@ -32,9 +36,10 @@ const DeleteFoodModal: React.FC<ModalProps> = ({
     e.preventDefault();
 
     const deleteFoodData = {
-      id: FoodId,
+      recipe_id: RecipeId,
+      food_id: FoodId,
     };
-    fetch('http://localhost:8080/backend/delete_food', {
+    fetch('http://localhost:8080/backend/delete_using_food', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -67,7 +72,7 @@ const DeleteFoodModal: React.FC<ModalProps> = ({
       <h2>食材の削除</h2>
       <div>削除した場合は新しく登録し直さなければいけませんがよろしいですか？</div>
       <h3>本当に削除しますか？</h3>
-      <p>削除項目: {FoodName}</p>
+      <p>削除項目: レシピ番号:{RecipeId}, 食材番号:{FoodId}, 食材名:{FoodName} </p>
 
       <form onSubmit={handleSubmit}>
         <ul>
@@ -79,4 +84,4 @@ const DeleteFoodModal: React.FC<ModalProps> = ({
   );
 };
 
-export default DeleteFoodModal;
+export default DeleteFoodinRecipeModal;

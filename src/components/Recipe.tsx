@@ -1,25 +1,27 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Recipe } from './Models'
 import ResistRecipeModal from './ResistRecipeModal'
 import DeleteRecipeModal from './DeleteRecipeModal'
 import UpdateRecipeModal from './UpdateRecipeModal'
+import { Link } from "react-router-dom";
+// import RecipeWithFood from './RecipeWithFood'
 
 const RecipeIndex: React.FC = () => {
   const [recipes, setRecipe] = useState<Recipe[] | null>(null);
+  const [RecipeId, setRecipeId] = useState<Recipe["id"] | null>(null);
+  const [RecipeName, setRecipeName] = useState<string | null>(null);
+  const [RecipeDecription, setRecipeDescription] = useState<Recipe["description"] | null>(null);
+  const [RecipeImage, setRecipeImage] = useState<Recipe['image'] | null>(null);
+  const [RecipeMethod, setRecipeMethod] = useState<Recipe['making_method'] | null>(null);
   const [showResistModal, setShowResistModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [RecipeId, setRecipeId] = useState<number | null>(null);
-  const [RecipeName, setRecipeName] = useState<string | null>(null);
-  const [RecipeDecription, setRecipeDescription] = useState<string | null>(null);
-  const [RecipeImage, setRecipeImage] = useState<string | null>(null);
-  const [RecipeMethod, setRecipeMethod] = useState<string | null>(null);
   
   useEffect(() => {
-    fetchFoods();
+    fetchRecipes();
   }, []);
 
-  async function fetchFoods() {
+  async function fetchRecipes() {
     try {
       const response = await fetch('http://localhost:8080/backend/recipes');
       const jsonData = await response.json();
@@ -72,27 +74,31 @@ const RecipeIndex: React.FC = () => {
           <ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
           {recipes.map((recipe) => (
             <li key={recipe.id}>
-              <p>Name: {recipe.name}</p>
-              <p>Description: {recipe.description}</p>
-              <p>Imageurl: {recipe.image}</p>
-              <p>Method: {recipe.making_method}</p>
-              <button onClick={() => openDeleteModal(recipe.id)}>削除</button>
-              <DeleteRecipeModal
-                showDeleteModal={showDeleteModal}
-                closeDeleteModal={closeDeleteModal}
-                RecipeId={RecipeId}
-                RecipeName={RecipeName}
-                />
-              <button onClick={() => openUpdateModal(recipe.id, recipe.name, recipe.description, recipe.image, recipe.making_method)}>レシピの変更</button>
-              <UpdateRecipeModal
-                showUpdateModal={showUpdateModal}
-                closeUpdateModal={closeUpdateModal}
-                RecipeId={RecipeId}
-                RecipeName={RecipeName}
-                RecipeDescription={RecipeDecription}
-                RecipeImage={RecipeImage}
-                RecipeMethod={RecipeMethod}
-                />
+                <p>Name: {recipe.name}</p>
+                <p>Description: {recipe.description}</p>
+                <p>Imageurl: {recipe.image}</p>
+                <p>Method: {recipe.making_method}</p>
+                <Link 
+                  to={`/recipes/${recipe.id}`}>
+                  <button>レシピの詳細</button>
+                </Link>
+                <button onClick={() => openDeleteModal(recipe.id)}>削除</button>
+                <DeleteRecipeModal
+                  showDeleteModal={showDeleteModal}
+                  closeDeleteModal={closeDeleteModal}
+                  RecipeId={RecipeId}
+                  RecipeName={RecipeName}
+                  />
+                <button onClick={() => openUpdateModal(recipe.id, recipe.name, recipe.description, recipe.image, recipe.making_method)}>レシピの変更</button>
+                <UpdateRecipeModal
+                  showUpdateModal={showUpdateModal}
+                  closeUpdateModal={closeUpdateModal}
+                  RecipeId={RecipeId}
+                  RecipeName={RecipeName}
+                  RecipeDescription={RecipeDecription}
+                  RecipeImage={RecipeImage}
+                  RecipeMethod={RecipeMethod}
+                  />
             </li>
           ))}
         </ul>
