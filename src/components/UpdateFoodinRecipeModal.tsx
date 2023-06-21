@@ -21,7 +21,7 @@ type ModalProps = {
   FoodId: number | null;
   FoodName: string | null;
   UseAmount: number | null;
-  FoodUnit: string | null;
+  Unit: string | null;
 };
 
 const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({ 
@@ -31,7 +31,7 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
    FoodId, 
    FoodName,
    UseAmount,
-   FoodUnit,
+   Unit,
 
   }) => {
     // const [recipe_id, setRecipe_id] = useState<RecipeFood["recipe_id"]>();
@@ -101,7 +101,7 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
       <h3>食品名: {FoodId} {FoodName}</h3>
       <form onSubmit={handleSubmit}>
 
-        <h3>現在の使用量: {UseAmount} {FoodUnit}</h3>
+        <h3>現在の使用量: {UseAmount} {Unit}</h3>
         <input type="quantity" onChange={handleUseAmount}/>
 
         {/* <input>食材の種類: </input> */}

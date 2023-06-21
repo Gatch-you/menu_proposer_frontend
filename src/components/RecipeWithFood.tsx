@@ -16,6 +16,7 @@ const RecipeWithFood: React.FC = () => {
   const [FoodId, setFoodId] = useState<RecipeFood["food_id"] | null>(null);
   const [FoodName, setFoodName] = useState<RecipeFood["food_name"] | null>(null)
   const [UseAmount, setUseAmount] = useState<RecipeFood["use_amount"] | null>(null);
+  const [Unit, setUnit] = useState<RecipeFood["food_unit"] | null>(null)
   const [showResistModal, setShowResistModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -44,20 +45,22 @@ const RecipeWithFood: React.FC = () => {
     console.log(recipe);
   }, [recipe]);
   
-  console.log(recipe)
+  console.log(recipe);
 
-  function openResistModal() {
+  function openResistModal(recipe_id: number) {
     setShowResistModal(true);
+    setRecipeId(recipe_id);
   }
   function closeResistModal() {
     setShowResistModal(false);
   }
 
-  function openUpdateModal(foodId: number, foodName: string, useAmount: number) {
-    setRecipeId(RecipeId)
+  function openUpdateModal(foodId: number, foodName: string, useAmount: number, unit: string) {
+    setRecipeId(RecipeId);
     setFoodId(foodId);
     setFoodName(foodName);
     setUseAmount(useAmount);
+    setUnit(unit)
     setShowUpdateModal(true);
   }
   function closeUpdateModal() {
@@ -97,8 +100,12 @@ const RecipeWithFood: React.FC = () => {
           </>
           )}
           <ul>
-          <button onClick={openResistModal}>新しい食材の追加</button>
-          <ResistFoodinRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
+          <button onClick={() => openResistModal(recipe[0].recipe_id)}>新しい食材の追加</button>
+          <ResistFoodinRecipeModal 
+            showResistModal={showResistModal} 
+            closeResistModal={closeResistModal} 
+            RecipeId={RecipeId}
+            />
           <button onClick={ () => openMakeModal(recipe[0].recipe_id)}>この料理を作成する</button>
           <MakeDishModal showMakeModal={showMakeModal} closeMakeModal={closeMakeModal} RecipeId={RecipeId}/>
             {recipe &&
@@ -113,7 +120,7 @@ const RecipeWithFood: React.FC = () => {
                   FoodId={FoodId}
                   FoodName={FoodName}
                 />
-                <button onClick={() => openUpdateModal(item.food_id, item.food_name, item.use_amount)}>使用量の変更</button>
+                <button onClick={() => openUpdateModal(item.food_id, item.food_name, item.use_amount, item.food_unit)}>使用量の変更</button>
                 <UpdateFoodinRecipeModal 
                   showUpdateModal={showUpdateModal} 
                   closeUpdateModal={closeUpdateModal} 
@@ -121,7 +128,7 @@ const RecipeWithFood: React.FC = () => {
                   FoodId={FoodId} 
                   FoodName={FoodName} 
                   UseAmount={UseAmount}
-                  FoodUnit={item.food_unit}
+                  Unit={Unit}
                 />
               </li>
             ))}

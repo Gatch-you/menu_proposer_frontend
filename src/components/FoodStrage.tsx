@@ -10,9 +10,10 @@ const FoodStorage: React.FC = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [FoodId, setFoodId] = useState<Food["id"] | null>(null);
-  const [FoodName, setFoodName] = useState<Food["name"] | null>(null);
+  const [FoodName, setFoodName] = useState<Food["name"]>("");
   const [FoodQuantity, setFoodQuantity] = useState<Food["quantity"] | null>(null);
   const [FoodUnit, setFoodUnit] = useState<Food["unit"] | null>(null);
+  const [FoodExpiratinData, setFoodExpirationDate] = useState<Food["expiration_date"] | null>(null);
   const [FoodType, setFoodType] = useState<Food["type"] | null>(null);
   
   function openResistModal() {
@@ -22,12 +23,13 @@ const FoodStorage: React.FC = () => {
     setShowResistModal(false);
   }
 
-  function openUpdateModal(foodId: number, foodName: string, fooodQuantity: number,foodUnit: string, foodType: string) {
+  function openUpdateModal(foodId: number, foodName: string, fooodQuantity: number,foodUnit: string, FoodExpiratinData: Food["expiration_date"], foodType: string) {
       setFoodId(foodId);
       setFoodName(foodName);
       setFoodQuantity(fooodQuantity)
       setFoodUnit(foodUnit);
       setFoodType(foodType);
+      setFoodExpirationDate(FoodExpiratinData)
       setShowUpdateModal(true);
   }
   function closeUpdateModal() {
@@ -82,7 +84,7 @@ const FoodStorage: React.FC = () => {
                 FoodId={FoodId}
                 FoodName={FoodName} />
 
-              <button onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.type)}>変更 {food.id}</button>
+              <button onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.expiration_date, food.type)}>変更 {food.id}</button>
               <UpdateFoodModal 
                 showUpdateModal={showUpdateModal} 
                 closeUpdateModal={closeUpdateModal} 
@@ -90,6 +92,7 @@ const FoodStorage: React.FC = () => {
                 FoodName={FoodName} 
                 FoodQuantity={FoodQuantity}
                 FoodUnit={FoodUnit}
+                FoodExpiratinData={FoodExpiratinData}
                 FoodType={FoodType}
                 />
             </li>

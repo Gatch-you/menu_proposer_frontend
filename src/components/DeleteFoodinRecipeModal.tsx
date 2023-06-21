@@ -77,7 +77,7 @@ const DeleteFoodinRecipeModal: React.FC<ModalProps> = ({
       <form onSubmit={handleSubmit}>
         <ul>
           <button type="button"onClick={handleCancell}>キャンセル</button>
-          <button type="submit">削除する</button>
+          <button type="submit">削除する{RecipeId}</button>
         </ul>
       </form>
     </Modal>
