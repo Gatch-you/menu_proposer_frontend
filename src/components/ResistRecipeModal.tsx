@@ -25,6 +25,9 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
   const [description, setDescription] = useState<Recipe["description"] | null>(null);
   const [image, setImage] = useState<Recipe["image"] | null>(null);
   const [making_method, setMethod] = useState<Recipe["making_method"] | null>(null);
+  const [nameError, setNameError] = useState('');
+
+  const isInputValid = name
 
   const handleKeyDown: KeyboardEventHandler<HTMLFormElement> = (event) => {
     if (event.key === 'Enter') {
@@ -41,6 +44,10 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
         image: image,
         making_method: making_method,
     };
+
+    if (!name) {
+      return;
+    }
 
     fetch('http://localhost:8080/backend/insert_recipe', {
         method: 'POST',
@@ -108,6 +115,12 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+
+    if (!e.target.value) {
+      setNameError('レシピ名を入力してください');
+    } else {
+      setNameError("");
+    }
   }
 
   const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,22 +148,18 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
       <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
         <h3>レシピ名</h3>
         <input type="name" onChange={handleName}/>
+        {nameError && <p>{nameError}</p>}
         <h3>レシピの説明</h3>
         <input type="description" onChange={handleDescription} />
-        <h3>レシピの画像</h3>
-        <input type="img" onChange={handleImage} />
+        {/* <h3>レシピの画像</h3>
+        <input type="img" onChange={handleImage} /> */}
         <h3>つくりかた</h3>
         <input type="method" onChange={handleMethod}/>
-
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>
-          <button type="submit">登録</button>
+          <button type="submit" disabled={!isInputValid}>登録</button>
         </ul>
       </form>
-      {/* 使用食材の登録を行うフォームの作成 */}
-      {/* <form onSubmit={handleSubmitWithFood} onKeyDown={handleKeyDown}>
-
-      </form> */}
     </Modal>
 
   )

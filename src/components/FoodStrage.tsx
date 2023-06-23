@@ -36,8 +36,9 @@ const FoodStorage: React.FC = () => {
     setShowUpdateModal(false);
   }
 
-  function openDeleteModal(foodId: number) {
+  function openDeleteModal(foodId: number, foodName: string) {
     setFoodId(foodId);
+    setFoodName(foodName);
     setShowDeleteModal(true);
   }
   function closeDeleteModal() {
@@ -68,23 +69,23 @@ const FoodStorage: React.FC = () => {
       {foods === null ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
           <button onClick={openResistModal}>新しい食材の追加</button>
           <ResistFoodModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
           {foods.map((food) => (
             <li key={food.id}>
-              <p>{food.id}</p>
-              <p>Name: {food.name}</p>
-              <p>Quantity: {food.quantity} {food.unit}</p>
-              <p>Type: {food.type}</p>
-              <button onClick={() => openDeleteModal(food.id)}>削除</button>
+              {/* <p>{food.id}</p> */}
+              <p>材料名: {food.name}</p>
+              <p>量: {food.quantity} {food.unit}</p>
+              <p>種類: {food.type}</p>
+              <button onClick={() => openDeleteModal(food.id, food.name)}>削除</button>
               <DeleteFoodModal
                 showDeleteModal={showDeleteModal} 
                 closeDeleteModal={closeDeleteModal}
                 FoodId={FoodId}
                 FoodName={FoodName} />
 
-              <button onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.expiration_date, food.type)}>変更 {food.id}</button>
+              <button onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.expiration_date, food.type)}>食材情報の変更</button>
               <UpdateFoodModal 
                 showUpdateModal={showUpdateModal} 
                 closeUpdateModal={closeUpdateModal} 
@@ -92,7 +93,7 @@ const FoodStorage: React.FC = () => {
                 FoodName={FoodName} 
                 FoodQuantity={FoodQuantity}
                 FoodUnit={FoodUnit}
-                FoodExpiratinData={FoodExpiratinData}
+                FoodExpiratinDate={FoodExpiratinData}
                 FoodType={FoodType}
                 />
             </li>

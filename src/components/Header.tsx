@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header>
         <div>
-            <h3>Portforio-Recpe-food-app</h3>
+            <h3>MyCookBook</h3>
         </div>
 
         <nav>

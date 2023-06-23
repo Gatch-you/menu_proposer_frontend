@@ -72,12 +72,12 @@ const DeleteFoodinRecipeModal: React.FC<ModalProps> = ({
       <h2>食材の削除</h2>
       <div>削除した場合は新しく登録し直さなければいけませんがよろしいですか？</div>
       <h3>本当に削除しますか？</h3>
-      <p>削除項目: レシピ番号:{RecipeId}, 食材番号:{FoodId}, 食材名:{FoodName} </p>
+      <p>削除する食材名:{FoodName} </p>
 
       <form onSubmit={handleSubmit}>
         <ul>
           <button type="button"onClick={handleCancell}>キャンセル</button>
-          <button type="submit">削除する{RecipeId}</button>
+          <button type="submit">削除する</button>
         </ul>
       </form>
     </Modal>

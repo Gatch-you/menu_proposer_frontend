@@ -9,8 +9,10 @@ import MakeDishModal from './MakeDishModal';
 //送るリクエスト↓
 // curl -X GET http://localhost:8080/backend/recipes/${recipeId}
 
+
+
 const RecipeWithFood: React.FC = () => {
-  const { recipeId } = useParams();
+  const { recipeId, recipeName } = useParams();
   const [recipe, setRecipe] = useState<RecipeFood[]>([]);
   const [RecipeId, setRecipeId] = useState<RecipeFood["recipe_id"] | null>(null);
   const [FoodId, setFoodId] = useState<RecipeFood["food_id"] | null>(null);
@@ -55,6 +57,11 @@ const RecipeWithFood: React.FC = () => {
     setShowResistModal(false);
   }
 
+  function openFirstResistModal(recipeId: any) {
+    setShowResistModal(true);
+    setRecipeId(+recipeId)
+  }
+
   function openUpdateModal(foodId: number, foodName: string, useAmount: number, unit: string) {
     setRecipeId(RecipeId);
     setFoodId(foodId);
@@ -87,19 +94,23 @@ const RecipeWithFood: React.FC = () => {
 
   return (
     <div>
-      <h1>Food Storage</h1>
+      <h1>Recipes</h1>
       {recipe === null ? (
-        <p>Loading...</p>
+        <><p>まず最初に{recipeName}に使用する食材を追加してください</p><button onClick={() => openFirstResistModal(parseFloat(recipeId!))}>食材の追加</button>
+        <ResistFoodinRecipeModal
+          showResistModal={showResistModal}
+          closeResistModal={closeResistModal}
+          RecipeId={RecipeId} /></>
       ) : (
         <div>
           {recipe && recipe.length > 0 && (
           <>
-            <p>Name: {recipe[0].recipe_name}</p>
-            <p>Description: {recipe[0].recipe_description}</p>
-            <p>Method: {recipe[0].recipe_making_method}</p>
+            <p>レシピ名: {recipe[0].recipe_name}</p>
+            <p>概要: {recipe[0].recipe_description}</p>
+            <p>つくりかた: {recipe[0].recipe_making_method}</p>
           </>
           )}
-          <ul>
+          <ul style={{listStyle: 'none', padding: 0, margin: 0}} >
           <button onClick={() => openResistModal(recipe[0].recipe_id)}>新しい食材の追加</button>
           <ResistFoodinRecipeModal 
             showResistModal={showResistModal} 
@@ -107,11 +118,13 @@ const RecipeWithFood: React.FC = () => {
             RecipeId={RecipeId}
             />
           <button onClick={ () => openMakeModal(recipe[0].recipe_id)}>この料理を作成する</button>
+          <h1>　</h1>
+          <h1>{'<使用食材一覧>'}</h1>
           <MakeDishModal showMakeModal={showMakeModal} closeMakeModal={closeMakeModal} RecipeId={RecipeId}/>
             {recipe &&
               recipe.map((item) => (
-               <li key={item.food_id}>
-                <p>UseingFoods:{item.food_name} {item.use_amount} {item.food_unit}</p>
+               <li key={item.food_id} style={{ marginBottom: '10px' }}>
+                <p>{item.food_name} {item.use_amount} {item.food_unit}</p>
                 <button onClick={() => openDeleteModal(item.recipe_id, item.food_id, item.food_name)}>削除</button>
                 <DeleteFoodinRecipeModal
                   showDeleteModal={showDeleteModal}

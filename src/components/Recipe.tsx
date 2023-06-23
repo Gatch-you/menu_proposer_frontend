@@ -51,8 +51,9 @@ const RecipeIndex: React.FC = () => {
     setShowUpdateModal(false);
   }
 
-  function openDeleteModal(recipeId: number) {
+  function openDeleteModal(recipeId: number, recipeName: string) {
     setRecipeId(recipeId);
+    setRecipeName(recipeName);
     setShowDeleteModal(true);
   }
   function closeDeleteModal() {
@@ -69,20 +70,20 @@ const RecipeIndex: React.FC = () => {
       {recipes == null ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
           <button onClick={openResistModal}>Resist New Recipe</button>
           <ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
           {recipes.map((recipe) => (
             <li key={recipe.id}>
-                <p>Name: {recipe.name}</p>
-                <p>Description: {recipe.description}</p>
-                <p>Imageurl: {recipe.image}</p>
-                <p>Method: {recipe.making_method}</p>
+                <p>レシピ名: {recipe.name}</p>
+                <p>概要: {recipe.description}</p>
+                {/* <p>Imageurl: {recipe.image}</p> */}
+                <p>つくりかた: {recipe.making_method}</p>
                 <Link 
-                  to={`/recipes/${recipe.id}`}>
+                  to={`/recipes/${recipe.id}/${recipe.name}`}>
                   <button>レシピの詳細</button>
                 </Link>
-                <button onClick={() => openDeleteModal(recipe.id)}>削除</button>
+                <button onClick={() => openDeleteModal(recipe.id, recipe.name)}>削除</button>
                 <DeleteRecipeModal
                   showDeleteModal={showDeleteModal}
                   closeDeleteModal={closeDeleteModal}

@@ -60,9 +60,6 @@ const ResistFoodModal: React.FC<ModalProps> = ({
       type: type,
     };
 
-    // if (nameError) {
-    //   return;
-    // }
 
     if (!name || quantityError) {
       return;
@@ -120,7 +117,7 @@ const ResistFoodModal: React.FC<ModalProps> = ({
     if (!value) {
       setQuantityError('正しい入力ではありません(半角数字にて記入)');
     } else {
-      setQuantityError("")
+      setQuantityError("");
       setQuantity(value);
     }
   }

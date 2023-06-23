@@ -34,9 +34,11 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
    Unit,
 
   }) => {
-    // const [recipe_id, setRecipe_id] = useState<RecipeFood["recipe_id"]>();
-    // const [food_id, setFood_id] = useState<RecipeFood["food_id"]>();
-    const [use_amount, setUseAmount] = useState<RecipeFood["use_amount"]>();
+  
+  const [use_amount, setUseAmount] = useState<RecipeFood["use_amount"]>(0.0);
+  const [useAmountError, setUseAmountError] = useState('');
+
+  const isInputVAlid = !useAmountError
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +48,10 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
       food_id: FoodId,
       use_amount: use_amount,
     };
+
+    if (useAmountError) {
+      return;
+    }
 
     // 実際にPUTクエリを送る
     fetch('http://localhost:8080/backend/recipe_food/update_using_food_quantity', {
@@ -60,8 +66,7 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
       .then((data) => {
         console.log('Update food sucsessfull:', data);
         closeUpdateModal();
-        setUseAmount(0);
-        
+        setUseAmount(0.0);
       })
       .catch((error) => {
         console.error('Update food failed:', error);
@@ -71,22 +76,18 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
 
   const handleCancell = (e: any) => {
     closeUpdateModal();
-    setUseAmount(0);
+    setUseAmount(0.0);
   }
-
-  // const handleRecipeId = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = parseFloat(e.target.value);
-  //   setRecipe_id(value);
-  // }
-
-  // const handleFoodId = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = parseFloat(e.target.value);
-  //   setFood_id(value);
-  // }
 
   const handleUseAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    setUseAmount(value);
+    
+    if (!value) {
+      setUseAmountError("正しい入力ではありません(半角数字にて記入)");
+    } else {
+      setUseAmountError('');
+      setUseAmount(value);
+    }
   }
 
   return (
@@ -103,11 +104,12 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
 
         <h3>現在の使用量: {UseAmount} {Unit}</h3>
         <input type="quantity" onChange={handleUseAmount}/>
+        {useAmountError && <p>{useAmountError}</p>}
 
         {/* <input>食材の種類: </input> */}
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>
-          <button type="submit">更新</button>
+          <button type="submit" disabled={!isInputVAlid}>更新</button>
         </ul>
       </form>
     </Modal>

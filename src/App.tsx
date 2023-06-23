@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/foods_strage" element={<FoodStrage />} />
           <Route path="/recipes" element={<Recipe />} />
-          <Route path="/recipes/:recipeId" Component={RecipeWithFood} />
+          <Route path="/recipes/:recipeId/:recipeName" Component={RecipeWithFood} />
         </Routes>
       </div>
     </Router>

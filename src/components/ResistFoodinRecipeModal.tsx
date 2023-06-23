@@ -39,6 +39,9 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
   const [use_amount, setUseAmount] = useState<RecipeFood["use_amount"]>();
   const [foodOptions, setFoodOptions] = useState<FoodOption[]>([]);
   const [selectedFood, setSelectedFood] = useState('');
+  const [use_amountError, setuse_AmountError] = useState('');
+
+  const isInputValid = !use_amountError
 
   useEffect(() => {
     // 食材データを取得するAPIを呼び出し、データを取得します
@@ -80,6 +83,10 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
       use_amount: use_amount,
     };
 
+    if (!+selectedFood) {
+      return;
+    }
+
     // 実際にPOSTリクストを送る
     fetch('http://localhost:8080/backend/recipe_food/insert_use_food', {
       method: 'POST',
@@ -120,7 +127,13 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
 
   const handleUseAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    setUseAmount(value);
+
+    if (!value) {
+      setuse_AmountError('無効な入力です(半角数字にて記入)')
+    } else {
+      setuse_AmountError('')
+      setUseAmount(value);
+    }
   }
 
   return (
@@ -145,9 +158,10 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
       </select>
         <h3>使用量</h3>
         <input type="quantity" onChange={handleUseAmount}/>
+        {use_amountError && <p>{use_amountError}</p>}
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>
-          <button type="submit">登録: recipe_id:{RecipeId}, food_id{selectedFood}</button>
+          <button type="submit" disabled={!isInputValid}>登録: recipe_id:{RecipeId}, food_id{selectedFood}</button>
         </ul>
       </form>
     </Modal>
