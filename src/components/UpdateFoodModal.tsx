@@ -86,7 +86,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
       return;
     }
 
-    fetch('http://localhost:8080/backend/update_food', {
+    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/update_food', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

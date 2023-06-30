@@ -32,7 +32,7 @@ const DeleteRecipeModal: React.FC<ModalProps> = ({
     const deleteRecipeData = {
         id: RecipeId
     };
-    fetch('http://localhost:8080/backend/delete_recipe', {
+    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/delete_recipe', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

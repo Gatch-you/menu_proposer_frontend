@@ -3,6 +3,7 @@ import { Food } from './Models';
 import ResistFoodModal from './ResistFoodModal';
 import UpdateFoodModal from './UpdateFoodModal';
 import DeleteFoodModal from './DeleteFoodModal';
+import { Link } from 'react-router-dom';
 
 const FoodStorage: React.FC = () => {
   const [foods, setFoods] = useState<Food[] | null>(null);
@@ -51,7 +52,7 @@ const FoodStorage: React.FC = () => {
 
   async function fetchFoods() {
     try {
-      const response = await fetch('http://localhost:8080/backend/foods');
+      const response = await fetch( process.env.REACT_APP_API_ENDPOINT+'/backend/foods');
       const jsonData = await response.json();
       setFoods(jsonData);
     } catch (error) {
@@ -72,6 +73,10 @@ const FoodStorage: React.FC = () => {
         <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
           <button onClick={openResistModal}>新しい食材の追加</button>
           <ResistFoodModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
+          <Link
+            to={`/foods_with_expiration`}>
+            <button>賞味期限が近い食材一覧</button>
+          </Link>
           {foods.map((food) => (
             <li key={food.id}>
               {/* <p>{food.id}</p> */}
@@ -96,6 +101,7 @@ const FoodStorage: React.FC = () => {
                 FoodExpiratinDate={FoodExpiratinData}
                 FoodType={FoodType}
                 />
+              <p>　</p>
             </li>
           ))}
         </ul>

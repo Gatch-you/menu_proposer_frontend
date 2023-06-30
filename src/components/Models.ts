@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export interface Food {
     id: number
     name: string
@@ -45,3 +47,16 @@ export interface RecipeFood {
     food_unit: string;
     recipe_making_method?: string;
   }
+
+export interface FoodwithExiration {
+    id: number;
+    food_id: number;
+    food_name: string;
+    food_quantity: number;
+    food_unit: string;
+    expiration_date: ReactNode
+    recipe_id: number;
+    recipe_name: string;
+    use_amount: number;
+
+}

@@ -23,7 +23,7 @@ const RecipeIndex: React.FC = () => {
 
   async function fetchRecipes() {
     try {
-      const response = await fetch('http://localhost:8080/backend/recipes');
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/recipes');
       const jsonData = await response.json();
 
       setRecipe(jsonData);
@@ -100,6 +100,7 @@ const RecipeIndex: React.FC = () => {
                   RecipeImage={RecipeImage}
                   RecipeMethod={RecipeMethod}
                   />
+                <p>　</p>
             </li>
           ))}
         </ul>

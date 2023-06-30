@@ -7,7 +7,7 @@ import ResistFoodinRecipeModal from './ResistFoodinRecipeModal';
 import MakeDishModal from './MakeDishModal';
 
 //送るリクエスト↓
-// curl -X GET http://localhost:8080/backend/recipes/${recipeId}
+// curl -X GET http://localhost:8080/backend/recipes/${recipeId}/${recipeName}
 
 
 
@@ -143,6 +143,7 @@ const RecipeWithFood: React.FC = () => {
                   UseAmount={UseAmount}
                   Unit={Unit}
                 />
+                <p>　</p>
               </li>
             ))}
           </ul>

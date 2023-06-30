@@ -49,7 +49,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
       return;
     }
 
-    fetch('http://localhost:8080/backend/insert_recipe', {
+    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/insert_recipe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
   //       making_method: making_method,
   //   };
 
-  //   fetch('http://localhost:8080/backend/insert_recipe', {
+  //   fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/insert_recipe', {
   //       method: 'POST',
   //       headers: {
   //         'Content-Type': 'application/json',

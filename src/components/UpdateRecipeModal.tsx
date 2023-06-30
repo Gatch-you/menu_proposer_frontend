@@ -70,7 +70,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
       making_method: data.making_method,
    };
 
-    fetch('http://localhost:8080/backend/update_recipe', {
+    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/update_recipe', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

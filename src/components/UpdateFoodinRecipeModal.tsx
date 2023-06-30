@@ -54,7 +54,7 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
     }
 
     // 実際にPUTクエリを送る
-    fetch('http://localhost:8080/backend/recipe_food/update_using_food_quantity', {
+    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/recipe_food/update_using_food_quantity', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
