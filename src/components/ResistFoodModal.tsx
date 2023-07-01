@@ -66,7 +66,7 @@ const ResistFoodModal: React.FC<ModalProps> = ({
     }
 
     // 実際にPOSTリクストを送る
-    fetch('http://localhost:8080/backend/insert_food', {
+    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/insert_food', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ const RecipeIndex: React.FC = () => {
 
   async function fetchRecipes() {
     try {
-      const response = await fetch('http://localhost:8080/backend/recipes');
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/recipes');
       const jsonData = await response.json();
 
       setRecipe(jsonData);
@@ -68,7 +68,10 @@ const RecipeIndex: React.FC = () => {
     <div>
       <h1>Recipes</h1>
       {recipes == null ? (
-        <p>Loading...</p>
+        <>        
+          <button onClick={openResistModal}>Resist New Recipe</button><ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
+          <p>Loading or Nothing...</p>
+        </>
       ) : (
         <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
           <button onClick={openResistModal}>Resist New Recipe</button>
@@ -100,6 +103,7 @@ const RecipeIndex: React.FC = () => {
                   RecipeImage={RecipeImage}
                   RecipeMethod={RecipeMethod}
                   />
+                <p>　</p>
             </li>
           ))}
         </ul>

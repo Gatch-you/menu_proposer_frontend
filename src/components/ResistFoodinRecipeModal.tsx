@@ -52,7 +52,7 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
 
   async function fetchFoodOptions() {
     try {
-      const response = await fetch('http://localhost:8080/backend/foods');
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/foods');
       const jsonData = await response.json();
       return jsonData;
     } catch (error) {
@@ -88,7 +88,7 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
     }
 
     // 実際にPOSTリクストを送る
-    fetch('http://localhost:8080/backend/recipe_food/insert_use_food', {
+    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/recipe_food/insert_use_food', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
