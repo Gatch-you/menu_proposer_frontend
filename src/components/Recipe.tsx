@@ -70,7 +70,7 @@ const RecipeIndex: React.FC = () => {
       {recipes == null ? (
         <>        
           <button onClick={openResistModal}>Resist New Recipe</button><ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
-          <p>Loading or Nothing...</p>
+          <p>Loading or Nothing</p>
         </>
       ) : (
         <ul style={{listStyle: 'none', padding: 0, margin: 0}}>

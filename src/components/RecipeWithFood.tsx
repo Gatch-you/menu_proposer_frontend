@@ -30,7 +30,7 @@ const RecipeWithFood: React.FC = () => {
 
   async function fetchRecipe(recipeId: string | undefined) {
     try {
-      const response = await fetch("http://localhost:8080/backend/recipes/" + recipeId);
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT+"/backend/recipes/" + recipeId + "/" +recipeName);
       if (response.ok) {
         const jsonData = await response.json() 
         setRecipe(jsonData);
