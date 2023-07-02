@@ -36,7 +36,6 @@ const DeleteRecipeModal: React.FC<ModalProps> = ({
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'Acsess-Control-Allow-Origin': '*',
         },
         body: JSON.stringify(deleteRecipeData)
     })
@@ -49,6 +48,7 @@ const DeleteRecipeModal: React.FC<ModalProps> = ({
         console.error('Delete recipe failed:', error)
       });
       console.log(deleteRecipeData)
+      window.location.reload();
   };
 
   const handleCancell = (e: any) => {

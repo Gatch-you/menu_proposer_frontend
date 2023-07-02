@@ -92,7 +92,6 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify(foodData)
     })
@@ -110,6 +109,7 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
         console.error('Food registration failed:', error);
       });
   console.log(foodData)
+  window.location.reload();
   };
 
   const handleCancell = (e: any) => {
@@ -161,7 +161,7 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
         {use_amountError && <p>{use_amountError}</p>}
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>
-          <button type="submit" disabled={!isInputValid}>登録: recipe_id:{RecipeId}, food_id{selectedFood}</button>
+          <button type="submit" disabled={!isInputValid}>登録</button>
         </ul>
       </form>
     </Modal>

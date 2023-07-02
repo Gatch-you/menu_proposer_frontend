@@ -74,7 +74,6 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Acsess-Control-Allow-Origin': '*',
       },
       body: JSON.stringify(recipeData)
     })
@@ -92,6 +91,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
           closeUpdateModal();
         })
       console.log(recipeData)
+      window.location.reload();
   };
 
   const handleCancell = (e: any) => {

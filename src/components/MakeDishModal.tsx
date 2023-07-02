@@ -33,7 +33,6 @@ const MakeDishModal: React.FC<ModalProps> = ({
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            'Acsess-Control-Allow-Origin': '*',
           },
         })
           .then((response) => response.json())
@@ -44,6 +43,7 @@ const MakeDishModal: React.FC<ModalProps> = ({
             console.error('Update food failed:', error);
           });
           closeMakeModal(); 
+          window.location.reload();
       };
 
       const handleCancell = (e: any) => {

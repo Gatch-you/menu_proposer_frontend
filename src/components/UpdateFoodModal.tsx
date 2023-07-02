@@ -90,7 +90,6 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Acsess-Control-Allow-Origin': '*',
       },
       body: JSON.stringify(foodData)
     })
@@ -107,8 +106,8 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
       .catch((error) => {
         console.error('Update food failed:', error);
       });
-
     console.log(foodData)
+    window.location.reload();
   };
 
   const handleCancell = (e: any) => {

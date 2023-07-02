@@ -53,7 +53,6 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify(recipeData)
     })
@@ -71,6 +70,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
         console.error('Reccipe resistration failed:', error);
       })
     console.log(recipeData)
+    window.location.reload();
   };
 // 使用食材の登録を行う際のsubmit処理後ほど
   // const handleSubmitWithFood = (e: React.FormEvent<HTMLFormElement>) => {
