@@ -1,6 +1,6 @@
 import React, {useState, KeyboardEventHandler} from 'react'
 import  Modal  from 'react-modal';
-import { Recipe } from './Models';
+import { Recipe } from '../Models';
 
 const customStyles = {
     content: {

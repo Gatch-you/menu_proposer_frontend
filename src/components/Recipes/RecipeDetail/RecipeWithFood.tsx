@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { RecipeFood } from './Models';
+import { RecipeFood } from '../../Models';
 import DeleteFoodinRecipeModal from './DeleteFoodinRecipeModal';
 import UpdateFoodinRecipeModal from './UpdateFoodinRecipeModal';
 import ResistFoodinRecipeModal from './ResistFoodinRecipeModal';
@@ -8,8 +8,6 @@ import MakeDishModal from './MakeDishModal';
 
 //送るリクエスト↓
 // curl -X GET http://localhost:8080/backend/recipes/${recipeId}/${recipeName}
-
-
 
 const RecipeWithFood: React.FC = () => {
   const { recipeId, recipeName } = useParams();
@@ -114,7 +112,7 @@ const RecipeWithFood: React.FC = () => {
           <button onClick={() => openResistModal(recipe[0].recipe_id)}>新しい食材の追加</button>
           <ResistFoodinRecipeModal 
             showResistModal={showResistModal} 
-            closeResistModal={closeResistModal} 
+            closeResistModal={closeResistModal}
             RecipeId={RecipeId}
             />
           <button onClick={ () => openMakeModal(recipe[0].recipe_id)}>この料理を作成する</button>

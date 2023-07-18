@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Recipe } from './Models'
+import { Recipe } from '../Models'
 import ResistRecipeModal from './ResistRecipeModal'
 import DeleteRecipeModal from './DeleteRecipeModal'
 import UpdateRecipeModal from './UpdateRecipeModal'

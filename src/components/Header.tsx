@@ -14,7 +14,7 @@ const Header = () => {
                     <Link to="/">ホーム</Link>
                 </li>
                 <li>
-                    <Link to="/foods_strage">食材ストレージ</Link>
+                    <Link to="/foods_storage">食材ストレージ</Link>
                 </li>
                 <li>
                     <Link to="/recipes">レシピ</Link>

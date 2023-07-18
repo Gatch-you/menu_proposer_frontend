@@ -17,14 +17,6 @@ const HomePage = () => {
         <p style={{ textAlign: 'left' }}>
            MyCookBookは、あなたの料理体験を向上させ、創造性を引き出すためのパートナーとなることでしょう。是非MyCookBookをご活用ください！！
         </p>
-        <center>
-          <h3>
-            アプリケーション移設しました。お手数ですが、以下のURLにて使用をお願いします
-          </h3>
-          <a href='http://52.192.113.162:3000' >
-            http://52.192.113.162:3000
-          </a>
-        </center>
       </div>
     </div>
   )

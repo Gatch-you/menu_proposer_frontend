@@ -1,4 +1,4 @@
-import { FoodwithExiration } from "./Models";
+import { FoodwithExiration } from "../Models";
 import React, { useState, useEffect } from 'react';
 
 const FoodswithExpirationDate: React.FC = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Food } from './Models';
+import { Food } from '../Models';
 import ResistFoodModal from './ResistFoodModal';
 import UpdateFoodModal from './UpdateFoodModal';
 import DeleteFoodModal from './DeleteFoodModal';

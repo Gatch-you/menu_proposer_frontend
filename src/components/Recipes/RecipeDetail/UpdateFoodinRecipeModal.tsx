@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css"
-import { RecipeFood } from './Models';
+import { RecipeFood } from '../../Models';
 
 const customStyles = {
     content: {
@@ -98,7 +98,7 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
       style={customStyles}
       onRequestClose={closeUpdateModal}
     >
-      <h2>登録内容変更: No.{RecipeId}</h2>
+      <h2>登録内容変更</h2>
       <div>食材の変更部分を入力してください</div>
       <h3>食品名: {FoodId} {FoodName}</h3>
       <form onSubmit={handleSubmit}>
