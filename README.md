@@ -1,6 +1,7 @@
 # MyCookBook
 
-MyCookBookはアプリケーションはユーザーの料理アイデアを記録し、レシピの提案、食材の効率的な管理を可能とするアプリケーションであり、
+MyCookBookはアプリケーションはユーザーの料理アイデアを記録し、レシピの提案、食材の効率的な管理を可能とするアプリケーションです。  
+MyCookBookは、あなたの料理体験を向上させ、創造性を引き出すためのパートナーとなることでしょう。是非MyCookBookをご活用ください！  
 このリポジトリはフロントエンドのものとなっています。  
 アプリケーションリンク: [MyCookBook](http://mycooookbook.com:3000)  
 サバーサイドのリポジトリ: [backend](https://github.com/Gatch-you/menu_proposer_backend)
