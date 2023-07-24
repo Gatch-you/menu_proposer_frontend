@@ -1,46 +1,26 @@
-# Getting Started with Create React App
+# MyCookBook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MyCookBookはアプリケーションはユーザーの料理アイデアを記録し、レシピの提案、食材の効率的な管理を可能とするアプリケーションであり、
+このリポジトリはフロントエンドのものとなっています。
+[MyCookBook](http://mycooookbook:3000)
+[backend](https://github.com/Gatch-you/menu_proposer_backend)
 
-## Available Scripts
+##　使用技術
 
-In the project directory, you can run:
+![Static Badge](https://img.shields.io/badge/npm-9.6.7-green)![Static Badge](https://img.shields.io/badge/typescript-4.9.4-blue)
+![Static Badge](https://img.shields.io/badge/react-18.2.0-red)![Static Badge](https://img.shields.io/badge/AWS-EC2-yellow)
 
-### `npm start`
+## 機能の紹介
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+このアプリケーションでは、以下の機能を実装しています。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 食材情報の登録・変更・削除
+ユーザーが店頭等で入手した食材に対し登録を行い、その食材情報の変更、削除等が可能です
 
-### `npm test`
+### レシピの登録・変更・削除
+ユーザーの作りたい料理(自身の自慢のレシピや作ってみたい料理等)の登録を行い、そのレシピ情報の変更、削除が可能です。
+また、登録した食材情報と結びつけて使用数の設定や作成時の在庫管理を行うことができます。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### レシピの提案
+ユーザーの食材登録時に入力した賞味期限に対して5日以内の食材の情報を取得し、その食材にて作成できるレシピを提案することが可能です。
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
