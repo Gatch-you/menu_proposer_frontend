@@ -35,7 +35,7 @@ const FoodswithExpirationDate: React.FC = () => {
           {foods.map((food) => (
             <li key={food.id}>
               <p>食材: {food.food_name} {food.food_quantity}{food.food_unit}</p>
-              <p>賞味期限: {food.expiration_date}</p>
+              <p>賞味期限: {food.expirationDate}</p>
               <p>提案するレシピ: {food.recipe_name}, 使用量{food.use_amount} {food.food_unit}</p>
               <p>　</p>
             </li>

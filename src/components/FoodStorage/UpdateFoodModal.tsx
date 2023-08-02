@@ -23,7 +23,7 @@ type ModalProps = {
   FoodName: string;
   FoodQuantity: number | null;
   FoodUnit: string | null;
-  FoodExpiratinDate: Food["expiration_date"] | null;
+  FoodExpiratinDate: Food["expirationDate"] | null;
   FoodType: string | null;
 };
 
@@ -42,7 +42,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
   const [name, setName] = useState<Food["name"]>(FoodName || "");
   const [quantity, setQuantity] = useState<Food["quantity"] | null>(FoodQuantity || null);
   const [unit, setUnit] = useState<Food["unit"] | null>(FoodUnit || null);
-  const [expirationDate, setExpirationDate] = useState<Food["expiration_date"] | null>(FoodExpiratinDate || null)
+  const [expirationDate, setExpirationDate] = useState<Food["expirationDate"] | null>(FoodExpiratinDate || null)
   const [type, setType] = useState<Food["type"] | null>(FoodType || null)
   // const [nameError, setNameError] = useState('');
   // const [quantityError, setQuantityError] = useState('')
@@ -78,7 +78,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
       name: data.name, // react-hook-formの値を使用する
       quantity: +data.quantity,
       unit: data.unit,
-      expiration_date: selectDate.toISOString(),
+      expirationDate: selectDate.toISOString(),
       type: data.type,
     };
 
@@ -134,12 +134,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
   
   const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-
-    // if (!value) {
-    //   setQuantityError('正しい入力がありません(半角数字にて記入)');
-    // } else {
-    //   setQuantityError('');
-      setValue('quantity', value);  // react-hook-formの値を更新
+    setValue('quantity', value);  // react-hook-formの値を更新
     
     
  // react-hook-formの値を更新

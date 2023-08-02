@@ -30,7 +30,7 @@ const ResistFoodModal: React.FC<ModalProps> = ({
   const [name, setName] = useState<Food["name"]>("");
   const [quantity, setQuantity] = useState<Food["quantity"]>(0.0);
   const [unit, setUnit] = useState<Food["unit"]>("");
-  const [expirationDate, setExpirationDate] = useState<Food["expiration_date"] | null>(null);
+  const [expirationDate, setExpirationDate] = useState<Food["expirationDate"] | null>(null);
   const [type, setType] = useState<Food["type"]>("");
   const [nameError, setNameError] = useState('')
   const [quantityError, setQuantityError] = useState('')
@@ -56,7 +56,7 @@ const ResistFoodModal: React.FC<ModalProps> = ({
       name: name,
       quantity: quantity,
       unit: unit,
-      expiration_date: selectDate.toISOString(),
+      expirationDate: selectDate.toISOString(),
       type: type,
     };
 

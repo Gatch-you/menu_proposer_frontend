@@ -12,7 +12,7 @@ const RecipeIndex: React.FC = () => {
   const [RecipeName, setRecipeName] = useState<string | null>(null);
   const [RecipeDecription, setRecipeDescription] = useState<Recipe["description"] | null>(null);
   const [RecipeImage, setRecipeImage] = useState<Recipe['image'] | null>(null);
-  const [RecipeMethod, setRecipeMethod] = useState<Recipe['making_method'] | null>(null);
+  const [RecipeMethod, setRecipeMethod] = useState<Recipe['makingMethod'] | null>(null);
   const [showResistModal, setShowResistModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -81,7 +81,7 @@ const RecipeIndex: React.FC = () => {
                 <p>レシピ名: {recipe.name}</p>
                 <p>概要: {recipe.description}</p>
                 {/* <p>Imageurl: {recipe.image}</p> */}
-                <p>つくりかた: {recipe.making_method}</p>
+                <p>つくりかた: {recipe.makingMethod}</p>
                 <Link 
                   to={`/recipes/${recipe.id}/${recipe.name}`}>
                   <button>レシピの詳細</button>
@@ -93,7 +93,7 @@ const RecipeIndex: React.FC = () => {
                   RecipeId={RecipeId}
                   RecipeName={RecipeName}
                   />
-                <button onClick={() => openUpdateModal(recipe.id, recipe.name, recipe.description, recipe.image, recipe.making_method)}>レシピの変更</button>
+                <button onClick={() => openUpdateModal(recipe.id, recipe.name, recipe.description, recipe.image, recipe.makingMethod)}>レシピの変更</button>
                 <UpdateRecipeModal
                   showUpdateModal={showUpdateModal}
                   closeUpdateModal={closeUpdateModal}

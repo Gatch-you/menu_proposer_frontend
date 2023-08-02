@@ -24,7 +24,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
   const [name, setName] = useState<Recipe["name"] | null>(null);
   const [description, setDescription] = useState<Recipe["description"] | null>(null);
   const [image, setImage] = useState<Recipe["image"] | null>(null);
-  const [making_method, setMethod] = useState<Recipe["making_method"] | null>(null);
+  const [makingMethod, setMethod] = useState<Recipe["makingMethod"] | null>(null);
   const [nameError, setNameError] = useState('');
 
   const isInputValid = name
@@ -42,7 +42,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
         name: name,
         description: description,
         image: image,
-        making_method: making_method,
+        makingMethod: makingMethod,
     };
 
     if (!name) {
@@ -78,7 +78,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
   //       name: name,
   //       description: description,
   //       image: image,
-  //       making_method: making_method,
+  //       makingMethod: makingMethod,
   //   };
 
   //   fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/insert_recipe', {

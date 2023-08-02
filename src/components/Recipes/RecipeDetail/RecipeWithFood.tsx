@@ -105,7 +105,7 @@ const RecipeWithFood: React.FC = () => {
           <>
             <p>レシピ名: {recipe[0].recipe_name}</p>
             <p>概要: {recipe[0].recipe_description}</p>
-            <p>つくりかた: {recipe[0].recipe_making_method}</p>
+            <p>つくりかた: {recipe[0].recipe_makingMethod}</p>
           </>
           )}
           <ul style={{listStyle: 'none', padding: 0, margin: 0}} >

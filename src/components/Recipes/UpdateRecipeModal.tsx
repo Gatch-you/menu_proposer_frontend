@@ -37,7 +37,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
   const [name, setName] = useState<Recipe["name"] | null>(null);
   const [description, setDescription] = useState<Recipe["description"] | null>(null);
   const [image, setImage] = useState<Recipe["image"] | null>(null);
-  const [making_method, setMethod] = useState<Recipe["making_method"] | null>(null);
+  const [makingMethod, setMethod] = useState<Recipe["makingMethod"] | null>(null);
 
   const {
     register,
@@ -49,7 +49,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
       name: RecipeName || "",
       description: RecipeDescription || "",
       image: RecipeImage || "",
-      making_method: RecipeMethod || "",
+      makingMethod: RecipeMethod || "",
     }
   })
 
@@ -57,7 +57,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
     if (RecipeName) setValue('name', RecipeName);
     if (RecipeDescription) setValue('description', RecipeDescription);
     if (RecipeImage) setValue('image', RecipeImage);
-    if (RecipeMethod) setValue('making_method', RecipeMethod);
+    if (RecipeMethod) setValue('makingMethod', RecipeMethod);
   }, [RecipeName, RecipeDescription, RecipeImage, RecipeMethod, setValue]);
 
   const onSubmit = (data: any) => {
@@ -67,7 +67,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
       name: data.name,
       description: data.description,
       image: data.image,
-      making_method: data.making_method,
+      makingMethod: data.makingMethod,
    };
 
     fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/update_recipe', {
@@ -119,7 +119,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
 
   const handleMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMethod(e.target.value);
-    setValue('making_method', e.target.value)
+    setValue('makingMethod', e.target.value)
   }
 
   return (
@@ -151,10 +151,10 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
         /> */}
         <h3>つくりかた</h3>
         <input 
-          type="making_method" 
-          {...register('making_method')} 
+          type="makingMethod" 
+          {...register('makingMethod')} 
           onChange={handleMethod} 
-          value={watch('making_method') || ""}
+          value={watch('makingMethod') || ""}
         />
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>

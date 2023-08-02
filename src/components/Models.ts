@@ -5,7 +5,7 @@ export interface Food {
     name: string
     quantity: number
     unit: string
-    expiration_date: Date
+    expirationDate: Date
     type: string  
 }
 
@@ -14,7 +14,7 @@ export interface Recipe {
     name: string
     description: string
     image: string
-    making_method: string
+    makingMethod: string
 }
 
 export interface Recipe_Food {
@@ -33,7 +33,7 @@ export interface Recipe_With_Food {
     food_name: string
     use_amount: number
     food_unit: string
-    recipe_making_method: string
+    recipe_makingMethod: string
 }
 
 export interface RecipeFood {
@@ -45,7 +45,7 @@ export interface RecipeFood {
     food_name: string;
     use_amount: number;
     food_unit: string;
-    recipe_making_method?: string;
+    recipe_makingMethod?: string;
   }
 
 export interface FoodwithExiration {
@@ -54,7 +54,7 @@ export interface FoodwithExiration {
     food_name: string;
     food_quantity: number;
     food_unit: string;
-    expiration_date: ReactNode
+    expirationDate: ReactNode
     recipe_id: number;
     recipe_name: string;
     use_amount: number;
