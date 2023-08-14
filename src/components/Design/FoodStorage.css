@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive; /* ロゴ風のフォント */
+    font-size: 55px;
+    color: #0b2d44; /* ロゴの色 */
+    margin-bottom: 10px;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #3498dbb3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.button:hover {
+    background-color: #2980b9;
+}
+  
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+  
+.list-item p {
+    margin: 5px 0;
+}
+
+.list-item-text {
+    font-size: 18px; /* テキストのフォントサイズを調整 */
+    color: #333; /* テキストの色を変更 */
+    font-weight: bold; /* テキストを太字にする */
+    margin-bottom: 8px; /* マージンを少し追加してテキスト間隔を広げる */
+}
+
+.delete-button {
+    background-color: #e74d3ce3;
+}
+  
+.delete-button:hover {
+    background-color: #c0392b;
+}
+  
+.update-button {
+    background-color: #27ae5fc2;
+}
+  
+.update-button:hover {
+    background-color: #219653;
+}

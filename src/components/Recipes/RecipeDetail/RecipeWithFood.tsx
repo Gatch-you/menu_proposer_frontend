@@ -5,6 +5,8 @@ import DeleteFoodinRecipeModal from './DeleteFoodinRecipeModal';
 import UpdateFoodinRecipeModal from './UpdateFoodinRecipeModal';
 import ResistFoodinRecipeModal from './ResistFoodinRecipeModal';
 import MakeDishModal from './MakeDishModal';
+import '../../Design/RecipeWithFood.css';
+
 
 //送るリクエスト↓
 // curl -X GET http://localhost:8080/backend/recipes/${recipeId}/${recipeName}
@@ -91,10 +93,10 @@ const RecipeWithFood: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Recipes</h1>
+    <div className="body">
+      <h1 className='logo'>Recipes</h1>
       {recipe === null ? (
-        <><p>まず最初に{recipeName}に使用する食材を追加してください</p><button onClick={() => openFirstResistModal(parseFloat(recipeId!))}>食材の追加</button>
+        <><p>まず最初に{recipeName}に使用する食材を追加してください</p><button className='button' onClick={() => openFirstResistModal(parseFloat(recipeId!))}>食材の追加</button>
         <ResistFoodinRecipeModal
           showResistModal={showResistModal}
           closeResistModal={closeResistModal}
@@ -103,27 +105,27 @@ const RecipeWithFood: React.FC = () => {
         <div>
           {recipe && recipe.length > 0 && (
           <>
-            <p>レシピ名: {recipe[0].recipe_name}</p>
-            <p>概要: {recipe[0].recipe_description}</p>
-            <p>つくりかた: {recipe[0].recipe_makingMethod}</p>
+            <p className='list-item-text'>レシピ名: {recipe[0].recipe_name}</p>
+            <p className='text'>概要: {recipe[0].recipe_description}</p>
+            <p className='text'>つくりかた: {recipe[0].recipe_making_method}</p>
           </>
           )}
           <ul style={{listStyle: 'none', padding: 0, margin: 0}} >
-          <button onClick={() => openResistModal(recipe[0].recipe_id)}>新しい食材の追加</button>
+          <button className='button' onClick={() => openResistModal(recipe[0].recipe_id)}>新しい食材の追加</button>
           <ResistFoodinRecipeModal 
             showResistModal={showResistModal} 
             closeResistModal={closeResistModal}
             RecipeId={RecipeId}
             />
-          <button onClick={ () => openMakeModal(recipe[0].recipe_id)}>この料理を作成する</button>
+          <button className='button' onClick={ () => openMakeModal(recipe[0].recipe_id)}>この料理を作成する</button>
           <h1>　</h1>
-          <h1>{'<使用食材一覧>'}</h1>
+          <h1 className='logo'>{'<使用食材一覧>'}</h1>
           <MakeDishModal showMakeModal={showMakeModal} closeMakeModal={closeMakeModal} RecipeId={RecipeId}/>
             {recipe &&
               recipe.map((item) => (
-               <li key={item.food_id} style={{ marginBottom: '10px' }}>
-                <p>{item.food_name} {item.use_amount} {item.food_unit}</p>
-                <button onClick={() => openDeleteModal(item.recipe_id, item.food_id, item.food_name)}>削除</button>
+               <li className='list-item' key={item.food_id} style={{ marginBottom: '10px' }}>
+                <p className='list-item-text'>{item.food_name} {item.use_amount} {item.food_unit}</p>
+                <button className='button delete-button' onClick={() => openDeleteModal(item.recipe_id, item.food_id, item.food_name)}>削除</button>
                 <DeleteFoodinRecipeModal
                   showDeleteModal={showDeleteModal}
                   closeDeleteModal={closeDeleteModal}
@@ -131,7 +133,7 @@ const RecipeWithFood: React.FC = () => {
                   FoodId={FoodId}
                   FoodName={FoodName}
                 />
-                <button onClick={() => openUpdateModal(item.food_id, item.food_name, item.use_amount, item.food_unit)}>使用量の変更</button>
+                <button className='button update-button' onClick={() => openUpdateModal(item.food_id, item.food_name, item.use_amount, item.food_unit)}>使用量の変更</button>
                 <UpdateFoodinRecipeModal 
                   showUpdateModal={showUpdateModal} 
                   closeUpdateModal={closeUpdateModal} 

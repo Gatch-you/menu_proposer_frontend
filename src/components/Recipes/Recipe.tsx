@@ -5,6 +5,7 @@ import DeleteRecipeModal from './DeleteRecipeModal'
 import UpdateRecipeModal from './UpdateRecipeModal'
 import { Link } from "react-router-dom";
 // import RecipeWithFood from './RecipeWithFood'
+import '../Design/Recipe.css';
 
 const RecipeIndex: React.FC = () => {
   const [recipes, setRecipe] = useState<Recipe[] | null>(null);
@@ -12,7 +13,7 @@ const RecipeIndex: React.FC = () => {
   const [RecipeName, setRecipeName] = useState<string | null>(null);
   const [RecipeDecription, setRecipeDescription] = useState<Recipe["description"] | null>(null);
   const [RecipeImage, setRecipeImage] = useState<Recipe['image'] | null>(null);
-  const [RecipeMethod, setRecipeMethod] = useState<Recipe['makingMethod'] | null>(null);
+  const [RecipeMethod, setRecipeMethod] = useState<Recipe['making_method'] | null>(null);
   const [showResistModal, setShowResistModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -65,35 +66,35 @@ const RecipeIndex: React.FC = () => {
   }, [recipes]);
 
   return (
-    <div>
-      <h1>Recipes</h1>
+    <div className="container">
+      <h1 className="logo">Recipes</h1>
+      <button className='button' onClick={openResistModal}>新しいレシピの登録</button>
       {recipes == null ? (
         <>        
-          <button onClick={openResistModal}>Resist New Recipe</button><ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
+          <button className="button-group" onClick={openResistModal}>新しいレシピの登録</button><ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
           <p>Loading or Nothing</p>
         </>
       ) : (
-        <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
-          <button onClick={openResistModal}>Resist New Recipe</button>
+        <ul className="list">
           <ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
           {recipes.map((recipe) => (
-            <li key={recipe.id}>
-                <p>レシピ名: {recipe.name}</p>
-                <p>概要: {recipe.description}</p>
+            <li className="list-item" key={recipe.id}>
+                <p　className='list-item-text'>レシピ名: {recipe.name}</p>
+                <p className='list-item-text'>概要: {recipe.description}</p>
                 {/* <p>Imageurl: {recipe.image}</p> */}
-                <p>つくりかた: {recipe.makingMethod}</p>
+                <p className='list-item-text'>つくりかた: {recipe.making_method}</p>
                 <Link 
                   to={`/recipes/${recipe.id}/${recipe.name}`}>
-                  <button>レシピの詳細</button>
+                  <button className="button detail-button">レシピの詳細</button>
                 </Link>
-                <button onClick={() => openDeleteModal(recipe.id, recipe.name)}>削除</button>
+                <button className="button delete-button" onClick={() => openDeleteModal(recipe.id, recipe.name)}>削除</button>
                 <DeleteRecipeModal
                   showDeleteModal={showDeleteModal}
                   closeDeleteModal={closeDeleteModal}
                   RecipeId={RecipeId}
                   RecipeName={RecipeName}
                   />
-                <button onClick={() => openUpdateModal(recipe.id, recipe.name, recipe.description, recipe.image, recipe.makingMethod)}>レシピの変更</button>
+                <button className="button update-button" onClick={() => openUpdateModal(recipe.id, recipe.name, recipe.description, recipe.image, recipe.making_method)}>レシピの変更</button>
                 <UpdateRecipeModal
                   showUpdateModal={showUpdateModal}
                   closeUpdateModal={closeUpdateModal}

@@ -14,7 +14,7 @@ export interface Recipe {
     name: string
     description: string
     image: string
-    makingMethod: string
+    making_method: string
 }
 
 export interface Recipe_Food {
@@ -33,7 +33,7 @@ export interface Recipe_With_Food {
     food_name: string
     use_amount: number
     food_unit: string
-    recipe_makingMethod: string
+    recipe_making_method: string
 }
 
 export interface RecipeFood {
@@ -45,7 +45,7 @@ export interface RecipeFood {
     food_name: string;
     use_amount: number;
     food_unit: string;
-    recipe_makingMethod?: string;
+    recipe_making_method?: string;
   }
 
 export interface FoodwithExiration {

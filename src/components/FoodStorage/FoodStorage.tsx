@@ -4,6 +4,8 @@ import ResistFoodModal from './ResistFoodModal';
 import UpdateFoodModal from './UpdateFoodModal';
 import DeleteFoodModal from './DeleteFoodModal';
 import { Link } from 'react-router-dom';
+// import './FoodStorage.css';
+import '../Design/FoodStorage.css';
 
 const FoodStorage: React.FC = () => {
   const [foods, setFoods] = useState<Food[] | null>(null);
@@ -65,35 +67,37 @@ const FoodStorage: React.FC = () => {
   }, [foods]);
 
   return (
-    <div>
-      <h1>Food Storage</h1>
+    <div className="container">
+      <h1 className='logo'>Food Storage</h1>
+      <div className='button-group'>
+        <button className='button' onClick={openResistModal}>新しい食材の追加</button>
+        <Link to={`/foods_with_expiration`}>
+          <button className='button'>賞味期限が近い食材一覧</button>
+        </Link>
+      </div>
       {foods === null ? (
       <>
         <button onClick={openResistModal}>新しい食材の追加</button><ResistFoodModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
         <p>Loading or Nothing...</p>
       </>
       ) : (
-        <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
-          <button onClick={openResistModal}>新しい食材の追加</button>
+        <ul className='list'>
           <ResistFoodModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
-          <Link
-            to={`/foods_with_expiration`}>
-            <button>賞味期限が近い食材一覧</button>
-          </Link>
+
           {foods.map((food) => (
-            <li key={food.id}>
+            <li className="list-item"key={food.id}>
               {/* <p>{food.id}</p> */}
-              <p>材料名: {food.name}</p>
-              <p>量: {food.quantity} {food.unit}</p>
-              <p>種類: {food.type}</p>
-              <button onClick={() => openDeleteModal(food.id, food.name)}>削除</button>
+              <p className='list-item-text'>材料名: {food.name}</p>
+              <p className='list-item-text'>量: {food.quantity} {food.unit}</p>
+              <p className='list-item-text'>種類: {food.type}</p>
+              <button className="button delete-button" onClick={() => openDeleteModal(food.id, food.name)}>削除</button>
               <DeleteFoodModal
                 showDeleteModal={showDeleteModal} 
                 closeDeleteModal={closeDeleteModal}
                 FoodId={FoodId}
                 FoodName={FoodName} />
 
-              <button onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.expirationDate, food.type)}>食材情報の変更</button>
+              <button className="button update-button" onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.expirationDate, food.type)}>食材情報の変更</button>
               <UpdateFoodModal 
                 showUpdateModal={showUpdateModal} 
                 closeUpdateModal={closeUpdateModal} 

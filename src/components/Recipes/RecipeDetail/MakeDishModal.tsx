@@ -29,7 +29,7 @@ const MakeDishModal: React.FC<ModalProps> = ({
         e.preventDefault();
     
         // 実際にPUTクエリを送る
-        fetch(`http://localhost:8080/backend/recipe_food/update_food_storage/${RecipeId}`, {
+        fetch(process.env.REACT_APP_API_ENDPOINT+`/backend/recipe_food/update_food_storage/${RecipeId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

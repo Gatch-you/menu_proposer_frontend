@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import HomePage from './components/Home/HomePage';
-import FoodStrage from './components/FoodStorage/FoodStrage';
+import FoodStrage from './components/FoodStorage/FoodStorage';
 import Recipe from './components/Recipes/Recipe';
 import RecipeWithFood from './components/Recipes/RecipeDetail/RecipeWithFood';
 import FoodswithExpirationDate from './components/FoodStorage/FoodswithExpirationDate';
