@@ -30,7 +30,7 @@ const ResistFoodModal: React.FC<ModalProps> = ({
   const [name, setName] = useState<Food["name"]>("");
   const [quantity, setQuantity] = useState<Food["quantity"]>(0.0);
   const [unit, setUnit] = useState<Food["unit"]>("");
-  const [expirationDate, setExpirationDate] = useState<Food["expirationDate"] | null>(null);
+  const [expiration_date, setExpirationDate] = useState<Food["expiration_date"] | null>(null);
   const [type, setType] = useState<Food["type"]>("");
   const [nameError, setNameError] = useState('')
   const [quantityError, setQuantityError] = useState('')
@@ -50,13 +50,13 @@ const ResistFoodModal: React.FC<ModalProps> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // jsonの型を設定
-    const selectDate = expirationDate || Today;
+    const selectDate = expiration_date || Today;
 
     const foodData = {
       name: name,
       quantity: quantity,
       unit: unit,
-      expirationDate: selectDate.toISOString(),
+      expiration_date: selectDate.toISOString(),
       type: type,
     };
 
@@ -159,7 +159,7 @@ const ResistFoodModal: React.FC<ModalProps> = ({
         <h3>賞味期限</h3>
         <DatePicker
           dateFormat="yyyy/MM/dd"
-          selected={expirationDate}
+          selected={expiration_date}
           onChange={(date: Date | null) => setExpirationDate(date)}
           />
 

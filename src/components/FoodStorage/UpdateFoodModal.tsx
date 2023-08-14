@@ -23,7 +23,7 @@ type ModalProps = {
   FoodName: string;
   FoodQuantity: number | null;
   FoodUnit: string | null;
-  FoodExpiratinDate: Food["expirationDate"] | null;
+  FoodExpiratinDate: Food["expiration_date"] | null;
   FoodType: string | null;
 };
 
@@ -42,7 +42,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
   const [name, setName] = useState<Food["name"]>(FoodName || "");
   const [quantity, setQuantity] = useState<Food["quantity"] | null>(FoodQuantity || null);
   const [unit, setUnit] = useState<Food["unit"] | null>(FoodUnit || null);
-  const [expirationDate, setExpirationDate] = useState<Food["expirationDate"] | null>(FoodExpiratinDate || null)
+  const [expiration_date, setExpirationDate] = useState<Food["expiration_date"] | null>(FoodExpiratinDate || null)
   const [type, setType] = useState<Food["type"] | null>(FoodType || null)
   // const [nameError, setNameError] = useState('');
   // const [quantityError, setQuantityError] = useState('')
@@ -71,14 +71,14 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
   }, [FoodName, FoodQuantity, FoodUnit, FoodType, setValue]);
 
   const onSubmit = (data: any) => {
-    const selectDate = expirationDate || Today;
+    const selectDate = expiration_date || Today;
 
     const foodData = {
       id: FoodId,
       name: data.name, // react-hook-formの値を使用する
       quantity: +data.quantity,
       unit: data.unit,
-      expirationDate: selectDate.toISOString(),
+      expiration_date: selectDate.toISOString(),
       type: data.type,
     };
 
@@ -171,7 +171,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
         <h3>賞味期限</h3>
         <DatePicker
           dateFormat="yyyy/MM/dd"
-          selected={expirationDate}
+          selected={expiration_date}
           onChange={(date: Date | null) => setExpirationDate(date)}
         />
         <h3>種類: {FoodType}</h3>
