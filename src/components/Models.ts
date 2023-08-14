@@ -55,6 +55,7 @@ export interface FoodwithExiration {
     food_quantity: number;
     food_unit: string;
     expirationDate: ReactNode
+    formatted_date: string;
     recipe_id: number;
     recipe_name: string;
     use_amount: number;

@@ -1,5 +1,6 @@
 import { FoodwithExiration } from "../Models";
 import React, { useState, useEffect } from 'react';
+import "../Design/FoodwithExpirationDate.css"
 
 const FoodswithExpirationDate: React.FC = () => {
 
@@ -26,17 +27,17 @@ const FoodswithExpirationDate: React.FC = () => {
   }, [foods]);
   
   return (
-    <div>
-      <h1>Food Storage</h1>
+    <div className="container">
+      <h1 className="logo">Food Storage</h1>
       {foods === null ? (
-        <p>現在賞味期限の近い食材はありません</p>
+        <p className="text">現在賞味期限の近い食材はありません</p>
       ) : (
-        <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+        <ul className="list">
           {foods.map((food) => (
-            <li key={food.id}>
-              <p>食材: {food.food_name} {food.food_quantity}{food.food_unit}</p>
-              <p>賞味期限: {food.expirationDate}</p>
-              <p>提案するレシピ: {food.recipe_name}, 使用量{food.use_amount} {food.food_unit}</p>
+            <li className="list-item" key={food.id}>
+              <p className="list-item-text">食材: {food.food_name} {food.food_quantity}{food.food_unit}</p>
+              <p className="list-item-text">賞味期限: {food.formatted_date}</p>
+              <p className="list-item-text">提案するレシピ: {food.recipe_name}, 使用量{food.use_amount} {food.food_unit}</p>
               <p>　</p>
             </li>
           ))}
