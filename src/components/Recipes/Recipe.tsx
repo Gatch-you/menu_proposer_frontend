@@ -68,14 +68,14 @@ const RecipeIndex: React.FC = () => {
   return (
     <div className="container">
       <h1 className="logo">Recipes</h1>
-      <button className='button' onClick={openResistModal}>新しいレシピの登録</button>
       {recipes == null ? (
         <>        
-          <button className="button-group" onClick={openResistModal}>新しいレシピの登録</button><ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
+          <button className="button" onClick={openResistModal}>新しいレシピの登録</button><ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
           <p>Loading or Nothing</p>
         </>
       ) : (
         <ul className="list">
+          <button className='button' onClick={openResistModal}>新しいレシピの登録</button>
           <ResistRecipeModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
           {recipes.map((recipe) => (
             <li className="list-item" key={recipe.id}>

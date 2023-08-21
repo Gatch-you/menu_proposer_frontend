@@ -3,12 +3,13 @@
 MyCookBookはアプリケーションはユーザーの料理アイデアを記録し、レシピの提案、食材の効率的な管理を可能とするアプリケーションです。  
 MyCookBookは、あなたの料理体験を向上させ、創造性を引き出すためのパートナーとなることでしょう。是非MyCookBookをご活用ください！  
 このリポジトリはフロントエンドのものとなっています。  
-アプリケーションリンク: [MyCookBook](http://mycooookbook.com:3000)  
+アプリケーションリンク: [MyCookBook](http://mycooookbook.com)  
 サバーサイドのリポジトリ: [backend](https://github.com/Gatch-you/menu_proposer_backend)
 
 **使用技術**  
 ![Static Badge](https://img.shields.io/badge/npm-9.6.7-green) ![Static Badge](https://img.shields.io/badge/typescript-4.9.4-blue)
  ![Static Badge](https://img.shields.io/badge/react-18.2.0-red) ![Static Badge](https://img.shields.io/badge/AWS-EC2,Route53-yellow)
+ ![Static Badge](https://img.shields.io/badge/nginx-1.12.1-green) 
 
 ## 機能の紹介
 
