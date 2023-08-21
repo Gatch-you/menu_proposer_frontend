@@ -117,9 +117,10 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
   //   setValue('image', e.target.value);
   // }
 
-  const handleMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMethod(e.target.value);
-    setValue('making_method', e.target.value)
+  const handleMethod = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => {
+    const newText = e.target.value.replace(/\n/g, '\r\n');
+    setMethod(newText);
+    setValue('making_method', newText)
   }
 
   return (
@@ -150,11 +151,11 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
           value={watch('image') || ""}
         /> */}
         <h3>つくりかた</h3>
-        <input 
-          type="making_method" 
+        <textarea 
           {...register('making_method')} 
           onChange={handleMethod} 
           value={watch('making_method') || ""}
+          style={{ whiteSpace: 'pre-line' }}
         />
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>

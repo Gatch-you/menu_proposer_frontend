@@ -6,6 +6,7 @@ export interface Food {
     quantity: number
     unit: string
     expiration_date: Date
+    formatted_date: string
     type: string  
 }
 

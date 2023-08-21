@@ -27,14 +27,13 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
   const [making_method, setMethod] = useState<Recipe["making_method"] | null>(null);
   const [nameError, setNameError] = useState('');
 
-  const isInputValid = name
+  const isInputValid = name && description && making_method
 
-  const handleKeyDown: KeyboardEventHandler<HTMLFormElement> = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      // ここでEnterキーが押された後の処理を実行する
-    }
-  };
+  // const handleKeyDown: KeyboardEventHandler<HTMLFormElement> = (event) => {
+  //   if (event.key === 'Enter'　&& !event.shiftKey) {
+  //     event.preventDefault();
+  //   }
+  // };
 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -131,8 +130,9 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
     setImage(e.target.value);
   }
 
-  const handleMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMethod(e.target.value);
+  const handleMethod = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = e.target.value.replace(/\n/g, '\r\n');
+    setMethod(newText);
   }
 
   return (
@@ -145,7 +145,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
       <h2>レシピの登録</h2>
       <div>以下のフォームにレシピを追加してください</div>
 
-      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+      <form onSubmit={handleSubmit} >
         <h3>レシピ名</h3>
         <input type="name" onChange={handleName}/>
         {nameError && <p>{nameError}</p>}
@@ -154,10 +154,18 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
         {/* <h3>レシピの画像</h3>
         <input type="img" onChange={handleImage} /> */}
         <h3>つくりかた</h3>
-        <input type="method" onChange={handleMethod}/>
+        <textarea 
+          onChange={handleMethod}
+          style={{ whiteSpace: 'pre-line' }}
+        />
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>
-          <button type="submit" disabled={!isInputValid}>登録</button>
+          <button 
+            type="submit" 
+            disabled={!isInputValid}
+          >
+            登録
+          </button>
         </ul>
       </form>
     </Modal>

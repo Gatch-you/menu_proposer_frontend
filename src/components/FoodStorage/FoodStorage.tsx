@@ -17,6 +17,7 @@ const FoodStorage: React.FC = () => {
   const [FoodQuantity, setFoodQuantity] = useState<Food["quantity"] | null>(null);
   const [FoodUnit, setFoodUnit] = useState<Food["unit"] | null>(null);
   const [FoodExpiratinData, setFoodExpirationDate] = useState<Food["expiration_date"] | null>(null);
+  const [FoodFormattedDate, setFoodFormattedDate] = useState<Food["formatted_date"] | null>(null);
   const [FoodType, setFoodType] = useState<Food["type"] | null>(null);
   
   function openResistModal() {
@@ -26,13 +27,14 @@ const FoodStorage: React.FC = () => {
     setShowResistModal(false);
   }
 
-  function openUpdateModal(foodId: number, foodName: string, fooodQuantity: number,foodUnit: string, FoodExpiratinData: Food["expiration_date"], foodType: string) {
+  function openUpdateModal(foodId: number, foodName: string, fooodQuantity: number,foodUnit: string, FoodExpiratinData: Food["expiration_date"], foodFormattedDate: string,foodType: string) {
       setFoodId(foodId);
       setFoodName(foodName);
       setFoodQuantity(fooodQuantity)
       setFoodUnit(foodUnit);
       setFoodType(foodType);
       setFoodExpirationDate(FoodExpiratinData)
+      setFoodFormattedDate(foodFormattedDate)
       setShowUpdateModal(true);
   }
   function closeUpdateModal() {
@@ -90,6 +92,7 @@ const FoodStorage: React.FC = () => {
               <p className='list-item-text'>材料名: {food.name}</p>
               <p className='list-item-text'>量: {food.quantity} {food.unit}</p>
               <p className='list-item-text'>種類: {food.type}</p>
+              <p className='list-item-text'>賞味期限: {food.formatted_date}</p>
               <button className="button delete-button" onClick={() => openDeleteModal(food.id, food.name)}>削除</button>
               <DeleteFoodModal
                 showDeleteModal={showDeleteModal} 
@@ -97,7 +100,7 @@ const FoodStorage: React.FC = () => {
                 FoodId={FoodId}
                 FoodName={FoodName} />
 
-              <button className="button update-button" onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.expiration_date, food.type)}>食材情報の変更</button>
+              <button className="button update-button" onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.expiration_date, food.formatted_date, food.type)}>食材情報の変更</button>
               <UpdateFoodModal 
                 showUpdateModal={showUpdateModal} 
                 closeUpdateModal={closeUpdateModal} 
@@ -106,6 +109,7 @@ const FoodStorage: React.FC = () => {
                 FoodQuantity={FoodQuantity}
                 FoodUnit={FoodUnit}
                 FoodExpiratinDate={FoodExpiratinData}
+                FoodFormattedDate={FoodFormattedDate}
                 FoodType={FoodType}
                 />
               <p>　</p>

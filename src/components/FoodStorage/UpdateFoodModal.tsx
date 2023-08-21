@@ -24,6 +24,7 @@ type ModalProps = {
   FoodQuantity: number | null;
   FoodUnit: string | null;
   FoodExpiratinDate: Food["expiration_date"] | null;
+  FoodFormattedDate: string | null;
   FoodType: string | null;
 };
 
@@ -35,6 +36,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
   FoodQuantity,
   FoodUnit,
   FoodExpiratinDate,
+  FoodFormattedDate,
   FoodType,
 }) => {
   const Today = new Date();
@@ -43,6 +45,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
   const [quantity, setQuantity] = useState<Food["quantity"] | null>(FoodQuantity || null);
   const [unit, setUnit] = useState<Food["unit"] | null>(FoodUnit || null);
   const [expiration_date, setExpirationDate] = useState<Food["expiration_date"] | null>(FoodExpiratinDate || null)
+  const [formatted_date, setFormattedDate] = useState<Food["formatted_date"] | null>(FoodFormattedDate || "")
   const [type, setType] = useState<Food["type"] | null>(FoodType || null)
   // const [nameError, setNameError] = useState('');
   // const [quantityError, setQuantityError] = useState('')
@@ -59,6 +62,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
       name: FoodName || "",
       quantity: FoodQuantity || null,
       unit: FoodUnit || "",
+      formatted_date: FoodFormattedDate || "",
       type: FoodType || "",
     },
   });
@@ -67,8 +71,9 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
     if (FoodName) setValue('name', FoodName);
     if (FoodQuantity) setValue('quantity', FoodQuantity);
     if (FoodUnit) setValue('unit', FoodUnit);
+    // if (FoodFormattedDate) setValue('formatted_date', FoodFormattedDate)
     if (FoodType) setValue('type', FoodType);
-  }, [FoodName, FoodQuantity, FoodUnit, FoodType, setValue]);
+  }, [FoodName, FoodQuantity, FoodUnit, FoodFormattedDate, FoodType, setValue]);
 
   const onSubmit = (data: any) => {
     const selectDate = expiration_date || Today;
@@ -79,6 +84,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
       quantity: +data.quantity,
       unit: data.unit,
       expiration_date: selectDate.toISOString(),
+      formatted_date: data.formatted_date,
       type: data.type,
     };
 
@@ -101,6 +107,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
         setQuantity(null);
         setUnit('');
         setExpirationDate(null);
+        setFormattedDate('');
         setType('');
       })
       .catch((error) => {
@@ -116,6 +123,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
     setQuantity(null);
     setUnit('');
     setExpirationDate(null);
+    setFormattedDate('');
     setType('');
   }
 
@@ -168,7 +176,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
         {/* {quantityError && <p>{quantityError}</p>} */}
         <h3>単位: {FoodUnit}(個, g, mL等...)</h3>
         <input type="unit" {...register('unit')} onChange={handleUnit} value={watch('unit') || ""} />
-        <h3>賞味期限</h3>
+        <h3>賞味期限: {FoodFormattedDate}</h3>
         <DatePicker
           dateFormat="yyyy/MM/dd"
           selected={expiration_date}

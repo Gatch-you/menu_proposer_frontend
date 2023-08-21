@@ -16,6 +16,14 @@
     font-weight: bold;
 }
 
+.making_method_text{
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;

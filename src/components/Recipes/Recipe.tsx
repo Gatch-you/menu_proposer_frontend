@@ -82,7 +82,7 @@ const RecipeIndex: React.FC = () => {
                 <p　className='list-item-text'>レシピ名: {recipe.name}</p>
                 <p className='list-item-text'>概要: {recipe.description}</p>
                 {/* <p>Imageurl: {recipe.image}</p> */}
-                <p className='list-item-text'>つくりかた: {recipe.making_method}</p>
+                {/* <p className='list-item-text'>つくりかた: {recipe.making_method}</p> */}
                 <Link 
                   to={`/recipes/${recipe.id}/${recipe.name}`}>
                   <button className="button detail-button">レシピの詳細</button>

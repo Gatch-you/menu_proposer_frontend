@@ -42,6 +42,18 @@ const RecipeWithFood: React.FC = () => {
       console.error(error);
     }
   }
+  const renderContextWithLineBreaks = (text: string | undefined) => {
+    if (text === undefined){
+      return
+    }
+    const lines = text.split('\n')
+    return lines.map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ))
+  };
 
   useEffect(() => {
     console.log(recipe);
@@ -106,8 +118,8 @@ const RecipeWithFood: React.FC = () => {
           {recipe && recipe.length > 0 && (
           <>
             <p className='list-item-text'>レシピ名: {recipe[0].recipe_name}</p>
-            <p className='text'>概要: {recipe[0].recipe_description}</p>
-            <p className='text'>つくりかた: {recipe[0].recipe_making_method}</p>
+            <p className='making_method_text'>概要: {recipe[0].recipe_description}</p>
+            <p className='making_method_text'>つくりかた<br /> {renderContextWithLineBreaks(recipe[0].recipe_making_method)}</p>
           </>
           )}
           <ul style={{listStyle: 'none', padding: 0, margin: 0}} >
