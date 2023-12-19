@@ -3,12 +3,13 @@ import { Food } from '../Models';
 import ResistFoodModal from './ResistFoodModal';
 import UpdateFoodModal from './UpdateFoodModal';
 import DeleteFoodModal from './DeleteFoodModal';
+import ResistNewFoodModal from './ResistNewFoodModal'
 import { Link } from 'react-router-dom';
 // import './FoodStorage.css';
 import '../Design/FoodStorage.css';
 
 const FoodStorage: React.FC = () => {
-  const [foods, setFoods] = useState<Food[] | null>(null);
+  const [foods, setFoods] = useState<Food[]>([]);
   const [showResistModal, setShowResistModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -19,7 +20,8 @@ const FoodStorage: React.FC = () => {
   const [FoodExpiratinData, setFoodExpirationDate] = useState<Food["expiration_date"] | null>(null);
   const [FoodFormattedDate, setFoodFormattedDate] = useState<Food["formatted_date"] | null>(null);
   const [FoodType, setFoodType] = useState<Food["type"] | null>(null);
-  
+  const [search, setSearch] = useState<string | null>(null)
+
   function openResistModal() {
     setShowResistModal(true);
   }
@@ -48,6 +50,10 @@ const FoodStorage: React.FC = () => {
   }
   function closeDeleteModal() {
     setShowDeleteModal(false);
+  }
+
+  function searchFoods(e: string) {
+    setSearch(e)
   }
 
   useEffect(() => {
@@ -85,8 +91,20 @@ const FoodStorage: React.FC = () => {
       ) : (
         <ul className='list'>
           <ResistFoodModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
-
+          <Link
+            to={`/foods_storage/search/${"肉"}`}>
+            
+          {/* ここに食材検索機能部分を移植する */}
+          {/* <input 
+            placeholder='名称検索'>
+            
+          </input>
+          <button>
+            検索
+          </button> */}
+          </Link>
           {foods.map((food) => (
+            food.quantity !== 0 &&(
             <li className="list-item"key={food.id}>
               {/* <p>{food.id}</p> */}
               <p className='list-item-text'>材料名: {food.name}</p>
@@ -114,7 +132,7 @@ const FoodStorage: React.FC = () => {
                 />
               <p>　</p>
             </li>
-          ))}
+          )))}
         </ul>
       )}
     </div>

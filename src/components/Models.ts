@@ -14,7 +14,6 @@ export interface Recipe {
     id: number
     name: string
     description: string
-    image: string
     making_method: string
 }
 
@@ -60,5 +59,4 @@ export interface FoodwithExiration {
     recipe_id: number;
     recipe_name: string;
     use_amount: number;
-
 }

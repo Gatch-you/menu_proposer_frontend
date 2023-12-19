@@ -12,7 +12,7 @@ const RecipeIndex: React.FC = () => {
   const [RecipeId, setRecipeId] = useState<Recipe["id"] | null>(null);
   const [RecipeName, setRecipeName] = useState<string | null>(null);
   const [RecipeDecription, setRecipeDescription] = useState<Recipe["description"] | null>(null);
-  const [RecipeImage, setRecipeImage] = useState<Recipe['image'] | null>(null);
+  // const [RecipeImage, setRecipeImage] = useState<Recipe['image'] | null>(null);
   const [RecipeMethod, setRecipeMethod] = useState<Recipe['making_method'] | null>(null);
   const [showResistModal, setShowResistModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -40,11 +40,11 @@ const RecipeIndex: React.FC = () => {
     setShowResistModal(false);
   }
 
-  function openUpdateModal(recipeId: number, recipeName: string, recipeDescription: string, recipeImage: string, recipeMethod: string) {
+  function openUpdateModal(recipeId: number, recipeName: string, recipeDescription: string, recipeMethod: string) {
     setRecipeId(recipeId);
     setRecipeName(recipeName);
     setRecipeDescription(recipeDescription)
-    setRecipeImage(recipeImage)
+    // setRecipeImage(recipeImage)
     setRecipeMethod(recipeMethod)
     setShowUpdateModal(true);
   }
@@ -94,14 +94,13 @@ const RecipeIndex: React.FC = () => {
                   RecipeId={RecipeId}
                   RecipeName={RecipeName}
                   />
-                <button className="button update-button" onClick={() => openUpdateModal(recipe.id, recipe.name, recipe.description, recipe.image, recipe.making_method)}>レシピの変更</button>
+                <button className="button update-button" onClick={() => openUpdateModal(recipe.id, recipe.name, recipe.description, recipe.making_method)}>レシピの変更</button>
                 <UpdateRecipeModal
                   showUpdateModal={showUpdateModal}
                   closeUpdateModal={closeUpdateModal}
                   RecipeId={RecipeId}
                   RecipeName={RecipeName}
                   RecipeDescription={RecipeDecription}
-                  RecipeImage={RecipeImage}
                   RecipeMethod={RecipeMethod}
                   />
                 <p>　</p>

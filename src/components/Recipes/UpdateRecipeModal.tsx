@@ -20,7 +20,7 @@ type ModalProps = {
     RecipeId: number | null,
     RecipeName: string | null,
     RecipeDescription: string | null,
-    RecipeImage: string | null,
+    // RecipeImage: string | null,
     RecipeMethod: string | null,
 }
 
@@ -30,13 +30,12 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
     RecipeId,
     RecipeName,
     RecipeDescription,
-    RecipeImage,
     RecipeMethod,
   }) => {
 
   const [name, setName] = useState<Recipe["name"] | null>(null);
   const [description, setDescription] = useState<Recipe["description"] | null>(null);
-  const [image, setImage] = useState<Recipe["image"] | null>(null);
+  // const [image, setImage] = useState<Recipe["image"] | null>(null);
   const [making_method, setMethod] = useState<Recipe["making_method"] | null>(null);
 
   const {
@@ -48,7 +47,6 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
     defaultValues: {
       name: RecipeName || "",
       description: RecipeDescription || "",
-      image: RecipeImage || "",
       making_method: RecipeMethod || "",
     }
   })
@@ -56,9 +54,9 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
   useEffect(() => {
     if (RecipeName) setValue('name', RecipeName);
     if (RecipeDescription) setValue('description', RecipeDescription);
-    if (RecipeImage) setValue('image', RecipeImage);
+    // if (RecipeImage) setValue('image', RecipeImage);
     if (RecipeMethod) setValue('making_method', RecipeMethod);
-  }, [RecipeName, RecipeDescription, RecipeImage, RecipeMethod, setValue]);
+  }, [RecipeName, RecipeDescription, RecipeMethod, setValue]);
 
   const onSubmit = (data: any) => {
 
@@ -66,7 +64,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
      id: RecipeId,
       name: data.name,
       description: data.description,
-      image: data.image,
+      // image: data.image,
       making_method: data.making_method,
    };
 
@@ -83,7 +81,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
         closeUpdateModal();
         setName('');
         setDescription('');
-        setImage('');
+        // setImage('');
         setMethod('');
       })
         .catch((erorr) => {
@@ -98,7 +96,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
     closeUpdateModal();
     setName('');
     setDescription('');
-    setImage('');
+    // setImage('');
     setMethod('');
   }
 

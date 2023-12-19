@@ -23,7 +23,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
 
   const [name, setName] = useState<Recipe["name"] | null>(null);
   const [description, setDescription] = useState<Recipe["description"] | null>(null);
-  const [image, setImage] = useState<Recipe["image"] | null>(null);
+  // const [image, setImage] = useState<Recipe["image"] | null>(null);
   const [making_method, setMethod] = useState<Recipe["making_method"] | null>(null);
   const [nameError, setNameError] = useState('');
 
@@ -40,7 +40,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
     const recipeData = {
         name: name,
         description: description,
-        image: image,
+        // image: image,
         making_method: making_method,
     };
 
@@ -62,7 +62,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
 
         setName("");
         setDescription("");
-        setImage("")
+        // setImage("")
         setMethod("")
       })
       .catch((error) => {
@@ -108,7 +108,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
     closeResistModal();
     setName('');
     setDescription('');
-    setImage('');
+    // setImage('');
     setMethod('');
   }
 
@@ -127,7 +127,7 @@ const ResistRecipeModal: React.FC<ModalProps> = ({
   }
   
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImage(e.target.value);
+    // setImage(e.target.value);
   }
 
   const handleMethod = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
