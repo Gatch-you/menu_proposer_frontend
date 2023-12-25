@@ -141,13 +141,6 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
           onChange={handleDescription} 
           value={watch('description') || ""}
         />
-        {/* <h3>料理の画像</h3>
-        <input 
-          type="img" 
-          {...register('image')} 
-          onChange={handleImage} 
-          value={watch('image') || ""}
-        /> */}
         <h3>つくりかた</h3>
         <textarea 
           {...register('making_method')} 

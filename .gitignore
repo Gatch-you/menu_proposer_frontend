@@ -24,3 +24,5 @@ yarn-error.log*
 
 # grobal
 .env
+
+/nohup.out
