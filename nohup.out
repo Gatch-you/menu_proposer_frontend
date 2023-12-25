@@ -1,0 +1,387 @@
+
+> frontend@0.1.0 start
+> react-scripts start
+
+(node:13135) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:13135) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.0.5.215:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+(node:16007) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:16007) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.0.5.215:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Error: ENAMETOOLONG: name too long, stat '/home/ec2-user/app_ver_1.0/menu_proposer_frontend/public/3000D00E0000FFFF3F0031313744373731343634304537353046007A7A7A7A7A7A7A7A7A7A7A7A7A7A7A0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000008047A7A7A7A7A7A7A7A7A0000000000000000000000000000000000000000000000000000000000000000'
+The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+(node:8917) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:8917) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.0.5.215:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:4811) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:4811) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.0.5.215:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:3174) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:3174) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled with warnings.
+
+[eslint] 
+src/components/FoodStorage/UpdateFoodModal.tsx
+  Line 44:10:  'name' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 45:10:  'quantity' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  Line 46:10:  'unit' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 48:10:  'formatted_date' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 49:10:  'type' is assigned a value but never used            @typescript-eslint/no-unused-vars
+
+src/components/Recipes/RecipeDetail/RecipeWithFood.tsx
+  Line 29:6:  React Hook useEffect has a missing dependency: 'fetchRecipe'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/Recipes/RecipeDetail/ResistFoodinRecipeModal.tsx
+  Line 37:10:  'recipe_id' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 38:10:  'food_id' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+src/components/Recipes/ResistRecipeModal.tsx
+  Line 1:26:   'KeyboardEventHandler' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 129:9:  'handleImage' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Recipes/UpdateRecipeModal.tsx
+  Line 37:10:  'name' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  Line 38:10:  'description' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 39:10:  'image' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 40:10:  'making_method' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/FoodStorage/UpdateFoodModal.tsx
+  Line 44:10:  'name' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 45:10:  'quantity' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  Line 46:10:  'unit' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 48:10:  'formatted_date' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 49:10:  'type' is assigned a value but never used            @typescript-eslint/no-unused-vars
+
+src/components/Recipes/RecipeDetail/RecipeWithFood.tsx
+  Line 29:6:  React Hook useEffect has a missing dependency: 'fetchRecipe'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/Recipes/RecipeDetail/ResistFoodinRecipeModal.tsx
+  Line 37:10:  'recipe_id' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 38:10:  'food_id' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+src/components/Recipes/ResistRecipeModal.tsx
+  Line 1:26:   'KeyboardEventHandler' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 129:9:  'handleImage' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Recipes/UpdateRecipeModal.tsx
+  Line 37:10:  'name' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  Line 38:10:  'description' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 39:10:  'image' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 40:10:  'making_method' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:4572) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:4572) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.0.5.215:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:5389) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:5389) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled with warnings.
+
+[eslint] 
+src/components/FoodStorage/UpdateFoodModal.tsx
+  Line 44:10:  'name' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 45:10:  'quantity' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  Line 46:10:  'unit' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 48:10:  'formatted_date' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 49:10:  'type' is assigned a value but never used            @typescript-eslint/no-unused-vars
+
+src/components/Recipes/RecipeDetail/RecipeWithFood.tsx
+  Line 29:6:  React Hook useEffect has a missing dependency: 'fetchRecipe'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/Recipes/RecipeDetail/ResistFoodinRecipeModal.tsx
+  Line 37:10:  'recipe_id' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 38:10:  'food_id' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+src/components/Recipes/ResistRecipeModal.tsx
+  Line 1:26:   'KeyboardEventHandler' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 129:9:  'handleImage' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Recipes/UpdateRecipeModal.tsx
+  Line 37:10:  'name' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  Line 38:10:  'description' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 39:10:  'image' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 40:10:  'making_method' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/FoodStorage/UpdateFoodModal.tsx
+  Line 44:10:  'name' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 45:10:  'quantity' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  Line 46:10:  'unit' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 48:10:  'formatted_date' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 49:10:  'type' is assigned a value but never used            @typescript-eslint/no-unused-vars
+
+src/components/Recipes/RecipeDetail/RecipeWithFood.tsx
+  Line 29:6:  React Hook useEffect has a missing dependency: 'fetchRecipe'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/Recipes/RecipeDetail/ResistFoodinRecipeModal.tsx
+  Line 37:10:  'recipe_id' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 38:10:  'food_id' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+src/components/Recipes/ResistRecipeModal.tsx
+  Line 1:26:   'KeyboardEventHandler' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 129:9:  'handleImage' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Recipes/UpdateRecipeModal.tsx
+  Line 37:10:  'name' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  Line 38:10:  'description' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 39:10:  'image' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 40:10:  'making_method' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:10084) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:10084) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.0.5.215:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:14598) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:14598) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled with warnings.
+
+[eslint] 
+src/components/FoodStorage/UpdateFoodModal.tsx
+  Line 44:10:  'name' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 45:10:  'quantity' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  Line 46:10:  'unit' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 48:10:  'formatted_date' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 49:10:  'type' is assigned a value but never used            @typescript-eslint/no-unused-vars
+
+src/components/Recipes/RecipeDetail/RecipeWithFood.tsx
+  Line 29:6:  React Hook useEffect has a missing dependency: 'fetchRecipe'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/Recipes/RecipeDetail/ResistFoodinRecipeModal.tsx
+  Line 37:10:  'recipe_id' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 38:10:  'food_id' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+src/components/Recipes/ResistRecipeModal.tsx
+  Line 1:26:   'KeyboardEventHandler' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 129:9:  'handleImage' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Recipes/UpdateRecipeModal.tsx
+  Line 37:10:  'name' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  Line 38:10:  'description' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 39:10:  'image' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 40:10:  'making_method' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/FoodStorage/UpdateFoodModal.tsx
+  Line 44:10:  'name' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 45:10:  'quantity' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  Line 46:10:  'unit' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  Line 48:10:  'formatted_date' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 49:10:  'type' is assigned a value but never used            @typescript-eslint/no-unused-vars
+
+src/components/Recipes/RecipeDetail/RecipeWithFood.tsx
+  Line 29:6:  React Hook useEffect has a missing dependency: 'fetchRecipe'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/Recipes/RecipeDetail/ResistFoodinRecipeModal.tsx
+  Line 37:10:  'recipe_id' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 38:10:  'food_id' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+src/components/Recipes/ResistRecipeModal.tsx
+  Line 1:26:   'KeyboardEventHandler' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 129:9:  'handleImage' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Recipes/UpdateRecipeModal.tsx
+  Line 37:10:  'name' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  Line 38:10:  'description' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 39:10:  'image' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 40:10:  'making_method' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:3365) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:3365) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.0.5.215:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
