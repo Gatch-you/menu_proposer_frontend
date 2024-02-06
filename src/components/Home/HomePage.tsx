@@ -1,4 +1,3 @@
-import React from 'react';
 import '../Design/HomePage.css';
 
 const HomePage = () => {

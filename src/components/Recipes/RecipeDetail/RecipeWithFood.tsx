@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { RecipeFood } from '../../Models';
+import { RecipeFood } from '../../../models/Models';
 import DeleteFoodinRecipeModal from './DeleteFoodinRecipeModal';
 import UpdateFoodinRecipeModal from './UpdateFoodinRecipeModal';
 import ResistFoodinRecipeModal from './ResistFoodinRecipeModal';

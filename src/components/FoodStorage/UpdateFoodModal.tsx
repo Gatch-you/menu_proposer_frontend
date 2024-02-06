@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Food } from '../Models';
+import { Food } from '../../models/Models';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"

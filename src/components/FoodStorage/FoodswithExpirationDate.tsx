@@ -1,4 +1,4 @@
-import { FoodwithExiration } from "../Models";
+import { FoodwithExiration } from "../../models/Models";
 import React, { useState, useEffect } from 'react';
 import "../Design/FoodwithExpirationDate.css"
 

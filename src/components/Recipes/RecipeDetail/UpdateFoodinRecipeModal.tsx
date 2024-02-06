@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css"
-import { RecipeFood } from '../../Models';
+import { RecipeFood } from '../../../models/Models';
 
 const customStyles = {
     content: {

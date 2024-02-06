@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Food } from '../Models';
+import { Food } from '../../models/Models';
 import ResistFoodModal from './ResistFoodModal';
 import UpdateFoodModal from './UpdateFoodModal';
 import DeleteFoodModal from './DeleteFoodModal';
 import { Link } from 'react-router-dom';
 // import './FoodStorage.css';
 import '../Design/FoodStorage.css';
+import axios from 'axios';
+import Header from '../Header';
 
 const FoodStorage: React.FC = () => {
   const [foods, setFoods] = useState<Food[] | null>(null);
@@ -56,19 +58,29 @@ const FoodStorage: React.FC = () => {
 
   async function fetchFoods() {
     try {
-      const response = await fetch( process.env.REACT_APP_API_ENDPOINT+'/backend/foods');
-      const jsonData = await response.json();
+      const response = await axios.get('/api/user/foods');
+      const jsonData = await response.data
       setFoods(jsonData);
     } catch (error) {
       console.error(error);
     }
   }
 
-  useEffect(() => {
-    console.log(foods);
-  }, [foods]);
+  // useEffect(() => {
+  //   console.log(foods);
+  // }, [foods]);
+
+  useEffect( () => {
+    (
+        async () => {
+            const {data} = await axios.get('api/user/foods');
+            setFoods(data);
+        }
+    )();
+}, []);
 
   return (
+
     <div className="container">
       <h1 className='logo'>Food Storage</h1>
       <div className='button-group'>

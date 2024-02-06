@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
-import {Recipe} from '../Models'
+import {Recipe} from '../../models/Models'
 import { useForm } from 'react-hook-form';
 
 const customStyles = {

@@ -1,7 +1,7 @@
 import React, {useState, useEffect, KeyboardEventHandler} from 'react';
 import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css"
-import { RecipeFood } from '../../Models';
+import { RecipeFood } from '../../../models/Models';
 
 
 // 送りたいリクエスト↓
@@ -44,11 +44,11 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
   const isInputValid = !use_amountError
 
   useEffect(() => {
-    // 食材データを取得するAPIを呼び出し、データを取得します
+    // 食材データを取得するAPIを呼び出し、データを取得
     fetchFoodOptions()
       .then((data) => setFoodOptions(data))
       .catch((error) => console.error('Failed to fetch food options:', error));
-  }, []); // このフックはマウント時にのみ実行するため、依存関係の配列は空にします
+  }, []); 
 
   async function fetchFoodOptions() {
     try {
