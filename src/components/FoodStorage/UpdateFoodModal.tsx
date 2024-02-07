@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Food } from '../../models/Models';
+import React, { SyntheticEvent, useState } from 'react';
+import { Food } from '../../models/Food';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
-import { useForm } from 'react-hook-form'
+
+import axios from 'axios';
 
 const customStyles = {
   content: {
@@ -19,143 +20,109 @@ const customStyles = {
 type ModalProps = {
   showUpdateModal: boolean;
   closeUpdateModal: () => void;
-  FoodId: number | null;
-  FoodName: string;
-  FoodQuantity: number | null;
-  FoodUnit: string | null;
-  FoodExpiratinDate: Food["expiration_date"] | null;
-  FoodFormattedDate: string | null;
-  FoodType: string | null;
+  food: Food
 };
 
 const UpdateFoodModal: React.FC<ModalProps> = ({
   showUpdateModal,
   closeUpdateModal,
-  FoodId,
-  FoodName,
-  FoodQuantity,
-  FoodUnit,
-  FoodExpiratinDate,
-  FoodFormattedDate,
-  FoodType,
+  food,
 }) => {
-  const Today = new Date();
+    const Today = new Date();
 
-  const [name, setName] = useState<Food["name"]>(FoodName || "");
-  const [quantity, setQuantity] = useState<Food["quantity"] | null>(FoodQuantity || null);
-  const [unit, setUnit] = useState<Food["unit"] | null>(FoodUnit || null);
-  const [expiration_date, setExpirationDate] = useState<Food["expiration_date"] | null>(FoodExpiratinDate || null)
-  const [formatted_date, setFormattedDate] = useState<Food["formatted_date"] | null>(FoodFormattedDate || "")
-  const [type, setType] = useState<Food["type"] | null>(FoodType || null)
-  // const [nameError, setNameError] = useState('');
-  // const [quantityError, setQuantityError] = useState('')
-
-  // const isInputValid = name && !quantityError
-
-  const { 
-    register, 
-    handleSubmit, 
-    setValue, 
-    watch,
-   } = useForm({
-    defaultValues: {
-      name: FoodName || "",
-      quantity: FoodQuantity || null,
-      unit: FoodUnit || "",
-      formatted_date: FoodFormattedDate || "",
-      type: FoodType || "",
-    },
-  });
-
-  useEffect(() => {
-    if (FoodName) setValue('name', FoodName);
-    if (FoodQuantity) setValue('quantity', FoodQuantity);
-    if (FoodUnit) setValue('unit', FoodUnit);
-    // if (FoodFormattedDate) setValue('formatted_date', FoodFormattedDate)
-    if (FoodType) setValue('type', FoodType);
-  }, [FoodName, FoodQuantity, FoodUnit, FoodFormattedDate, FoodType, setValue]);
-
-  const onSubmit = (data: any) => {
-    const selectDate = expiration_date || Today;
-
-    const foodData = {
-      id: FoodId,
-      name: data.name, // react-hook-formの値を使用する
-      quantity: +data.quantity,
-      unit: data.unit,
-      expiration_date: selectDate.toISOString(),
-      formatted_date: data.formatted_date,
-      type: data.type,
-    };
-
-    if (!data.name || !data.quantity) {
-      return;
-    }
-
-    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/update_food', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(foodData)
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Update food successful:', data);
-        closeUpdateModal();
-        setName('');
-        setQuantity(null);
-        setUnit('');
-        setExpirationDate(null);
-        setFormattedDate('');
-        setType('');
+    const [objFood, setObjFood] = useState<Food>({
+      id: food.id,
+      name: food.name,
+      quantity: food.quantity,
+      unit_id: food.unit_id,
+      unit: food.unit,
+      expiration_date: new Date(food.expiration_date),
+      type_id: food.type_id,
+      type: food.type,
+      user_id: food.user_id,
       })
-      .catch((error) => {
-        console.error('Update food failed:', error);
-      });
-    console.log(foodData)
-    window.location.reload();
-  };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+  
+      const currentFood  = {
+        id: objFood.id,
+        name: objFood.name,
+        quantity: objFood.quantity,
+        unit_id: objFood.unit_id,
+        expiration_date: objFood.expiration_date,
+        type_id: objFood.type_id,
+      }
+  
+      try {
+        const response = await axios.put('api/user/foods', currentFood);
+        console.log('Update food success:', response.data);
+        closeUpdateModal();
+      } catch (error) {
+        console.log('Update food failed:', error)
+        closeUpdateModal();
+      }
+      
+      window.location.reload()
+    };
 
   const handleCancell = (e: any) => {
     closeUpdateModal();
-    setName('');
-    setQuantity(null);
-    setUnit('');
-    setExpirationDate(null);
-    setFormattedDate('');
-    setType('');
-  }
-
-  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-
-    // if (!e.target.value) {
-    //   setNameError('食品名を記入してください')
-    // } else {
-    //   setNameError('')
-      setValue('name', e.target.value); 
-
-    
-// react-hook-formの値を更新
+    setObjFood({
+      id: 0,
+      name: '',
+      quantity: 0.0,
+      unit_id: 0,
+      unit: {id: 0, unit: '',},
+      expiration_date: new Date(),
+      type_id: 0,
+      type: {id: 0,type: ''},
+      user_id: 0,
+    })
   }
   
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setObjFood(prevFood => ({
+      ...prevFood, // 更新をかけないものに対してはそのままの値にする。そのための記述
+      name: value,
+    }));  
+  }
   const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    setValue('quantity', value);  // react-hook-formの値を更新
-    
-    
- // react-hook-formの値を更新
+    setObjFood(prevFood => ({
+      ...prevFood, 
+      quantity: value,
+    }));  
   }
-  
-  const handleUnit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUnit(e.target.value);
-    setValue('unit', e.target.value); // react-hook-formの値を更新
+
+  const handleExpirationDate = (date: Date | null, event: SyntheticEvent<any, Event> | undefined) => {
+    if (date) { // 日付が選択されている場合にのみ状態を更新
+      setObjFood(prevFood => ({
+        ...prevFood,
+        expiration_date: date,
+      }));
+    }
+  };
+
+  const handleUnitId = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value }= e.target;
+    if (name === "unit_id") {
+      setObjFood(prevFood => ({
+        ...prevFood,
+        unit_id: parseInt(value, 10)
+      }))
+    }
   }
-  
-  const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setType(e.target.value);
-    setValue('type', e.target.value); // react-hook-formの値を更新
+
+  const handleTypeId = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value }= e.target;
+    if (name === "type_id") {
+      setObjFood(prevFood => ({
+        ...prevFood,
+        type_id: parseInt(value, 10)
+      }))
+    }
   }
   
   return (
@@ -167,23 +134,43 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
     >
       <h2>登録内容変更</h2>
       <div>食材の変更部分を入力してください</div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h3>食品名: {FoodName}</h3>
-        <input type="name" {...register('name')} onChange={handleName} value={watch('name') || ""} placeholder={FoodName} />
+      <form onSubmit={handleSubmit}>
+        <h3>食品名: {objFood.name}</h3>
+        {/* <input type="name" {...register('name')} onChange={handleName} value={watch('name') || ""} placeholder={FoodName} /> */}
+        <input type="name"  onChange={handleName} value={objFood.name} placeholder={"直前の入力:"+objFood.name} />
         {/* {nameError && <p>{nameError}</p>} */}
-        <h3>数量: {FoodQuantity}</h3>
-        <input type="quantity" {...register('quantity')} onChange={handleQuantity} value={watch('quantity') || ""} />
+        <h3>数量: {objFood.quantity}</h3>
+        {/* <input type="quantity" {...register('quantity')} onChange={handleQuantity} value={watch('quantity') || ""} /> */}
+        <input type="quantity" onChange={handleQuantity} value={objFood.quantity} placeholder={"直前の入力:"+objFood.quantity}/>
         {/* {quantityError && <p>{quantityError}</p>} */}
-        <h3>単位: {FoodUnit}(個, g, mL等...)</h3>
-        <input type="unit" {...register('unit')} onChange={handleUnit} value={watch('unit') || ""} />
-        <h3>賞味期限: {FoodFormattedDate}</h3>
+        <label htmlFor="unit_id">単位:</label>
+          <select
+            id="unit_id"
+            name="unit_id"
+            value={objFood.unit_id}
+            onChange={handleUnitId} 
+          >
+            <option value="1">g</option>
+            <option value="2">ml</option>
+            </select>
+        <h3>賞味期限: {objFood.expiration_date.getFullYear() + '/' +objFood.expiration_date.getMonth() +'/'+objFood.expiration_date.getDay()}</h3>
         <DatePicker
           dateFormat="yyyy/MM/dd"
-          selected={expiration_date}
-          onChange={(date: Date | null) => setExpirationDate(date)}
+          minDate={Today}
+          selected={objFood.expiration_date}
+          // value={food.expiration_date}
+          onChange={handleExpirationDate}
         />
-        <h3>種類: {FoodType}</h3>
-        <input type="unit" {...register('type')} onChange={handleType} value={watch('type') || ""} />
+        <label htmlFor="type_id">種類:</label>
+          <select
+            id="type_id"
+            name="type_id"
+            value={objFood.type_id}
+            onChange={handleTypeId} 
+          >
+            <option value="1">肉</option>
+            <option value="2">野菜</option>
+          </select>
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>
           <button type="submit">更新</button>

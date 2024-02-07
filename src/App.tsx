@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 // import Header from './components/Header';
 // import HomePage from './components/Home/HomePage';
-import FoodStrage from './components/FoodStorage/FoodStorage';
+// import FoodStrage from './components/FoodStorage/FoodStorage';
 // import Recipe from './components/Recipes/Recipe';
 // import RecipeWithFood from './components/Recipes/RecipeDetail/RecipeWithFood';
 // import FoodswithExpirationDate from './components/FoodStorage/FoodswithExpirationDate';
@@ -11,6 +11,7 @@ import Users from './pages/Users'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import { RedirectToUsers } from './components/RedirectToUser';
+import FoodList from './pages/Foods';
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
 
           {/* <Route path={'/home'} element={<HomePage />}/>
           <Route path={'/reset_password'}/>*/}
-          <Route path={'/foods_storage'} element={<FoodStrage />} />
+          {/* <Route path={'/foods_storage'} element={<FoodStrage />} /> */}
+          <Route path={'/foods_storage'} element={<FoodList />} />
           {/*
           <Route path={'/foods_with_expiration'} Component={FoodswithExpirationDate}/>
           <Route path={"/recipes"} element={<Recipe />} />

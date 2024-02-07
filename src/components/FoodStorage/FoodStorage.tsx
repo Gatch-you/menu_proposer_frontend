@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Food } from '../../models/Models';
 import ResistFoodModal from './ResistFoodModal';
-import UpdateFoodModal from './UpdateFoodModal';
-import DeleteFoodModal from './DeleteFoodModal';
+// import UpdateFoodModal from './UpdateFoodModal';
+// import DeleteFoodModal from './DeleteFoodModal';
 import { Link } from 'react-router-dom';
 // import './FoodStorage.css';
 import '../Design/FoodStorage.css';
@@ -70,15 +70,6 @@ const FoodStorage: React.FC = () => {
   //   console.log(foods);
   // }, [foods]);
 
-  useEffect( () => {
-    (
-        async () => {
-            const {data} = await axios.get('api/user/foods');
-            setFoods(data);
-        }
-    )();
-}, []);
-
   return (
 
     <div className="container">
@@ -106,14 +97,13 @@ const FoodStorage: React.FC = () => {
               <p className='list-item-text'>種類: {food.type}</p>
               <p className='list-item-text'>賞味期限: {food.formatted_date}</p>
               <button className="button delete-button" onClick={() => openDeleteModal(food.id, food.name)}>削除</button>
-              <DeleteFoodModal
+              {/* <DeleteFoodModal
                 showDeleteModal={showDeleteModal} 
                 closeDeleteModal={closeDeleteModal}
-                FoodId={FoodId}
-                FoodName={FoodName} />
+                Food={food} /> */}
 
               <button className="button update-button" onClick={() => openUpdateModal(food.id, food.name, food.quantity, food.unit, food.expiration_date, food.formatted_date, food.type)}>食材情報の変更</button>
-              <UpdateFoodModal 
+              {/* <UpdateFoodModal 
                 showUpdateModal={showUpdateModal} 
                 closeUpdateModal={closeUpdateModal} 
                 FoodId={FoodId} 
@@ -123,7 +113,7 @@ const FoodStorage: React.FC = () => {
                 FoodExpiratinDate={FoodExpiratinData}
                 FoodFormattedDate={FoodFormattedDate}
                 FoodType={FoodType}
-                />
+                /> */}
               <p>　</p>
             </li>
           ))}
