@@ -16,6 +16,29 @@ const FoodList: React.FC = () => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+    useEffect(() => {
+        const fetchFoods = async () => {
+            try {
+                // 認証トークンを含める必要がある場合、ここでヘッダーに追加します。
+                const response = await axios.get('api/user/foods');
+                const jsonData = await response.data
+                setFoods(jsonData);
+                console.log(response.data)
+            } catch (error) {
+                console.error('データの取得中にエラーが発生しました:', error);
+            }
+        };
+
+        fetchFoods();
+    }, []);
+
+    function openResistModal() {
+      setShowResistModal(true);
+    }
+    function closeResistModal() {
+      setShowResistModal(false);
+    }
+
     function openUpdateModal(food: Food) {
         setShowUpdateModal(true);
         setSelectedFood(food);
@@ -32,28 +55,6 @@ const FoodList: React.FC = () => {
         setShowDeleteModal(false);
     }
 
-    function openResistModal() {
-      setShowResistModal(true);
-    }
-    function closeResistModal() {
-      setShowResistModal(false);
-    }
-    
-    useEffect(() => {
-        const fetchFoods = async () => {
-            try {
-                // 認証トークンを含める必要がある場合、ここでヘッダーに追加します。
-                const response = await axios.get('api/user/foods');
-                const jsonData = await response.data
-                setFoods(jsonData);
-                console.log(response.data)
-            } catch (error) {
-                console.error('データの取得中にエラーが発生しました:', error);
-            }
-        };
-
-        fetchFoods();
-    }, []);
 
     return (
         <div className="container">
