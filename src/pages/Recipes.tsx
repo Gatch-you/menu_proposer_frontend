@@ -1,3 +1,100 @@
+import React, { useEffect, useState } from 'react'
+import { Recipe } from '../models/Recipe'
+import axios from 'axios';
+
+import RegisterRecipeModal from '../components/Recipes/RegisterRecipeModal';
+import UpdateRecipeModal from '../components/Recipes/UpdateRecipeModal';
+import DeleteRecipeModal from '../components/Recipes/DeleteRecipeModal';
+
+
+const Recipes: React.FC = () => {
+    const [recipes, setResipes] = useState<Recipe[]>([]);
+    const [selectedRecipe, setSelectedRecipe] = useState<Recipe>();
+    const [showRegistModal, setShowRegistModal] = useState(false);
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    function openRegistModal() {
+        setShowRegistModal(true);
+    }
+    function closeRegisterModal() {
+        setShowRegistModal(false);
+    }
+
+    function openUpdateModal(recipe: Recipe) {
+        setShowUpdateModal(true);
+        setSelectedRecipe(recipe)
+    }
+    function closeUpdateModal() {
+        setShowUpdateModal(false);
+    }
+
+    function openDeleteModal(recipe: Recipe) {
+        setShowDeleteModal(true);
+        setSelectedRecipe(recipe)
+    }
+    function closeDeleteModal() {
+        setShowDeleteModal(false);
+    }
+
+
+    useEffect(() => {
+        const fetchRecipes = async () => {
+            try{
+                const response = await axios.get('api/user/recipes');
+                console.log(response.data)
+                const jsonData = await response.data;
+                setResipes(jsonData);
+                console.log(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        };
+
+        fetchRecipes();
+    }, []);
+
+
+
+    return (
+
+    <div>
+        <button onClick={openRegistModal}>レシピの登録</button>
+        <RegisterRecipeModal
+            showRegistModal={showRegistModal}
+            closeRegisterModal={closeRegisterModal}
+            />
+        {recipes.map(recipe => (
+            <li className='list-item' key={recipe.id}>
+                <p>{recipe.id}</p>
+                <p>{recipe.name}</p>
+                <p>{recipe.description}</p>
+                <p>{recipe.making_method}</p>
+                <button className="button update-button" onClick={() => openUpdateModal(recipe)}>食材情報の変更</button>
+                {selectedRecipe && (
+                <UpdateRecipeModal
+                    showUpdateModal={showUpdateModal}
+                    closeUpdateModal={closeUpdateModal}
+                    recipe={selectedRecipe}
+                />
+                )}
+                <button className="button delete-button" onClick={() => openDeleteModal(recipe)}>削除</button>
+                {selectedRecipe && (
+                    <DeleteRecipeModal
+                        showDeleteModal={showDeleteModal}
+                        closeDeleteModal={closeDeleteModal}
+                        recipe={selectedRecipe}
+                    />
+                )}
+                </li>
+        ))
+        }
+    </div>
+    )
+}
+
+export default Recipes
+
 // import React, { useState, useEffect } from 'react'
 // import { Recipe } from '../../models/Models'
 // import RegistRecipeModal from './RegistRecipeModal'

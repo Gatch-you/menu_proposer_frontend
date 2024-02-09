@@ -4,13 +4,14 @@ import axios from 'axios'
 import {User} from '../models/user'
 
 const Header = (props: {user: User | null}) => {
+
+    // const [user, setUser] = useState<User>()
+
   return (
     <header>
         <div>
             <h3>MyCookBook</h3>
         </div>
-
-
         <nav>
             <ul>
                 <li>
@@ -22,7 +23,8 @@ const Header = (props: {user: User | null}) => {
                 <li>
                     <Link to="/recipes">レシピ</Link>
                 </li>
-                <Link to={'/profile'}
+                <Link 
+                    to={'/profile'}
                     className="p-2 text-white text-decoration-none">
                     Hello. {props.user?.first_name} {props.user?.last_name}
                 </Link>

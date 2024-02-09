@@ -15,11 +15,10 @@ const Layout = (props: any) => {
         (
             async () => {
                 try {
-                const {data} = await axios.get('api/user/profile');
-
-                setUser(data)
-
-                console.log(data)
+                const response = await axios.get('api/user/profile');
+                const jsonData = await response.data
+                setUser(jsonData)
+                console.log(response.data)
                 } catch (e) {
                     setRedirect(true)
                 }

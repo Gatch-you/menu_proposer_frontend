@@ -12,6 +12,8 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import { RedirectToUsers } from './components/RedirectToUser';
 import FoodList from './pages/Foods';
+import Recipes from './pages/Recipes';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
@@ -24,7 +26,8 @@ function App() {
           <Route path={'/home'} Component={Users}/>
           <Route path={'/login'} Component={Login}/>
           <Route path={'/register'} Component={Register}/>
-
+          <Route path={'/recipes'} Component={Recipes}/>
+          <Route path={'/profile'} Component={UserProfile}/>
 
           {/* <Route path={'/home'} element={<HomePage />}/>
           <Route path={'/reset_password'}/>*/}

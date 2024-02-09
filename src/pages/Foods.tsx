@@ -5,14 +5,14 @@ import axios from 'axios';
 
 import DeleteFoodModal from '../components/FoodStorage/DeleteFoodModal';
 import UpdateFoodModal from '../components/FoodStorage/UpdateFoodModal';
-import ResistFoodModal from '../components/FoodStorage/ResistFoodModal';
+import RegisterFoodModal from '../components/FoodStorage/RegisterFoodModal';
 import '../components/Design/FoodStorage.css';
 
 
 const FoodList: React.FC = () => {
     const [foods, setFoods] = useState<Food[]>([]);
     const [selectedFood, setSelectedFood] = useState<Food>();
-    const [showResistModal, setShowResistModal] = useState(false);
+    const [showRegistModal, setShowRegistModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -32,11 +32,11 @@ const FoodList: React.FC = () => {
         fetchFoods();
     }, []);
 
-    function openResistModal() {
-      setShowResistModal(true);
+    function openRegistModal() {
+      setShowRegistModal(true);
     }
-    function closeResistModal() {
-      setShowResistModal(false);
+    function closeRegisterModal() {
+      setShowRegistModal(false);
     }
 
     function openUpdateModal(food: Food) {
@@ -60,19 +60,26 @@ const FoodList: React.FC = () => {
         <div className="container">
           <h1 className='logo'>Food Storage</h1>
           <div className='button-group'>
-            <button className='button' onClick={()=> {setShowResistModal(true)}}>新しい食材の追加</button>
+            <button className='button' onClick={()=> {setShowRegistModal(true)}}>新しい食材の追加</button>
             <Link to={`/foods_with_expiration`}>
               <button className='button'>賞味期限が近い食材一覧</button>
             </Link>
           </div>
           {foods === null ? (
           <>
-            <button onClick={openResistModal}>新しい食材の追加</button><ResistFoodModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
+            <button onClick={openRegistModal}>新しい食材の追加</button>
+            <RegisterFoodModal 
+              showRegistModal={showRegistModal} 
+              closeRegisterModal={closeRegisterModal} 
+            />
             <p>Loading or Nothing...</p>
           </>
           ) : (
             <ul className='list'>
-              <ResistFoodModal showResistModal={showResistModal} closeResistModal={closeResistModal} />
+              <RegisterFoodModal 
+                showRegistModal={showRegistModal} 
+                closeRegisterModal={closeRegisterModal} 
+              />
     
               {foods.map(food => (
                 <li className="list-item"key={food.id}>

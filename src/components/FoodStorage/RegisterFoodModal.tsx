@@ -19,13 +19,13 @@ const customStyles = {
 };
 
 type ModalProps = {
-  showResistModal: boolean;
-  closeResistModal: () => void;
+  showRegistModal: boolean;
+  closeRegisterModal: () => void;
 };
 
-const ResistFoodModal: React.FC<ModalProps> = ({ 
-  showResistModal, 
-  closeResistModal, 
+const RegisterFoodModal: React.FC<ModalProps> = ({ 
+  showRegistModal, 
+  closeRegisterModal, 
 }) => {
   const Today = new Date();
 
@@ -45,7 +45,6 @@ const ResistFoodModal: React.FC<ModalProps> = ({
   const handleKeyDown: KeyboardEventHandler<HTMLFormElement> = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      // ここでEnterキーが押された後の処理を実行する
     }
   };
   
@@ -75,7 +74,7 @@ const ResistFoodModal: React.FC<ModalProps> = ({
       .then((response) => response.data)
       .then((data) => {
         console.log('Food registration sucsessfull:', data);
-        closeResistModal();
+        closeRegisterModal();
         //stateの初期化
         setName("");
         setQuantity(0.0);
@@ -91,7 +90,7 @@ const ResistFoodModal: React.FC<ModalProps> = ({
   };
 
   const handleCancell = (e: any) => {
-    closeResistModal();
+    closeRegisterModal();
     // ステートを初期化
     setName('');
     setQuantity(0.0);
@@ -138,9 +137,9 @@ const ResistFoodModal: React.FC<ModalProps> = ({
   return (
     <Modal
       contentLabel="Example Modal"
-      isOpen={showResistModal}
+      isOpen={showRegistModal}
       style={customStyles}
-      onRequestClose={closeResistModal}
+      onRequestClose={closeRegisterModal}
     >
       <h2>食材登録</h2>
       <div>仕入れた食材を追加してください</div>
@@ -197,4 +196,4 @@ const ResistFoodModal: React.FC<ModalProps> = ({
   );
 };
 
-export default ResistFoodModal;
+export default RegisterFoodModal;

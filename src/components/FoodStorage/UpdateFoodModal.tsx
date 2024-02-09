@@ -1,26 +1,16 @@
 import React, { SyntheticEvent, useState } from 'react';
-import { Food } from '../../models/Food';
+import { Food, newFood } from '../../models/Food';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+import { customStyles } from '../../modalDesign';
 
 import axios from 'axios';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 
 type ModalProps = {
   showUpdateModal: boolean;
   closeUpdateModal: () => void;
-  food: Food
+  food: Food;
 };
 
 const UpdateFoodModal: React.FC<ModalProps> = ({
@@ -62,23 +52,12 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
         console.log('Update food failed:', error)
         closeUpdateModal();
       }
-      
       window.location.reload()
     };
 
   const handleCancell = (e: any) => {
     closeUpdateModal();
-    setObjFood({
-      id: 0,
-      name: '',
-      quantity: 0.0,
-      unit_id: 0,
-      unit: {id: 0, unit: '',},
-      expiration_date: new Date(),
-      type_id: 0,
-      type: {id: 0,type: ''},
-      user_id: 0,
-    })
+    setObjFood(newFood)
   }
   
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,13 +115,9 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
       <div>食材の変更部分を入力してください</div>
       <form onSubmit={handleSubmit}>
         <h3>食品名: {objFood.name}</h3>
-        {/* <input type="name" {...register('name')} onChange={handleName} value={watch('name') || ""} placeholder={FoodName} /> */}
         <input type="name"  onChange={handleName} value={objFood.name} placeholder={"直前の入力:"+objFood.name} />
-        {/* {nameError && <p>{nameError}</p>} */}
         <h3>数量: {objFood.quantity}</h3>
-        {/* <input type="quantity" {...register('quantity')} onChange={handleQuantity} value={watch('quantity') || ""} /> */}
         <input type="quantity" onChange={handleQuantity} value={objFood.quantity} placeholder={"直前の入力:"+objFood.quantity}/>
-        {/* {quantityError && <p>{quantityError}</p>} */}
         <label htmlFor="unit_id">単位:</label>
           <select
             id="unit_id"

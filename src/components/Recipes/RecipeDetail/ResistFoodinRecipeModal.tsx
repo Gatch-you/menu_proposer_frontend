@@ -19,8 +19,8 @@ const customStyles = {
 };
 
 type ModalProps = {
-  showResistModal: boolean;
-  closeResistModal: () => void;
+  showRegistModal: boolean;
+  closeRegisterModal: () => void;
   RecipeId: number | null;
 };
 
@@ -29,8 +29,8 @@ interface FoodOption {
   name: string;
 }
 
-const ResistFoodinRecipeModal: React.FC<ModalProps> = ({ 
-  showResistModal, closeResistModal, RecipeId, }) => {
+const RegistFoodinRecipeModal: React.FC<ModalProps> = ({ 
+  showRegistModal, closeRegisterModal, RecipeId, }) => {
 
 
   //useStateでのリアルタイムフィードバック
@@ -98,7 +98,7 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
       .then((response) => response.json())
       .then((data) => {
         console.log('Food registration sucsessfull:', data);
-        closeResistModal();
+        closeRegisterModal();
         //stateの初期化
         setRecipe_id(0);
         setFood_id(0);
@@ -113,7 +113,7 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
   };
 
   const handleCancell = (e: any) => {
-    closeResistModal();
+    closeRegisterModal();
     // ステートを初期化
     setRecipe_id(0);
     setFood_id(0);
@@ -139,9 +139,9 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
   return (
     <Modal
       contentLabel="Example Modal"
-      isOpen={showResistModal}
+      isOpen={showRegistModal}
       style={customStyles}
-      onRequestClose={closeResistModal}
+      onRequestClose={closeRegisterModal}
     >
       <h2>食材登録</h2>
       <div>レシピに登録する食材を記述してください。</div>
@@ -168,4 +168,4 @@ const ResistFoodinRecipeModal: React.FC<ModalProps> = ({
   );
 };
 
-export default ResistFoodinRecipeModal;
+export default RegistFoodinRecipeModal;
