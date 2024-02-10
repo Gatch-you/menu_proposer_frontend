@@ -1,5 +1,5 @@
-import React, { SyntheticEvent, useState } from 'react';
-import { Food, newFood } from '../../models/Food';
+import React, { SyntheticEvent, useState, useEffect } from 'react';
+import { Food } from '../../models/Food';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
@@ -20,17 +20,36 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
 }) => {
     const Today = new Date();
 
+    // todo:とりま動いてるから後でリファクタリング
     const [objFood, setObjFood] = useState<Food>({
       id: food.id,
       name: food.name,
       quantity: food.quantity,
       unit_id: food.unit_id,
+      unit_obj: food.unit_obj,
       unit: food.unit,
       expiration_date: new Date(food.expiration_date),
       type_id: food.type_id,
       type: food.type,
       user_id: food.user_id,
-      })
+      use_amount: food.use_amount,
+    })
+
+    useEffect(() => {
+      setObjFood({
+        id: food.id,
+        name: food.name,
+        quantity: food.quantity,
+        unit_id: food.unit_id,
+        unit_obj: food.unit_obj,
+        unit: food.unit,
+        expiration_date: new Date(food.expiration_date),
+        type_id: food.type_id,
+        type: food.type,
+        user_id: food.user_id,
+        use_amount: food.use_amount,
+      });
+    }, [food]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -57,7 +76,6 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
 
   const handleCancell = (e: any) => {
     closeUpdateModal();
-    setObjFood(newFood)
   }
   
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -6,6 +6,7 @@ import './App.css';
 // import Recipe from './components/Recipes/Recipe';
 // import RecipeWithFood from './components/Recipes/RecipeDetail/RecipeWithFood';
 // import FoodswithExpirationDate from './components/FoodStorage/FoodswithExpirationDate';
+import RecipeWithFood from './pages/RecipeWithFood';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Users from './pages/Users'
 import Register from './pages/Register'
@@ -36,7 +37,8 @@ function App() {
           {/*
           <Route path={'/foods_with_expiration'} Component={FoodswithExpirationDate}/>
           <Route path={"/recipes"} element={<Recipe />} />
-          <Route path={"/recipes/:recipeId/:recipeName"} Component={RecipeWithFood} /> */}
+        */}
+          <Route path={"/recipes/:recipeId/:recipeName"} Component={RecipeWithFood} />
         </Routes>
       </div>
     </Router>

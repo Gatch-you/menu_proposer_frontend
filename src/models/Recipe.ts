@@ -5,7 +5,12 @@ export type Recipe = {
     name: string;
     description: string;
     making_method: string;
-    Food: Food;
+    foods: Food[];
+}
+
+export type RecipeFoodRelation = {
+    food_id: number;
+    use_amount: number;
 }
 
 export const newRecipe: Recipe = {
@@ -13,5 +18,5 @@ export const newRecipe: Recipe = {
     name: '',
     description: '',
     making_method: '',
-    Food: newFood,
+    foods: [newFood],
 }

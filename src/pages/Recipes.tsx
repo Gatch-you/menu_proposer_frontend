@@ -5,6 +5,7 @@ import axios from 'axios';
 import RegisterRecipeModal from '../components/Recipes/RegisterRecipeModal';
 import UpdateRecipeModal from '../components/Recipes/UpdateRecipeModal';
 import DeleteRecipeModal from '../components/Recipes/DeleteRecipeModal';
+import { Link } from 'react-router-dom';
 
 
 const Recipes: React.FC = () => {
@@ -22,21 +23,20 @@ const Recipes: React.FC = () => {
     }
 
     function openUpdateModal(recipe: Recipe) {
-        setShowUpdateModal(true);
         setSelectedRecipe(recipe)
+        setShowUpdateModal(true);
     }
     function closeUpdateModal() {
         setShowUpdateModal(false);
     }
 
     function openDeleteModal(recipe: Recipe) {
-        setShowDeleteModal(true);
         setSelectedRecipe(recipe)
+        setShowDeleteModal(true);
     }
     function closeDeleteModal() {
         setShowDeleteModal(false);
     }
-
 
     useEffect(() => {
         const fetchRecipes = async () => {
@@ -70,6 +70,14 @@ const Recipes: React.FC = () => {
                 <p>{recipe.name}</p>
                 <p>{recipe.description}</p>
                 <p>{recipe.making_method}</p>
+
+                <Link
+                    to={`/recipes/${recipe.id}/${recipe.name}`}
+                    state={{id: recipe.id, name:recipe.name}}
+                    >
+                    <button className="button detail-button">レシピの詳細</button>
+                </Link>
+
                 <button className="button update-button" onClick={() => openUpdateModal(recipe)}>食材情報の変更</button>
                 {selectedRecipe && (
                 <UpdateRecipeModal

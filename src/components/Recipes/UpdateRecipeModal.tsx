@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
-import {Recipe, newRecipe} from '../../models/Recipe'
+import { Recipe } from '../../models/Recipe'
 import { customStyles } from '../../modalDesign';
 import axios from 'axios';
 
@@ -21,35 +21,44 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
       name: recipe.name,
       description: recipe.description,
       making_method: recipe.making_method,
-      Food: recipe.Food,
+      foods: recipe.foods,
     })
     const [valueError, setValueError] = useState('')
 
     const isInputValid = recipe.name && recipe.description && recipe.making_method
 
-  const handleSubmit = async (data: React.FormEvent<HTMLFormElement>) => {
+    useEffect(() => {
+      setObjRecipe({
+        id: recipe.id,
+        name: recipe.name,
+        description: recipe.description,
+        making_method: recipe.making_method,
+        foods: recipe.foods,
+      })
+    }, [recipe])
 
-    const recipeData ={
-      id: recipe.id,
-      name: objRecipe.name,
-      description: objRecipe.description,
-      making_method: objRecipe.making_method,
-    };
+    const handleSubmit = async (data: React.FormEvent<HTMLFormElement>) => {
 
-    try {
-      const response = await axios.put('api/user/recipes', recipeData);
-      console.log('update recipe success:', response.data);
-      closeUpdateModal();
-    } catch (error) {
-      console.log('update recipe failed:', error);
-      closeUpdateModal();
-    }
-    window.location.reload();
+      const recipeData ={
+        id: recipe.id,
+        name: objRecipe.name,
+        description: objRecipe.description,
+        making_method: objRecipe.making_method,
+      };
+
+      try {
+        const response = await axios.put('api/user/recipes', recipeData);
+        console.log('update recipe success:', response.data);
+        closeUpdateModal();
+      } catch (error) {
+        console.log('update recipe failed:', error);
+        closeUpdateModal();
+      }
+      window.location.reload();
     };
 
   const handleCancell = (e: any) => {
     closeUpdateModal();
-    setObjRecipe(newRecipe)
   }
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {

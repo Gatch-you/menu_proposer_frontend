@@ -3,7 +3,7 @@
 // import { RecipeFood } from '../../../models/Models';
 // import DeleteFoodinRecipeModal from './DeleteFoodinRecipeModal';
 // import UpdateFoodinRecipeModal from './UpdateFoodinRecipeModal';
-// import RegistFoodinRecipeModal from './RegistFoodinRecipeModal';
+// import RegistFoodinRecipeModal from './RegisterFoodinRecipeModal';
 // import MakeDishModal from './MakeDishModal';
 // import '../../Design/RecipeWithFood.css';
 
@@ -110,9 +110,9 @@
 //       {recipe === null ? (
 //         <><p>まず最初に{recipeName}に使用する食材を追加してください</p><button className='button' onClick={() => openFirstRegistModal(parseFloat(recipeId!))}>食材の追加</button>
 //         <RegistFoodinRecipeModal
-//           showRegistModal={showRegistModal}
+//           showRegisterModal={showRegistModal}
 //           closeRegisterModal={closeRegisterModal}
-//           RecipeId={RecipeId} /></>
+//           recipeId={1} /></>
 //       ) : (
 //         <div>
 //           {recipe && recipe.length > 0 && (
@@ -125,9 +125,9 @@
 //           <ul style={{listStyle: 'none', padding: 0, margin: 0}} >
 //           <button className='button' onClick={() => openRegistModal(recipe[0].recipe_id)}>新しい食材の追加</button>
 //           <RegistFoodinRecipeModal 
-//             showRegistModal={showRegistModal} 
+//             showRegisterModal={showRegistModal} 
 //             closeRegisterModal={closeRegisterModal}
-//             RecipeId={RecipeId}
+//             recipeId={1}
 //             />
 //           <button className='button' onClick={ () => openMakeModal(recipe[0].recipe_id)}>この料理を作成する</button>
 //           <h1>　</h1>
@@ -141,9 +141,7 @@
 //                 <DeleteFoodinRecipeModal
 //                   showDeleteModal={showDeleteModal}
 //                   closeDeleteModal={closeDeleteModal}
-//                   RecipeId={RecipeId}
-//                   FoodId={FoodId}
-//                   FoodName={FoodName}
+//                   food={item}
 //                 />
 //                 <button className='button update-button' onClick={() => openUpdateModal(item.food_id, item.food_name, item.use_amount, item.food_unit)}>使用量の変更</button>
 //                 <UpdateFoodinRecipeModal 

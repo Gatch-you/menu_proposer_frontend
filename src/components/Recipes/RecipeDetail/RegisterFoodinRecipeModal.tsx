@@ -1,64 +1,45 @@
 import React, {useState, useEffect, KeyboardEventHandler} from 'react';
 import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css"
-import { RecipeFood } from '../../../models/Models';
-
-
-// 送りたいリクエスト↓
-// curl -X POST -H "Content-Type: application/json" -d '[{"recipe_id": 5, "food_id": 20, "use_amount": 0.2},{"recipe_id": 5, "food_id": 21, "use_amount": 100}]' http://localhost:8080/backend/recipe_food/insert_use_food
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
+import { RecipeFoodRelation } from '../../../models/Recipe';
+import { Food } from '../../../models/Food';
+import axios from 'axios';
+import { customStyles } from '../../../modalDesign';
 
 type ModalProps = {
-  showRegistModal: boolean;
+  showRegisterModal: boolean;
   closeRegisterModal: () => void;
-  RecipeId: number | null;
+  recipeId: string | undefined
 };
 
-interface FoodOption {
-  id: number;
-  name: string;
-}
-
 const RegistFoodinRecipeModal: React.FC<ModalProps> = ({ 
-  showRegistModal, closeRegisterModal, RecipeId, }) => {
-
+  showRegisterModal, 
+  closeRegisterModal, 
+  recipeId, 
+}) => {
 
   //useStateでのリアルタイムフィードバック
-  const [recipe_id, setRecipe_id] = useState<RecipeFood["recipe_id"]>();
-  const [food_id, setFood_id] = useState<RecipeFood["food_id"]>();
-  const [use_amount, setUseAmount] = useState<RecipeFood["use_amount"]>();
-  const [foodOptions, setFoodOptions] = useState<FoodOption[]>([]);
+  const [foods, setFoods] = useState<Food[]>([]);
+  const [use_amount, setUseAmount] = useState<RecipeFoodRelation["use_amount"]>();
   const [selectedFood, setSelectedFood] = useState('');
   const [use_amountError, setuse_AmountError] = useState('');
 
   const isInputValid = !use_amountError
 
   useEffect(() => {
-    // 食材データを取得するAPIを呼び出し、データを取得
-    fetchFoodOptions()
-      .then((data) => setFoodOptions(data))
-      .catch((error) => console.error('Failed to fetch food options:', error));
-  }, []); 
+    const fetchFoods = async () => {
+        try {
+            const response = await axios.get('api/user/foods');
+            const jsonData = await response.data
+            setFoods(jsonData);
+            console.log(response.data)
+        } catch (error) {
+            console.error('データの取得中にエラーが発生しました:', error);
+        }
+    };
 
-  async function fetchFoodOptions() {
-    try {
-      const response = await fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/foods');
-      const jsonData = await response.json();
-      return jsonData;
-    } catch (error) {
-      console.error(error);
-    }
-  }
+    fetchFoods();
+}, []);
 
   const handleFoodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedFood(e.target.value);
@@ -67,18 +48,13 @@ const RegistFoodinRecipeModal: React.FC<ModalProps> = ({
   const handleKeyDown: KeyboardEventHandler<HTMLFormElement> = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      // ここでEnterキーが押された後の処理を実行する
     }
   };
   
-  //フォームの入力に対して
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(selectedFood);
-    // jsonの型を設定
 
     const foodData = {
-      recipe_id: RecipeId,
       food_id: +selectedFood,
       use_amount: use_amount,
     };
@@ -88,46 +64,27 @@ const RegistFoodinRecipeModal: React.FC<ModalProps> = ({
     }
 
     // 実際にPOSTリクストを送る
-    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/recipe_food/insert_use_food', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(foodData)
+    axios.post(`api/user/recipes/detail/controllfood/${recipeId}`, {
+      ...foodData
     })
-      .then((response) => response.json())
+      .then((response) => response.data)
       .then((data) => {
         console.log('Food registration sucsessfull:', data);
         closeRegisterModal();
-        //stateの初期化
-        setRecipe_id(0);
-        setFood_id(0);
-        setUseAmount(0);
-
       })
       .catch((error) => {
         console.error('Food registration failed:', error);
       });
-  console.log(foodData)
-  window.location.reload();
+    console.log(foodData)
+    window.location.reload();
   };
 
   const handleCancell = (e: any) => {
     closeRegisterModal();
-    // ステートを初期化
-    setRecipe_id(0);
-    setFood_id(0);
-    setUseAmount(0);
   }
-
-  // const handleFoodId = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = parseFloat(e.target.value);
-  //   setFood_id(value);
-  // }
 
   const handleUseAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-
     if (!value) {
       setuse_AmountError('無効な入力です(半角数字にて記入)')
     } else {
@@ -139,7 +96,7 @@ const RegistFoodinRecipeModal: React.FC<ModalProps> = ({
   return (
     <Modal
       contentLabel="Example Modal"
-      isOpen={showRegistModal}
+      isOpen={showRegisterModal}
       style={customStyles}
       onRequestClose={closeRegisterModal}
     >
@@ -149,8 +106,8 @@ const RegistFoodinRecipeModal: React.FC<ModalProps> = ({
         {/* <h3>resipe_id: </h3>
         <input type="name" onChange={handleRecipeId}/> */}
         <select value={selectedFood} onChange={handleFoodChange}>
-        <option value="">選択してください</option>
-        {foodOptions.map((food) => (
+        <option value="" defaultValue={"選択してください"}>選択してください</option>
+        {foods.map((food) => (
           <option key={food.id} value={food.id}>
             {food.name}
           </option>

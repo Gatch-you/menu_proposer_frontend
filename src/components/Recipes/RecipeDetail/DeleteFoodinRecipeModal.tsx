@@ -1,52 +1,36 @@
 import React from 'react';
 import Modal from 'react-modal';
+import { Food } from '../../../models/Food';
+import axios from 'axios';
+import { customStyles } from '../../../modalDesign';
 // import { Food } from './Models'
 
 // curl -X DELETE -d '{"recipe_id": 1, "food_id": 14}' http://localhost:8080/backend/delete_using_food
 //　一応完成！
 
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
-
 type ModalProps = {
   showDeleteModal: boolean;
   closeDeleteModal: () => void;
-  RecipeId: number | null;
-  FoodId: number | null;
-  FoodName: string | null;
+  recipeId: number
+  food: Food | undefined
 };
 
 const DeleteFoodinRecipeModal: React.FC<ModalProps> = ({ 
   showDeleteModal, 
   closeDeleteModal,
-  RecipeId,
-  FoodId,
-  FoodName,
+  recipeId,
+  food
   }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const deleteFoodData = {
-      recipe_id: RecipeId,
-      food_id: FoodId,
+      recipe_id: recipeId,
+      food_id: food?.id,
     };
-    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/delete_using_food', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(deleteFoodData)
-    })
-      .then((response) => response.json())
+    axios.delete(`/api/user/recipes/detail/controllfood/${recipeId}/${food?.id}`)
+      .then((response) => response.data)
       .then((data) => {
         console.log('Delete food sucsessfull:', data);
         closeDeleteModal();
@@ -72,7 +56,7 @@ const DeleteFoodinRecipeModal: React.FC<ModalProps> = ({
       <h2>食材の削除</h2>
       <div>削除した場合は新しく登録し直さなければいけませんがよろしいですか？</div>
       <h3>本当に削除しますか？</h3>
-      <p>削除する食材名:{FoodName} </p>
+      <p>削除する食材名:{food?.name}{food?.quantity} </p>
 
       <form onSubmit={handleSubmit}>
         <ul>

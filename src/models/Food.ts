@@ -3,11 +3,13 @@ export type Food = {
     name: string;
     quantity: number;
     unit_id: number;
-    unit: FoodUnit;
+    unit_obj: FoodUnit;
+    unit: string | null
     expiration_date: Date;
     type_id: number;
     type: FoodType;
     user_id: number;
+    use_amount: number; //何かしらで不具合が出たら、| nullを付け足すこと。
 };
 
 type FoodUnit = {
@@ -25,9 +27,11 @@ export const newFood: Food = {
     name: '',
     quantity: 0,
     unit_id: 0,
-    unit: {id: 0, unit: ''},
+    unit_obj: {id: 0, unit: ''},
+    unit: '',
     expiration_date: new Date(),
     type_id: 0,
     type: {id: 0, type: ''},
     user_id: 0,
+    use_amount: 0,
 }

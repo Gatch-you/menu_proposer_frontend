@@ -40,16 +40,16 @@ const FoodList: React.FC = () => {
     }
 
     function openUpdateModal(food: Food) {
-        setShowUpdateModal(true);
         setSelectedFood(food);
+        setShowUpdateModal(true);
     }
     function closeUpdateModal() {
         setShowUpdateModal(false);
     }
 
     function openDeleteModal(food: Food) {
-        setShowDeleteModal(true);
         setSelectedFood(food);
+        setShowDeleteModal(true);
     }
     function closeDeleteModal() {
         setShowDeleteModal(false);
@@ -85,7 +85,7 @@ const FoodList: React.FC = () => {
                 <li className="list-item"key={food.id}>
                   <p>{food.id}</p>
                   <p className='list-item-text'>材料名: {food.name}</p>
-                  <p className='list-item-text'>量: {food.quantity} {food.unit.unit}</p>
+                  <p className='list-item-text'>量: {food.quantity} {food.unit_obj.unit}</p>
                   <p className='list-item-text'>種類: {food.type?.type ?? '種別不明'}</p>
                   <p className='list-item-text'>賞味期限: {new Date(food.expiration_date).toLocaleDateString()}</p>
                   <button className="button delete-button" onClick={() => openDeleteModal(food)}>削除</button>
@@ -94,9 +94,7 @@ const FoodList: React.FC = () => {
                       showDeleteModal={showDeleteModal}
                       closeDeleteModal={closeDeleteModal}
                       food={selectedFood}
-                    />
-                  )}
-    
+                    />)}
                   <button className="button update-button" onClick={() => openUpdateModal(food)}>食材情報の変更</button>
                   {selectedFood && (
                     <UpdateFoodModal 
@@ -105,7 +103,6 @@ const FoodList: React.FC = () => {
                       food={selectedFood}
                       />
                     )}
-                  <p>　</p>
                 </li>
               ))}
             </ul>

@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css"
 import { RecipeFood } from '../../../models/Models';
+import { Food } from '../../../models/Food';
+import axios from 'axios';
 
 const customStyles = {
     content: {
@@ -17,26 +19,36 @@ const customStyles = {
 type ModalProps = {
   showUpdateModal: boolean;
   closeUpdateModal: () => void;
-  RecipeId: number | undefined;
-  FoodId: number | null;
-  FoodName: string | null;
-  UseAmount: number | null;
-  Unit: string | null;
+  recipeId: number;
+  food: Food
 };
 
 const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({ 
-   showUpdateModal,
-   closeUpdateModal,
-   RecipeId,
-   FoodId, 
-   FoodName,
-   UseAmount,
-   Unit,
-
+    showUpdateModal,
+    closeUpdateModal,
+    recipeId,
+    food
   }) => {
   
   const [use_amount, setUseAmount] = useState<RecipeFood["use_amount"]>(0.0);
+  const [objFood, setObjFood] = useState<Food>(food);
   const [useAmountError, setUseAmountError] = useState('');
+
+  useEffect(() => {
+    setObjFood({
+      id: food.id,
+      name: food.name,
+      quantity: food.quantity,
+      unit_id: food.unit_id,
+      unit_obj: food.unit_obj,
+      unit: food.unit,
+      expiration_date: new Date(food.expiration_date),
+      type_id: food.type_id,
+      type: food.type,
+      user_id: food.user_id,
+      use_amount: food.use_amount,
+    });
+  }, [food]);
 
   const isInputVAlid = !useAmountError
 
@@ -44,51 +56,51 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
     e.preventDefault();
 
     const foodData = {
-      recipe_id: RecipeId,
-      food_id: FoodId,
-      use_amount: use_amount,
+      food_id: objFood?.id,
+      use_amount: objFood?.use_amount,
     };
 
-    if (useAmountError) {
+    if (useAmountError || objFood.use_amount === 0) {
       return;
     }
 
     // 実際にPUTクエリを送る
-    fetch(process.env.REACT_APP_API_ENDPOINT+'/backend/recipe_food/update_using_food_quantity', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(foodData)
+    axios.put(`api/user/recipes/detail/controllfood/${recipeId}`, {
+      ...foodData
     })
-      .then((response) => response.json())
+      .then((response) => response.data)
       .then((data) => {
         console.log('Update food sucsessfull:', data);
         closeUpdateModal();
-        setUseAmount(0.0);
       })
       .catch((error) => {
         console.error('Update food failed:', error);
         closeUpdateModal();
       });
   console.log(foodData)
-  window.location.reload();
+  // window.location.reload();
   };
 
   const handleCancell = (e: any) => {
     closeUpdateModal();
-    setUseAmount(0.0);
   }
 
   const handleUseAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
     
     if (!value) {
-      setUseAmountError("正しい入力ではありません(半角数字にて記入)");
+      setObjFood(prevFood => ({
+        ...prevFood,
+        use_amount: 0,
+      }));
     } else {
       setUseAmountError('');
-      setUseAmount(value);
+      setObjFood(prevFood => ({
+        ...prevFood,
+        use_amount: value,
+      }))
     }
+    
   }
 
   return (
@@ -100,11 +112,11 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
     >
       <h2>登録内容変更</h2>
       <div>食材の変更部分を入力してください</div>
-      <h3>食品名: {FoodId} {FoodName}</h3>
+      <h3>食品名: {food?.id} {food?.name}</h3>
       <form onSubmit={handleSubmit}>
 
-        <h3>現在の使用量: {UseAmount} {Unit}</h3>
-        <input type="quantity" onChange={handleUseAmount}/>
+        <h3>現在の使用量: {food.use_amount} {food?.unit}</h3>
+        <input type="quantity" onChange={handleUseAmount} value={objFood.use_amount}/>
         {useAmountError && <p>{useAmountError}</p>}
 
         {/* <input>食材の種類: </input> */}
