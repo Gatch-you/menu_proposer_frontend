@@ -1,18 +1,9 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { Food } from '../../models/Food'
+import { customStyles } from '../../modalDesign';
 import axios from 'axios';
 
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
 
 interface ModalProps {
   showDeleteModal: boolean;
@@ -36,7 +27,6 @@ const DeleteFoodModal: React.FC<ModalProps> = ({
       const response = await axios.put(`/api/user/foods/sfdelete/${food_id}`,updateData);
       console.log('Delete food successful:', response.data);
       closeDeleteModal();
-      // 親コンポーネントの状態を更新するなどの追加処理が必要な場合はここで行う
     } catch (error) {
       console.error('Delete food failed:', error);
       closeDeleteModal();

@@ -33,6 +33,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
       type: food.type,
       user_id: food.user_id,
       use_amount: food.use_amount,
+      recipes: food.recipes
     })
 
     useEffect(() => {
@@ -48,6 +49,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
         type: food.type,
         user_id: food.user_id,
         use_amount: food.use_amount,
+        recipes: food.recipes,
       });
     }, [food]);
 
@@ -94,7 +96,7 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
   }
 
   const handleExpirationDate = (date: Date | null, event: SyntheticEvent<any, Event> | undefined) => {
-    if (date) { // 日付が選択されている場合にのみ状態を更新
+    if (date) {
       setObjFood(prevFood => ({
         ...prevFood,
         expiration_date: date,
@@ -151,7 +153,6 @@ const UpdateFoodModal: React.FC<ModalProps> = ({
           dateFormat="yyyy/MM/dd"
           minDate={Today}
           selected={objFood.expiration_date}
-          // value={food.expiration_date}
           onChange={handleExpirationDate}
         />
         <label htmlFor="type_id">種類:</label>

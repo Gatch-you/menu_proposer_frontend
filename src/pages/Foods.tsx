@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Food } from '../models/Food';
 import axios from 'axios';
 
-import DeleteFoodModal from '../components/FoodStorage/DeleteFoodModal';
-import UpdateFoodModal from '../components/FoodStorage/UpdateFoodModal';
-import RegisterFoodModal from '../components/FoodStorage/RegisterFoodModal';
+import DeleteFoodModal from '../components/FoodModal/DeleteFoodModal';
+import UpdateFoodModal from '../components/FoodModal/UpdateFoodModal';
+import RegisterFoodModal from '../components/FoodModal/RegisterFoodModal';
 import '../components/Design/FoodStorage.css';
 
 
@@ -19,7 +19,6 @@ const FoodList: React.FC = () => {
     useEffect(() => {
         const fetchFoods = async () => {
             try {
-                // 認証トークンを含める必要がある場合、ここでヘッダーに追加します。
                 const response = await axios.get('api/user/foods');
                 const jsonData = await response.data
                 setFoods(jsonData);

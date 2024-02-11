@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import Layout from '../components/Layout'
-import { User } from '../models/user';
-import axios from 'axios';
+// import { User } from '../models/user';
+// import axios from 'axios';
 // import FoodStorage from '../components/FoodStorage/FoodStorage';
 import HomePage from '../components/Home/HomePage';
 
 const Users = () => {
-    const [users, setUsers] = useState<User[]>([]);
+    // const [users, setUsers] = useState<User[]>([]);
 
     // useEffect( () => {
     //     (

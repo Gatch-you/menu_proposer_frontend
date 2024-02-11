@@ -4,19 +4,9 @@ import DatePicker from 'react-datepicker'
 // import { Food } from '../../models/Models';
 import { Food } from '../../models/Food';
 import axios from 'axios';
-
 import "react-datepicker/dist/react-datepicker.css"
+import { customStyles } from '../../modalDesign';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 
 type ModalProps = {
   showRegistModal: boolean;
@@ -29,7 +19,6 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
 }) => {
   const Today = new Date();
 
-  //useStateでのリアルタイムフィードバック
   const [name, setName] = useState<Food["name"]>("");
   const [quantity, setQuantity] = useState<Food["quantity"]>(0.0);
   const [unit, setUnit] = useState<Food["unit_id"]>(0);
@@ -38,9 +27,7 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
   const [nameError, setNameError] = useState('')
   const [quantityError, setQuantityError] = useState('')
 
-  // const isInputNameValid = !nameError
   const isInputValid = name && !quantityError
-
 
   const handleKeyDown: KeyboardEventHandler<HTMLFormElement> = (event) => {
     if (event.key === 'Enter') {
@@ -48,10 +35,9 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
     }
   };
   
-  //フォームの入力に対して
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // jsonの型を設定
+
     const selectDate = expiration_date || Today;
 
     const foodData = {
@@ -67,7 +53,6 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
       return;
     }
 
-    // 実際にPOSTリクストを送る
     axios.post('/api/user/foods', {
       ...foodData
     })
@@ -75,7 +60,6 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
       .then((data) => {
         console.log('Food registration sucsessfull:', data);
         closeRegisterModal();
-        //stateの初期化
         setName("");
         setQuantity(0.0);
         setUnit(0);
@@ -91,7 +75,6 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
 
   const handleCancell = (e: any) => {
     closeRegisterModal();
-    // ステートを初期化
     setName('');
     setQuantity(0.0);
     setUnit(0);
@@ -174,8 +157,6 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
           selected={expiration_date}
           onChange={(date: Date | null) => setExpirationDate(date)}
           />
-
-        {/* <input type="expiration" onChange={handleExpirationData}/> */}
         <label htmlFor="type_id">種類:</label>
           <select
             id="type_id"
@@ -186,7 +167,6 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
             <option value="1">肉</option>
             <option value="2">野菜</option>
           </select>
-        {/* <input>食材の種類: </input> */}
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>
           <button type="submit" disabled={!isInputValid}>登録</button>

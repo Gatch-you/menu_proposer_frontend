@@ -21,6 +21,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
       name: recipe.name,
       description: recipe.description,
       making_method: recipe.making_method,
+      use_amount: recipe.use_amount,
       foods: recipe.foods,
     })
     const [valueError, setValueError] = useState('')
@@ -33,6 +34,7 @@ const UpdateRecipeModal: React.FC<ModalProps> = ({
         name: recipe.name,
         description: recipe.description,
         making_method: recipe.making_method,
+        use_amount: recipe.use_amount,
         foods: recipe.foods,
       })
     }, [recipe])

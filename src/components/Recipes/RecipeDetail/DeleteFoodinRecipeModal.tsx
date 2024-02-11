@@ -3,10 +3,7 @@ import Modal from 'react-modal';
 import { Food } from '../../../models/Food';
 import axios from 'axios';
 import { customStyles } from '../../../modalDesign';
-// import { Food } from './Models'
 
-// curl -X DELETE -d '{"recipe_id": 1, "food_id": 14}' http://localhost:8080/backend/delete_using_food
-//　一応完成！
 
 type ModalProps = {
   showDeleteModal: boolean;

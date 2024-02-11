@@ -1,41 +1,27 @@
 import React from 'react'
 import Modal from 'react-modal';
-
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-};
+import { Recipe } from '../../../models/Recipe';
+import { customStyles } from '../../../modalDesign';
+import axios from 'axios';
 
 type ModalProps = {
     showMakeModal: boolean;
     closeMakeModal: () => void;
-    RecipeId: number | null;
+    recipe: Recipe;
 }
 
 const MakeDishModal: React.FC<ModalProps> = ({
     showMakeModal,
     closeMakeModal,
-    RecipeId
+    recipe
 
 }) => {
   
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     
-        // 実際にPUTクエリを送る
-        fetch(process.env.REACT_APP_API_ENDPOINT+`/backend/recipe_food/update_food_storage/${RecipeId}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then((response) => response.json())
+        axios.put(`/api/user/recipes/cooking/${recipe.id}`)
+          .then((response) => response.data)
           .then((data) => {
             console.log('Update food sucsessfull:', data);      
           })

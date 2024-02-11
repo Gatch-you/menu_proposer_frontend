@@ -5,8 +5,6 @@ import {User} from '../models/user'
 
 const Header = (props: {user: User | null}) => {
 
-    // const [user, setUser] = useState<User>()
-
   return (
     <header>
         <div>

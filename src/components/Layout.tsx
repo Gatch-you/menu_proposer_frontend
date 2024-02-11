@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import Header from './Header'
 import { Navigate } from 'react-router-dom';
 import {User} from '../models/user'
-import Menu from '../components/Menu'
 import axios from 'axios'
 
 const Layout = (props: any) => {

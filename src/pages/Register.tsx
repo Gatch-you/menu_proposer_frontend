@@ -13,13 +13,6 @@ class Register extends Component {
         redirect: false
     }
 
-    // const navigate = useNavigate();
-
-    // const navigateSignIn = () => {
-    //     this.navigate('/register')
-    // }
-
-
     submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 

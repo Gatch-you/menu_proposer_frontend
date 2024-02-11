@@ -18,7 +18,6 @@ const RegistFoodinRecipeModal: React.FC<ModalProps> = ({
   recipeId, 
 }) => {
 
-  //useStateでのリアルタイムフィードバック
   const [foods, setFoods] = useState<Food[]>([]);
   const [use_amount, setUseAmount] = useState<RecipeFoodRelation["use_amount"]>();
   const [selectedFood, setSelectedFood] = useState('');
@@ -63,7 +62,6 @@ const RegistFoodinRecipeModal: React.FC<ModalProps> = ({
       return;
     }
 
-    // 実際にPOSTリクストを送る
     axios.post(`api/user/recipes/detail/controllfood/${recipeId}`, {
       ...foodData
     })
@@ -103,8 +101,6 @@ const RegistFoodinRecipeModal: React.FC<ModalProps> = ({
       <h2>食材登録</h2>
       <div>レシピに登録する食材を記述してください。</div>
       <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
-        {/* <h3>resipe_id: </h3>
-        <input type="name" onChange={handleRecipeId}/> */}
         <select value={selectedFood} onChange={handleFoodChange}>
         <option value="" defaultValue={"選択してください"}>選択してください</option>
         {foods.map((food) => (

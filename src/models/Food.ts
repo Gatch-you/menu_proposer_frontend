@@ -1,3 +1,5 @@
+import { Recipe } from "./Recipe";
+
 export type Food = {
     id: number;
     name: string;
@@ -10,6 +12,7 @@ export type Food = {
     type: FoodType;
     user_id: number;
     use_amount: number; //何かしらで不具合が出たら、| nullを付け足すこと。
+    recipes: Recipe[];
 };
 
 type FoodUnit = {
@@ -34,4 +37,5 @@ export const newFood: Food = {
     type: {id: 0, type: ''},
     user_id: 0,
     use_amount: 0,
+    recipes: [],
 }

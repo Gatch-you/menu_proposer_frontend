@@ -1,20 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css"
-import { RecipeFood } from '../../../models/Models';
 import { Food } from '../../../models/Food';
 import axios from 'axios';
+import { customStyles } from '../../../modalDesign';
 
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-};
 
 type ModalProps = {
   showUpdateModal: boolean;
@@ -29,8 +19,7 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
     recipeId,
     food
   }) => {
-  
-  const [use_amount, setUseAmount] = useState<RecipeFood["use_amount"]>(0.0);
+
   const [objFood, setObjFood] = useState<Food>(food);
   const [useAmountError, setUseAmountError] = useState('');
 
@@ -47,6 +36,7 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
       type: food.type,
       user_id: food.user_id,
       use_amount: food.use_amount,
+      recipes: food.recipes,
     });
   }, [food]);
 
@@ -64,7 +54,6 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
       return;
     }
 
-    // 実際にPUTクエリを送る
     axios.put(`api/user/recipes/detail/controllfood/${recipeId}`, {
       ...foodData
     })
@@ -77,8 +66,9 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
         console.error('Update food failed:', error);
         closeUpdateModal();
       });
-  console.log(foodData)
-  // window.location.reload();
+
+    console.log(foodData)
+    window.location.reload();
   };
 
   const handleCancell = (e: any) => {
@@ -119,7 +109,6 @@ const UpdateFoodinRecipeModal: React.FC<ModalProps> = ({
         <input type="quantity" onChange={handleUseAmount} value={objFood.use_amount}/>
         {useAmountError && <p>{useAmountError}</p>}
 
-        {/* <input>食材の種類: </input> */}
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>
           <button type="submit" disabled={!isInputVAlid}>更新</button>
