@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Food } from '../models/Food';
+import ReactPaginate from 'react-paginate';
 import axios from 'axios';
-
 import DeleteFoodModal from '../components/FoodModal/DeleteFoodModal';
 import UpdateFoodModal from '../components/FoodModal/UpdateFoodModal';
 import RegisterFoodModal from '../components/FoodModal/RegisterFoodModal';
 import '../components/Design/FoodStorage.css';
+import Layout from '../components/Layout';
 
 
 const FoodList: React.FC = () => {
@@ -15,6 +16,17 @@ const FoodList: React.FC = () => {
     const [showRegistModal, setShowRegistModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    //pagination settings
+    const [currentPage, setCurrentPage] = useState(0);
+    const foodsPerPage:number = 5;
+    const indexOfLastFood = (currentPage + 1) * foodsPerPage;
+    const indexOfFirstFood = indexOfLastFood - foodsPerPage;
+    const currentFoods = foods.slice(indexOfFirstFood, indexOfLastFood);
+    const handlePageClick = (data: { selected: React.SetStateAction<number>; }) => {
+      setCurrentPage(data.selected);
+    };
+
 
     useEffect(() => {
         const fetchFoods = async () => {
@@ -56,7 +68,9 @@ const FoodList: React.FC = () => {
 
 
     return (
+      <Layout>
         <div className="container">
+
           <h1 className='logo'>Food Storage</h1>
           <div className='button-group'>
             <button className='button' onClick={()=> {setShowRegistModal(true)}}>新しい食材の追加</button>
@@ -79,8 +93,7 @@ const FoodList: React.FC = () => {
                 showRegistModal={showRegistModal} 
                 closeRegisterModal={closeRegisterModal} 
               />
-    
-              {foods.map(food => (
+              {currentFoods.map(food => (
                 <li className="list-item"key={food.id}>
                   <p>{food.id}</p>
                   <p className='list-item-text'>材料名: {food.name}</p>
@@ -106,7 +119,21 @@ const FoodList: React.FC = () => {
               ))}
             </ul>
           )}
+            <ReactPaginate
+                previousLabel={'前'}
+                nextLabel={'次'}
+                breakLabel={'...'}
+                pageCount={Math.ceil(foods.length / foodsPerPage)}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination'}
+                // subContainerClassName={'pages pagination'}
+                activeClassName={'active'}
+            />
+
         </div>
+        </Layout>
     );
 };
 

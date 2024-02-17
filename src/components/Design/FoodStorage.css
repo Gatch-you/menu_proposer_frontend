@@ -83,3 +83,60 @@ body {
 .update-button:hover {
     background-color: #219653;
 }
+/* FoodStorage.css */
+
+/* ページネーションコンテナのスタイル */
+.pagination {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  /* 各ページネーションアイテムのスタイル */
+  .pagination li {
+    margin: 0 5px;
+    border-radius: 5px; /* 角を丸く */
+  }
+  
+  /* ページネーションリンクのスタイル */
+  .pagination li a {
+    padding: 5px 10px;
+    border: 1px solid #fff; /* 白い境界線 */
+    color: #333; /* 白い文字色 */
+    background-color: transparent; /* 透明な背景色 */
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  /* アクティブなページネーションアイテムのスタイル */
+  .pagination li.active a {
+    background-color: #fff; /* 白い背景色 */
+    color: #000; /* 黒い文字色 */
+  }
+  
+  /* ページネーションアイテムのホバー効果 */
+  .pagination li a:hover {
+    background-color: #666; /* ホバー時の背景色 */
+    border-radius: 5px;
+    color: #fff; /* ホバー時の文字色 */
+  }
+  
+  /* 'prev' と 'next' ボタンのスタイル */
+  .pagination li.previous a,
+  .pagination li.next a {
+    border-color: #2980b9; /* 白い境界線 */
+    border-radius: 5px; /* 角を丸く */
+  }
+  
+  /* 非アクティブなアイテムのスタイル */
+  .pagination li.disabled a {
+    color: #888; /* 灰色の文字色 */
+    cursor: default;
+  }
+  
+  .pagination li.break a {
+    cursor: default;
+  }
+  

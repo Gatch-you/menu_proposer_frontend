@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import axios from 'axios'
 import {User} from '../models/user'
+import { connect } from 'react-redux'
 
 const Header = (props: {user: User | null}) => {
 
@@ -38,4 +39,8 @@ const Header = (props: {user: User | null}) => {
   )
 }
 
-export default Header
+export default connect(
+        (state: {user: User}) => ({
+        user: state.user
+    })
+)(Header)

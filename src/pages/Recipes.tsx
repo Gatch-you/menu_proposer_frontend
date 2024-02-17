@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Recipe } from '../models/Recipe'
+import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 
 import RegisterRecipeModal from '../components/Recipes/RegisterRecipeModal';
 import UpdateRecipeModal from '../components/Recipes/UpdateRecipeModal';
 import DeleteRecipeModal from '../components/Recipes/DeleteRecipeModal';
 import { Link } from 'react-router-dom';
+import Layout from '../components/Layout';
 
 
 const Recipes: React.FC = () => {
@@ -14,6 +16,15 @@ const Recipes: React.FC = () => {
     const [showRegistModal, setShowRegistModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const foodsPerPage:number = 10;
+    const indexOfLastFood = (currentPage + 1) * foodsPerPage;
+    const indexOfFirstFood = indexOfLastFood - foodsPerPage;
+    const currentRecipes = recipes.slice(indexOfFirstFood, indexOfLastFood);
+    const handlePageClick = (data: { selected: React.SetStateAction<number>; }) => {
+        setCurrentPage(data.selected);
+      };
 
     function openRegistModal() {
         setShowRegistModal(true);
@@ -57,6 +68,7 @@ const Recipes: React.FC = () => {
 
 
     return (
+        <Layout>
 
     <div>
         <button onClick={openRegistModal}>レシピの登録</button>
@@ -64,7 +76,7 @@ const Recipes: React.FC = () => {
             showRegistModal={showRegistModal}
             closeRegisterModal={closeRegisterModal}
             />
-        {recipes.map(recipe => (
+        {currentRecipes.map(recipe => (
             <li className='list-item' key={recipe.id}>
                 <p>{recipe.id}</p>
                 <p>{recipe.name}</p>
@@ -97,7 +109,20 @@ const Recipes: React.FC = () => {
                 </li>
         ))
         }
+            <ReactPaginate
+                previousLabel={'前'}
+                nextLabel={'次'}
+                breakLabel={'...'}
+                pageCount={Math.ceil(recipes.length / foodsPerPage)}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination'}
+                // subContainerClassName={'pages pagination'}
+                activeClassName={'active'}
+            />
     </div>
+    </Layout>
     )
 }
 

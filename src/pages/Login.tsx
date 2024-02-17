@@ -16,13 +16,17 @@ const Login = () => {
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
+        try {
+            const response = await axios.post('/api/user/login', {
+                email,
+                password
+            })
+            console.log(response);
+            setRedirect(true);
 
-        await axios.post('/api/user/login', {
-            email,
-            password
-        });
-
-        setRedirect(true);
+            } catch(error) {
+                console.log("メールアドレス、パスワードが間違っています。\n"+ error)
+        }
     }
 
     if (redirect) {

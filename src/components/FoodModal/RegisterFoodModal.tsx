@@ -1,7 +1,6 @@
 import React, {useState, KeyboardEventHandler} from 'react';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker'
-// import { Food } from '../../models/Models';
 import { Food } from '../../models/Food';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css"
@@ -21,9 +20,9 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
 
   const [name, setName] = useState<Food["name"]>("");
   const [quantity, setQuantity] = useState<Food["quantity"]>(0.0);
-  const [unit, setUnit] = useState<Food["unit_id"]>(0);
+  const [unit, setUnit] = useState<Food["unit_id"]>();
   const [expiration_date, setExpirationDate] = useState<Food["expiration_date"] | null>(null);
-  const [type, setType] = useState<Food["type_id"]>(0);
+  const [type, setType] = useState<Food["type_id"]>();
   const [nameError, setNameError] = useState('')
   const [quantityError, setQuantityError] = useState('')
 
@@ -52,6 +51,7 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
     if (!name || quantityError) {
       return;
     }
+
 
     axios.post('/api/user/foods', {
       ...foodData
@@ -84,6 +84,7 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
+    console.log(e.target.value, typeof(e.target.value))
 
     if (!e.target.value) {
       setNameError('食品名を入力してください');
@@ -92,18 +93,14 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
     }
   }
 
-  const handleChangeUnit = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    if (name === "unit_id") {
-      setUnit(parseInt(value, 10));
-    }
+  const handleChangeUnit = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value
+    setUnit(parseInt(value, 10));
   };
 
   const handleChangeType = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    if (name === "type_id") {
-      setType(parseInt(value, 10));
-    }
+    const value = e.target.value
+    setType(parseInt(value, 10));
   };
 
   const handleChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,6 +145,7 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
             value={unit}
             onChange={handleChangeUnit} 
           >
+            <option value="0">-</option>
             <option value="1">g</option>
             <option value="2">ml</option>
             </select>
@@ -164,6 +162,7 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
             value={type}
             onChange={handleChangeType} 
           >
+            <option value="0">-</option>
             <option value="1">肉</option>
             <option value="2">野菜</option>
           </select>

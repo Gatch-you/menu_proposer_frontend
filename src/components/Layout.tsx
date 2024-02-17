@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Dispatch} from 'react'
 import Header from './Header'
 import { Navigate } from 'react-router-dom';
-import {User} from '../models/user'
-import axios from 'axios'
+import {User} from '../models/user';
+import axios from 'axios';
+import {connect} from 'react-redux'
+import { setUser } from '../redux/actions/setUserAction';
 
 const Layout = (props: any) => {
 
     const [redirect, setRedirect] = useState(false);
-    const [user, setUser] = useState<User | null>(null);
 
 
     useEffect( () => {
@@ -16,7 +17,7 @@ const Layout = (props: any) => {
                 try {
                 const response = await axios.get('api/user/profile');
                 const jsonData = await response.data
-                setUser(jsonData)
+                props.setUser(jsonData);
                 console.log(response.data)
                 } catch (e) {
                     setRedirect(true)
@@ -31,12 +32,12 @@ const Layout = (props: any) => {
     
     return (
         <div>
-            <Header user={user}/>
+            <Header />
 
             <div className="container-fluid">
                 <div className="row">
                     {/* <Menu/> */}
-                    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <main className='container'>
                         <div className="table-responsive small">
                             {props.children}
                         </div>
@@ -47,4 +48,14 @@ const Layout = (props: any) => {
   )
 }
 
-export default Layout
+// 他のイベントを他のコンポーネントから取得して扱う
+const mapStateToProps = (state: {user: User}) => ({
+    user: state.user
+})
+
+// 他のコンポーネントにこのコンポーネント内のアクションを送る
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+    setUser: (user: User) => dispatch(setUser(user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

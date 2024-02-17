@@ -7,6 +7,7 @@ import MakeDishModal from '../components/Recipes/RecipeDetail/MakeDishModal';
 import { Recipe } from '../models/Recipe';
 import { Food } from '../models/Food'
 import axios from 'axios';
+import Layout from '../components/Layout';
 
 
 const RecipeWithFood: React.FC = () => {
@@ -75,6 +76,7 @@ const RecipeWithFood: React.FC = () => {
   if (!recipe) return <div>Loading...</div>
 
   return (
+    <Layout>
     <div className='body'>
          <h1 className='logo'>Recipes</h1>
        {recipe === null ? (
@@ -120,6 +122,7 @@ const RecipeWithFood: React.FC = () => {
             </ul></>
        )}
     </div>
+    </Layout>
   );
 }
 

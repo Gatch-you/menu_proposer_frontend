@@ -1,33 +1,74 @@
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import { User } from '../models/user'
-import axios from 'axios';
+import Layout from '../components/Layout';
+import UpdateUserModal from '../components/User/UpdateUserModal';
+import UpdateUserPassModal from '../components/User/UpdateUserPassModal';
+import { connect } from 'react-redux';
+import { setUser } from '../redux/actions/setUserAction';
 
 
-
-const UserProfile: React.FC = () => {
+const UserProfile = (props: any) => {
     const [user, setUser] = useState<User>();
-    
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showUpdatePassModal, setShowUpdatePassModal] = useState(false);
+
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get('api/user/profile');
-                const jsonData = await response.data;
-                setUser(jsonData)
-                console.log(response.data)
-            } catch (error) {
-                console.log(error);
-            };
-        };
-                
-        fetchUser();
-    }, [])
+        setUser(props.user)
+    }, [props.user])
+
+    function openUpdateModal(user: User | undefined) {
+        setUser(user);
+        setShowUpdateModal(true);
+    }
+    function closeUpdateModal() {
+        setShowUpdateModal(false);
+    }
+    function openUpdatePassModal(user: User | undefined) {
+        setUser(user);
+        setShowUpdatePassModal(true);
+    }
+    function closeUpdatePassModal() {
+        setShowUpdatePassModal(false);
+    }
+
 
     return (
         <div>
-            <p>{user?.first_name} {user?.last_name}</p>
-            <p>{user?.email}</p>
+            <Layout>
+
+            <h2>登録ユーザー情報</h2>
+
+        <h3>First Name: {user?.first_name}</h3>
+
+        <h3>Last Name: {user?.last_name}</h3>
+      
+        <h3>Email: {user?.email}</h3>
+      
+        <ul>
+          <button type="submit" onClick={() => openUpdateModal(user)}>プロフィールを変更する</button>
+          <UpdateUserModal
+            showUpdateModal={showUpdateModal}
+            closeUpdateModal={closeUpdateModal}
+            user={user}
+          />
+          <button type="submit" onClick={() => openUpdatePassModal(user)}>パスワードをを変更する</button>
+          <UpdateUserPassModal
+            showUpdateModal={showUpdatePassModal}
+            closeUpdateModal={closeUpdatePassModal}
+            user={user}
+          />
+        </ul>
+            </Layout>
+
         </div>
     )
 }
 
-export default UserProfile
+export default connect(
+        (state: {user: User}) => ({
+        user: state.user
+    }),
+    (dispatch: Dispatch<any>) => ({
+        setUser: (user: User) => dispatch(setUser(user))
+    })
+)(UserProfile);
