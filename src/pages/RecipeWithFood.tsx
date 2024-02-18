@@ -89,7 +89,7 @@ const RecipeWithFood: React.FC = () => {
           />
         </>
        ) : (
-        <><h1>Recipe Details</h1><h2>{recipeName}</h2><p>{recipe?.description}</p><p>{recipe?.making_method}</p><button className='button' onClick={() => openRegisterModal(recipe?.id)}>新しい食材の追加</button>
+        <><h1>{recipeName}</h1><p className='list-item-text'>{recipe?.description}</p><p className='list-item-text'>{recipe?.making_method}</p><button className='button' onClick={() => openRegisterModal(recipe?.id)}>新しい食材の追加</button>
         <RegisterFoodinRecipeModal
             showRegisterModal={showRegisterModal}
             closeRegisterModal={closeRegisterModal}
@@ -98,8 +98,9 @@ const RecipeWithFood: React.FC = () => {
             <button className='button' onClick={ () => openMakeModal(recipe)}>この料理を作成する</button>
              <h1>　</h1>
              <h1 className='logo'>{'<使用食材一覧>'}</h1>
+             <div className="container">
               <MakeDishModal showMakeModal={showMakeModal} closeMakeModal={closeMakeModal} recipe={recipe}/>
-            <h3>Ingredients:</h3><ul>
+              <ul className='list'>
               {recipe.foods && recipe.foods.map(food => (
                 <li className="list-item" key={food.id}>
                   <p className='list-item-text'>{food.name} - {food.use_amount} {food.unit}</p>
@@ -110,7 +111,7 @@ const RecipeWithFood: React.FC = () => {
                       closeDeleteModal={closeDeleteModal}
                       recipeId={recipe.id}
                       food={selectedFood} />)}
-                  <button className='button update-button' onClick={() => openUpdateModal(food)}>使用量の変更</button>
+                  <button className='button update-button list-' onClick={() => openUpdateModal(food)}>使用量の変更</button>
                   {selectedFood && (
                     <UpdateFoodinRecipeModal
                       showUpdateModal={showUpdateModal}
@@ -119,7 +120,7 @@ const RecipeWithFood: React.FC = () => {
                       food={selectedFood} />)}
                 </li>
               ))}
-            </ul></>
+            </ul></div></>
        )}
     </div>
     </Layout>

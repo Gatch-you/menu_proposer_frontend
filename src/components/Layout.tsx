@@ -18,7 +18,6 @@ const Layout = (props: any) => {
                 const response = await axios.get('api/user/profile');
                 const jsonData = await response.data
                 props.setUser(jsonData);
-                console.log(response.data)
                 } catch (e) {
                     setRedirect(true)
                 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Recipe } from '../models/Recipe'
 import ReactPaginate from 'react-paginate';
 import axios from 'axios';
-
+import '../components/Design/FoodStorage.css';
 import RegisterRecipeModal from '../components/Recipes/RegisterRecipeModal';
 import UpdateRecipeModal from '../components/Recipes/UpdateRecipeModal';
 import DeleteRecipeModal from '../components/Recipes/DeleteRecipeModal';
@@ -16,6 +16,12 @@ const Recipes: React.FC = () => {
     const [showRegistModal, setShowRegistModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    const [filters, setFilters] = useState('');
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setFilters(value)
+    }
 
     const [currentPage, setCurrentPage] = useState(0);
     const foodsPerPage:number = 10;
@@ -51,8 +57,14 @@ const Recipes: React.FC = () => {
 
     useEffect(() => {
         const fetchRecipes = async () => {
+            const arr = [];
+            
+            if (filters) {
+                arr.push(`s=${filters}`)
+            }
+
             try{
-                const response = await axios.get('api/user/recipes');
+                const response = await axios.get(`api/user/recipes?${arr.join('&')}`);
                 console.log(response.data)
                 const jsonData = await response.data;
                 setResipes(jsonData);
@@ -63,30 +75,36 @@ const Recipes: React.FC = () => {
         };
 
         fetchRecipes();
-    }, []);
+    }, [filters]);
 
 
 
     return (
         <Layout>
 
-    <div>
-        <button onClick={openRegistModal}>レシピの登録</button>
+    <div className="container">
+        <h1 className='logo'>Recipes</h1>
+            <div className='button-group'>
+                <button className='button' onClick={openRegistModal}>レシピの登録</button>
+            </div>
         <RegisterRecipeModal
             showRegistModal={showRegistModal}
             closeRegisterModal={closeRegisterModal}
-            />
+        />
+        <div className="form-signin w-100 m-auto">
+            <input type="text" className='form-contlol' placeholder='Search'
+            onChange={handleSearch} />
+        </div>
+        <ul className='list'>
         {currentRecipes.map(recipe => (
             <li className='list-item' key={recipe.id}>
-                <p>{recipe.id}</p>
-                <p>{recipe.name}</p>
-                <p>{recipe.description}</p>
-                <p>{recipe.making_method}</p>
+                <p className='list-item-text'>{recipe.name}</p>
+                <p className='list-item-text'>{recipe.description}</p>
+                <p className='list-item-text'>{recipe.making_method}</p>
 
                 <Link
                     to={`/recipes/${recipe.id}/${recipe.name}`}
-                    state={{id: recipe.id, name:recipe.name}}
-                    >
+                    state={{id: recipe.id, name:recipe.name}}>
                     <button className="button detail-button">レシピの詳細</button>
                 </Link>
 
@@ -109,6 +127,7 @@ const Recipes: React.FC = () => {
                 </li>
         ))
         }
+        </ul>
             <ReactPaginate
                 previousLabel={'前'}
                 nextLabel={'次'}

@@ -92,3 +92,18 @@ body {
 .detail-button:hover {
     background-color: #214c96;
 }
+
+.form-search {
+    max-width: 330px;
+    padding: 1rem;
+  }
+  
+  .form-search .form-floating:focus-within {
+    z-index: 2;
+  }
+  
+  .form-search input[type="Search"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }

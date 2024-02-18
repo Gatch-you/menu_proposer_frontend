@@ -17,6 +17,16 @@ const FoodList: React.FC = () => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+    const [filters, setFilters] = useState({
+      s: ''
+    });
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value
+      setFilters({
+        s: value,
+      })
+    } 
+
     //pagination settings
     const [currentPage, setCurrentPage] = useState(0);
     const foodsPerPage:number = 5;
@@ -30,8 +40,14 @@ const FoodList: React.FC = () => {
 
     useEffect(() => {
         const fetchFoods = async () => {
+            const arr = [];
+
+            if (filters.s) {
+              arr.push(`s=${filters.s}`)
+            }
+
             try {
-                const response = await axios.get('api/user/foods');
+                const response = await axios.get(`api/user/foods?${arr.join('&')}`);
                 const jsonData = await response.data
                 setFoods(jsonData);
                 console.log(response.data)
@@ -41,7 +57,7 @@ const FoodList: React.FC = () => {
         };
 
         fetchFoods();
-    }, []);
+    }, [filters]);
 
     function openRegistModal() {
       setShowRegistModal(true);
@@ -70,7 +86,6 @@ const FoodList: React.FC = () => {
     return (
       <Layout>
         <div className="container">
-
           <h1 className='logo'>Food Storage</h1>
           <div className='button-group'>
             <button className='button' onClick={()=> {setShowRegistModal(true)}}>新しい食材の追加</button>
@@ -93,9 +108,12 @@ const FoodList: React.FC = () => {
                 showRegistModal={showRegistModal} 
                 closeRegisterModal={closeRegisterModal} 
               />
+              <div className="form-signin w-100 m-auto">
+              <input type="text" className="form-control" placeholder='Search'
+                onChange={handleSearch} />
+              </div>
               {currentFoods.map(food => (
                 <li className="list-item"key={food.id}>
-                  <p>{food.id}</p>
                   <p className='list-item-text'>材料名: {food.name}</p>
                   <p className='list-item-text'>量: {food.quantity} {food.unit_obj.unit}</p>
                   <p className='list-item-text'>種類: {food.type?.type ?? '種別不明'}</p>

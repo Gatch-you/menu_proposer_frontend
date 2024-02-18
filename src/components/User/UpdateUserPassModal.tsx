@@ -16,28 +16,12 @@ const UpdateUserModal: React.FC<ModalProps> = ({
     closeUpdateModal,
     user,
 }) => {
-    // const [user, setUser] = useState<User>();
+
     const [password, setPassword] = useState('');
     const [passwordConfirm, setpasswordConfirm] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [passwordConfirmError, setPasswordConfirmError] = useState('')
     
-    // useEffect(() => {
-    //     const fetchUser = async () => {
-    //         try {
-    //             const response = await axios.get('api/user/profile');
-    //             const jsonData = await response.data;
-    //             setFirstName(jsonData.first_name)
-    //             setLastName(jsonData.last_name)
-    //             setEmail(jsonData.email)
-    //             console.log(response.data)
-    //         } catch (error) {
-    //             console.log(error);
-    //         };
-    //     };
-                
-    //     fetchUser();
-    // }, [])
 
     const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value

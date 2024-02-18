@@ -28,7 +28,7 @@ const RegistFoodinRecipeModal: React.FC<ModalProps> = ({
   useEffect(() => {
     const fetchFoods = async () => {
         try {
-            const response = await axios.get('api/user/foods');
+            const response = await axios.get('api/user/foods/select');
             const jsonData = await response.data
             setFoods(jsonData);
             console.log(response.data)

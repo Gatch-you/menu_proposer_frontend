@@ -4,10 +4,18 @@ import { Recipe } from '../models/Recipe'
 import ReactPaginate from 'react-paginate'
 import axios from 'axios'
 import Layout from '../components/Layout'
+import { Link } from 'react-router-dom'
+// import '../components/Design/RecipeWithFood.css'
 
 const FoodswithExpiration: React.FC = () => {
 
     const [foods, setFoods] = useState<Food[]>([]);
+    // 賞味期限の選択部
+    const [expirationDate, setExpirationDate] = useState(5);
+    const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value)
+        setExpirationDate(value)
+    }   
 
     const [currentPage, setCurrentPage] = useState(0);
     const foodsPerPage:number = 10;
@@ -21,22 +29,26 @@ const FoodswithExpiration: React.FC = () => {
     useEffect(() => {
         const fetchFoods = async () => {
             try {
-                const response = await axios.get('api/user/foods/expiration');
+                const response = await axios.get(`api/user/foods/expiration?expiration_date=${expirationDate}`,);
                 const jsonData = response.data;
-                console.log(jsonData)
                 setFoods(jsonData);
             } catch (error) {
                 console.log(error);
             }
         }
         fetchFoods();
-    }, [])
+    }, [expirationDate])
 
     return (
         <Layout>
-        <div>
+            <div>
         <div className='container'>
             <h1 className="logo">Food Storage</h1>
+            <div className="input-container">
+            <h5>期限が</h5>
+            <input style={{width: '50px', height: '30px'}}　type="number" onChange={handleExpiration} defaultValue={expirationDate}/>
+            <h5>日以内の食材</h5>
+            </div>
             {foods && foods.length > 0 ? (
                 <ul className="list">
                     {currentFoods.map((food) => (
@@ -45,7 +57,10 @@ const FoodswithExpiration: React.FC = () => {
                             <p className="list-item-text">賞味期限: {new Date(food.expiration_date).toDateString()}</p>
                             {food.recipes && food.recipes.map((recipe: Recipe) => (
                                 <li key={recipe.id}>
-                                    <p className="list-item-text">提案するレシピ: {recipe.name}, 使用量: {recipe.use_amount} {food.unit_obj.unit}</p>
+                                    <p className="list-item-text">
+                                        提案するレシピ: {recipe.name}, 使用量: {recipe.use_amount} {food.unit_obj.unit}
+                                        <Link className='link' to={`/recipes/${recipe.id}/${recipe.name}`}>レシピを見る</Link>
+                                    </p>
                                 </li>
                             ))}
                         </li>
@@ -67,7 +82,7 @@ const FoodswithExpiration: React.FC = () => {
                 // subContainerClassName={'pages pagination'}
                 activeClassName={'active'}
             />
-        </div>
+            </div>
         </Layout>
     );
 

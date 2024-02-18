@@ -22,8 +22,10 @@ const Login = () => {
                 password
             })
             console.log(response);
-            setRedirect(true);
-
+            if (response.data.message ==='success')
+                setRedirect(true);
+            else
+                alert('パスワード、もしくはメールアドレスが間違っています。')
             } catch(error) {
                 console.log("メールアドレス、パスワードが間違っています。\n"+ error)
         }
@@ -58,6 +60,15 @@ const Login = () => {
                 <button className="btn btn-primary w-75 py-2" onClick={navigateSignUp} >Sign up</button>
                 <p className="mt-5 mb-3 text-body-secondary">released in 2024</p>
             </form>
+
+            <p className="mt-5 mb-3 text-body-secondary">
+                \\ 採用担当者の方々へ //<br></br>
+                こちらのアプリケーションの使用に際して、
+                もしよろしければ以下の登録情報をご活用ください。<br></br>
+                email: test@testmail.com<br></br>
+
+                password: nf9vqyaP+hih83
+            </p>
         </main>
     )
 }

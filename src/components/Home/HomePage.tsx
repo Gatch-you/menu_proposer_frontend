@@ -2,7 +2,7 @@ import '../Design/HomePage.css';
 
 const HomePage = () => {
   return (
-    <div className="home-container">
+    <div className="container">
       <div className="home-header">
         <h1 className="home-title">MyCookBook</h1>
         <h2> </h2>

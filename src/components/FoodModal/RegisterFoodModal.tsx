@@ -146,8 +146,11 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
             onChange={handleChangeUnit} 
           >
             <option value="0">-</option>
-            <option value="1">g</option>
-            <option value="2">ml</option>
+            <option value="1">個</option>
+            <option value="2">本</option>
+            <option value="3">匹</option>
+            <option value="4">g</option>
+            <option value="5">ml</option>
             </select>
         <h3>賞味期限</h3>
         <DatePicker
@@ -163,8 +166,13 @@ const RegisterFoodModal: React.FC<ModalProps> = ({
             onChange={handleChangeType} 
           >
             <option value="0">-</option>
-            <option value="1">肉</option>
-            <option value="2">野菜</option>
+            <option value="1">穀物</option>
+            <option value="2">肉</option>
+            <option value="3">魚</option>
+            <option value="4">野菜</option>
+            <option value="5">乳製品</option>
+            <option value="6">果物</option>
+            <option value="7">卵</option>
           </select>
         <ul>
           <button type="button" onClick={handleCancell}>キャンセル</button>

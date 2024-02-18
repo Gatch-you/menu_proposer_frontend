@@ -5,6 +5,7 @@ import UpdateUserModal from '../components/User/UpdateUserModal';
 import UpdateUserPassModal from '../components/User/UpdateUserPassModal';
 import { connect } from 'react-redux';
 import { setUser } from '../redux/actions/setUserAction';
+import '../components/Design/UserProfile.css'
 
 
 const UserProfile = (props: any) => {
@@ -33,34 +34,30 @@ const UserProfile = (props: any) => {
 
 
     return (
-        <div>
-            <Layout>
+        <Layout>
+            <div className="layout">
+                <h2>登録ユーザー情報</h2>
+                <h3>First Name: {user?.first_name}</h3>
+                <h3>Last Name: {user?.last_name}</h3>
+                <h3>Email: {user?.email}</h3>
+                <div>
+                    <button type="submit" onClick={() => openUpdateModal(user)}>プロフィールを変更する</button>
+                    <UpdateUserModal
+                    showUpdateModal={showUpdateModal}
+                    closeUpdateModal={closeUpdateModal}
+                    user={user}
+                    />
+                    <button type="submit" onClick={() => openUpdatePassModal(user)}>パスワードを変更する</button>
+                    <UpdateUserPassModal
+                    showUpdateModal={showUpdatePassModal}
+                    closeUpdateModal={closeUpdatePassModal}
+                    user={user}
+                    />
+                </div>
 
-            <h2>登録ユーザー情報</h2>
+            </div>
+        </Layout>
 
-        <h3>First Name: {user?.first_name}</h3>
-
-        <h3>Last Name: {user?.last_name}</h3>
-      
-        <h3>Email: {user?.email}</h3>
-      
-        <ul>
-          <button type="submit" onClick={() => openUpdateModal(user)}>プロフィールを変更する</button>
-          <UpdateUserModal
-            showUpdateModal={showUpdateModal}
-            closeUpdateModal={closeUpdateModal}
-            user={user}
-          />
-          <button type="submit" onClick={() => openUpdatePassModal(user)}>パスワードをを変更する</button>
-          <UpdateUserPassModal
-            showUpdateModal={showUpdatePassModal}
-            closeUpdateModal={closeUpdatePassModal}
-            user={user}
-          />
-        </ul>
-            </Layout>
-
-        </div>
     )
 }
 
