@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react'
 import Layout from '../components/Layout'
 import axios from 'axios';
-// import FoodStorage from '../components/FoodStorage/FoodStorage';
-import HomePage from '../components/Home/HomePage';
+import HomePage from './HomePage';
 
 const Users = () => {
     useEffect(() => {

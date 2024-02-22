@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-modal'
 import { Recipe } from '../../models/Recipe';
 import axios from 'axios';
-import { customStyles } from '../../modalDesign';
+import { customStyles } from '../Design/modalDesign';
 
 type ModalProps = {
     showDeleteModal: boolean;

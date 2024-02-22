@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Recipe, newRecipe } from '../../models/Recipe';
 import Modal from 'react-modal'
 import axios from 'axios';
-import { customStyles } from '../../modalDesign';
+import { customStyles } from '../Design/modalDesign';
 
 type ModalProps = {
     showRegistModal: boolean;

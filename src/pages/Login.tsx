@@ -1,5 +1,5 @@
 import React, {SyntheticEvent, useState} from 'react'
-import '../Login.css';
+import '../components/Design/Login.css';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 

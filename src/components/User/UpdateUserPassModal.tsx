@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { User } from '../../models/user'
+import React, { useState } from 'react'
+import { User } from '../../models/User'
 import axios from 'axios';
 import Modal from 'react-modal';
-import { customStyles } from '../../modalDesign';
+import { customStyles } from '../Design/modalDesign';
 
 type ModalProps = {
     showUpdateModal: boolean;

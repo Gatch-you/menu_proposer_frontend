@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { Food } from '../../../models/Food';
 import axios from 'axios';
-import { customStyles } from '../../../modalDesign';
+import { customStyles } from '../../Design/modalDesign';
 
 
 type ModalProps = {

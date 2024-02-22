@@ -1,6 +1,6 @@
 import React, {Component, SyntheticEvent} from 'react'
 import { Navigate } from 'react-router-dom';
-import '../Login.css';
+import '../components/Design/Login.css';
 import axios from 'axios';
 
 class Register extends Component {

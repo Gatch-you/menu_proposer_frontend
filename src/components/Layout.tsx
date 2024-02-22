@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Dispatch} from 'react'
 import Header from './Header'
 import { Navigate } from 'react-router-dom';
-import {User} from '../models/user';
+import {User} from '../models/User';
 import axios from 'axios';
 import {connect} from 'react-redux'
 import { setUser } from '../redux/actions/setUserAction';

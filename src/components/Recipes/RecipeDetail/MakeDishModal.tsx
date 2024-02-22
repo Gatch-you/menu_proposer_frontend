@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal';
 import { Recipe } from '../../../models/Recipe';
-import { customStyles } from '../../../modalDesign';
+import { customStyles } from '../../Design/modalDesign';
 import axios from 'axios';
 
 type ModalProps = {

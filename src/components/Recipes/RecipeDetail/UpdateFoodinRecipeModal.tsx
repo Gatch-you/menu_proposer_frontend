@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css"
 import { Food } from '../../../models/Food';
 import axios from 'axios';
-import { customStyles } from '../../../modalDesign';
+import { customStyles } from '../../Design/modalDesign';
 
 
 type ModalProps = {
