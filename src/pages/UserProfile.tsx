@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect, useState } from 'react'
-import { User } from '../models/User'
+import { User } from '../models/user'
 import Layout from '../components/Layout';
 import UpdateUserModal from '../components/User/UpdateUserModal';
 import UpdateUserPassModal from '../components/User/UpdateUserPassModal';

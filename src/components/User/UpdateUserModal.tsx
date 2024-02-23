@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { User } from '../../models/User'
+import { User } from '../../models/user'
 import axios from 'axios';
 import Modal from 'react-modal';
 import { customStyles } from '../Design/modalDesign';
