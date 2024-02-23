@@ -50,7 +50,6 @@ const FoodList: React.FC = () => {
                 const response = await axios.get(`api/user/foods?${arr.join('&')}`);
                 const jsonData = await response.data
                 setFoods(jsonData);
-                console.log(response.data)
             } catch (error) {
                 console.error('データの取得中にエラーが発生しました:', error);
             }

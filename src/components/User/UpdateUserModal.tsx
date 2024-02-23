@@ -29,7 +29,6 @@ const UpdateUserModal: React.FC<ModalProps> = ({
                 setFirstName(jsonData.first_name)
                 setLastName(jsonData.last_name)
                 setEmail(jsonData.email)
-                console.log(response.data)
             } catch (error) {
                 console.log(error);
             };

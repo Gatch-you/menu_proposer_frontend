@@ -65,10 +65,8 @@ const Recipes: React.FC = () => {
 
             try{
                 const response = await axios.get(`api/user/recipes?${arr.join('&')}`);
-                console.log(response.data)
                 const jsonData = await response.data;
                 setResipes(jsonData);
-                console.log(response.data)
             } catch (error) {
                 console.log(error)
             }

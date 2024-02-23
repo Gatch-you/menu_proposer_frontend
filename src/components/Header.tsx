@@ -1,10 +1,21 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import axios from 'axios'
-import {User} from '../models/User'
+import { User } from '../models/User'
 import { connect } from 'react-redux'
 
 const Header = (props: {user: User | null}) => {
+
+    const handleLogout = async () => {
+        try {
+            const response = await axios.post('api/user/logout')
+            const data = response.data
+            console.log(data)
+            localStorage.removeItem("token")
+        } catch (error) {
+            alert("ログアウト処理に失敗しました。")
+        }
+    }
 
   return (
     <header>
@@ -30,7 +41,7 @@ const Header = (props: {user: User | null}) => {
 
                 <Link to={'/login'} 
                     className="p-2 text-white text-decoration-none"
-                    onClick={async () => await axios.post('api/user/logout')}
+                    onClick={handleLogout}
                     >Sign out
                 </Link>
             </ul>

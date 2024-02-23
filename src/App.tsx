@@ -16,8 +16,6 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          {/* 以下のRouteにてページのルーティングを行う。
-          ボタンなどを押すときに遷移させるには、そのボタンに対して<Link>タグを使用する */}
           <Route path={"/"} Component={RedirectToUsers} />
           <Route path={'/home'} Component={Users}/>
           <Route path={'/login'} Component={Login}/>

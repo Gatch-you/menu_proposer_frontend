@@ -28,10 +28,8 @@ const RecipeWithFood: React.FC = () => {
       const response = await axios.get<Recipe>(`api/user/recipes/detail/${recipeId}`);
       const jsonData = response.data
       setRecipe(jsonData)
-      console.log(response.data)
     } catch (error) {
-      console.log("Missing Catch jsondata." + recipeId);
-      console.error(error);
+      console.log("Missing Catch jsondata." + recipeId, error);
     }
   }
 

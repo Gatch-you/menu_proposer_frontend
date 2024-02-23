@@ -15,7 +15,11 @@ const Layout = (props: any) => {
         (
             async () => {
                 try {
-                const response = await axios.get('api/user/profile');
+                const response = await axios.get('api/user/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
                 const jsonData = await response.data
                 props.setUser(jsonData);
                 } catch (e) {

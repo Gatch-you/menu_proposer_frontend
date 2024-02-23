@@ -17,17 +17,20 @@ const Login = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/user/login', {
+            axios.post('/api/user/login', {
                 email,
                 password
             })
-            console.log(response);
-            if (response.data.message ==='success')
-                setRedirect(true);
-            else
-                alert('パスワード、もしくはメールアドレスが間違っています。')
+            .then(response => {
+                localStorage.setItem('token', response.data.token);
+
+                if (response.data.message ==='success')
+                    setRedirect(true);
+                else
+                    alert(response.data.message)
+            })
             } catch(error) {
-                console.log("メールアドレス、パスワードが間違っています。\n"+ error)
+                console.log("Login error occurred\n"+ error)
         }
     }
 
